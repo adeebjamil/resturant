@@ -1,2 +1,9 @@
 @import "tailwindcss";
 
+.nav-item svg {
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover svg {
+  transform: translateY(-2px);
+}
