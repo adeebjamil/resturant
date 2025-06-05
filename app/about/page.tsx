@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { 
@@ -17,20 +17,31 @@ import {
   FaLeaf,
   FaChartLine,
   FaLightbulb,
-  FaHandsHelping
+  FaHandsHelping,
+  FaQuoteRight
 } from 'react-icons/fa'
 import { 
   GiCookingPot,
   GiSparkles,
   GiChefToque,
-  GiHotMeal
+  GiHotMeal,
+  GiMeal
 } from 'react-icons/gi'
+import { IoRestaurantOutline } from 'react-icons/io5'
 
 export default function AboutPage() {
   const [isVisible, setIsVisible] = useState(false)
+  const [activeTestimonial, setActiveTestimonial] = useState(0)
 
   useEffect(() => {
     setIsVisible(true)
+    
+    // Auto-rotate testimonials
+    const interval = setInterval(() => {
+      setActiveTestimonial(prev => (prev + 1) % testimonials.length)
+    }, 8000)
+    
+    return () => clearInterval(interval)
   }, [])
 
   const journey = [
@@ -38,39 +49,53 @@ export default function AboutPage() {
       year: '2015',
       title: 'The Dream Begins',
       description: 'Founded with a vision to bring world flavors to Dubai',
-      icon: FaRocket
+      icon: FaRocket,
+      image: '/about/img2.webp'
     },
     {
       year: '2017',
       title: 'First Recognition',
       description: 'Won "Best New Restaurant" at Dubai Food Awards',
-      icon: FaAward
+      icon: FaAward,
+      image: '/about/img3.webp'
     },
     {
       year: '2019',
       title: 'Expansion & Innovation',
       description: 'Launched our signature fusion menu concept',
-      icon: FaFire
+      icon: FaFire,
+      image: '/about/img4.webp'
     },
     {
       year: '2023',
       title: 'Culinary Excellence',
       description: 'Achieved Michelin recognition and community love',
-      icon: FaCrown
+      icon: FaCrown,
+      image: '/about/img5.webp'
     }
   ]
 
-  const stats = [
-    { icon: FaUsers, number: '50K+', label: 'Happy Customers' },
-    { icon: FaUtensils, number: '200+', label: 'Menu Items' },
-    { icon: FaAward, number: '15+', label: 'Awards' },
-    { icon: FaClock, number: '24/7', label: 'Service' }
-  ]
+
 
   const values = [
-    { icon: GiCookingPot, title: 'Quality First', desc: 'Premium ingredients, authentic flavors' },
-    { icon: FaHeart, title: 'Made with Love', desc: 'Every dish crafted with passion' },
-    { icon: FaStar, title: 'Excellence', desc: 'Award-winning culinary experience' }
+    { 
+      icon: GiCookingPot, 
+      title: 'Quality First', 
+      desc: 'We source the finest ingredients from local and international suppliers to ensure every dish meets our exacting standards.',
+      color: 'from-amber-400 to-orange-500'
+    },
+    { 
+      icon: FaHeart, 
+      title: 'Made with Love', 
+      desc: 'Our chefs pour their passion into every dish, creating memorable culinary experiences that keep our guests coming back.',
+      color: 'from-red-400 to-rose-500'
+    },
+    { 
+      icon: FaStar, 
+      title: 'Excellence', 
+      desc: 'We strive for perfection in every aspect of our service, from the first greeting to the final bite of dessert.',
+      color: 'from-blue-400 to-indigo-500'
+    }
   ]
 
   const team = [
@@ -79,191 +104,297 @@ export default function AboutPage() {
       role: 'Executive Head Chef',
       bio: '18+ years of culinary excellence across Dubai\'s finest establishments',
       image: '/team/chef-ahmed.jpg',
-      expertise: 'Middle Eastern & Fusion Cuisine'
+      expertise: 'Middle Eastern & Fusion Cuisine',
+      quote: "Cooking is about passion, so it may look slightly temperamental in a way that it's too assertive to the naked eye."
     },
     {
       name: 'Chef Priya Sharma',
       role: 'Spice Master & Sous Chef',
       bio: 'Expert in authentic Indian cooking techniques and spice blending',
       image: '/team/chef-priya.jpg',
-      expertise: 'Indian Cuisine & Spice Blending'
+      expertise: 'Indian Cuisine & Spice Blending',
+      quote: "The essence of great food lies in understanding the soul of your ingredients."
     },
     {
       name: 'Marco Giuseppe',
       role: 'Culinary Consultant',
       bio: 'Michelin-starred chef bringing international expertise',
       image: '/team/chef-marco.jpg',
-      expertise: 'European & International Cuisine'
+      expertise: 'European & International Cuisine',
+      quote: "Simplicity is the ultimate sophistication in cuisine. Let ingredients speak for themselves."
     }
   ]
-
+  
+  const testimonials = [
+    {
+      text: "World Cup Restaurant is a culinary masterpiece! Their fusion of global flavors with local favorites creates an unforgettable dining experience.",
+      name: "Sarah Johnson",
+      role: "Food Blogger & Critic",
+      image: "/testimonials/customer1.jpg",
+      stars: 5
+    },
+    {
+      text: "Every dish tells a story. The chefs at World Cup Restaurant are true artists who transform ingredients into edible masterpieces.",
+      name: "Mohammed Al-Farsi",
+      role: "Dubai Foodie Guide",
+      image: "/testimonials/customer2.jpg",
+      stars: 5
+    },
+    {
+      text: "From ambiance to service to taste - everything is perfection. Their dedication to quality and innovation is evident in every bite.",
+      name: "Elena Petrova",
+      role: "Travel & Food Writer",
+      image: "/testimonials/customer3.jpg",
+      stars: 5
+    }
+  ]
+  
   return (
     <>
       <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
         @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(40px); }
+          from { opacity: 0; transform: translateY(30px); }
           to { opacity: 1; transform: translateY(0); }
         }
-
+        
         @keyframes fadeInDown {
-          from { opacity: 0; transform: translateY(-40px); }
+          from { opacity: 0; transform: translateY(-30px); }
           to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes slideInLeft {
-          from { opacity: 0; transform: translateX(-60px); }
+        
+        @keyframes fadeInLeft {
+          from { opacity: 0; transform: translateX(-30px); }
           to { opacity: 1; transform: translateX(0); }
         }
-
-        @keyframes slideInRight {
-          from { opacity: 0; transform: translateX(60px); }
+        
+        @keyframes fadeInRight {
+          from { opacity: 0; transform: translateX(30px); }
           to { opacity: 1; transform: translateX(0); }
         }
-
-        @keyframes scaleIn {
-          from { opacity: 0; transform: scale(0.9); }
-          to { opacity: 1; transform: scale(1); }
-        }
-
+        
         @keyframes float {
-          0%, 100% { transform: translateY(0px); }
+          0%, 100% { transform: translateY(0); }
           50% { transform: translateY(-10px); }
         }
-
+        
         @keyframes pulse {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.05); }
         }
-
-        @keyframes slideUp {
-          from { opacity: 0; transform: translateY(60px); }
-          to { opacity: 1; transform: translateY(0); }
+        
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
-
-        /* Animation classes */
-        .animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
-        .animate-fade-in-down { animation: fadeInDown 0.6s ease-out; }
-        .animate-slide-in-left { animation: slideInLeft 0.6s ease-out; }
-        .animate-slide-in-right { animation: slideInRight 0.6s ease-out; }
-        .animate-scale-in { animation: scaleIn 0.5s ease-out; }
+        
+        .animate-fade-in { animation: fadeIn 0.8s ease forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease forwards; }
+        .animate-fade-in-down { animation: fadeInDown 0.8s ease forwards; }
+        .animate-fade-in-left { animation: fadeInLeft 0.8s ease forwards; }
+        .animate-fade-in-right { animation: fadeInRight 0.8s ease forwards; }
         .animate-float { animation: float 3s ease-in-out infinite; }
         .animate-pulse { animation: pulse 2s ease-in-out infinite; }
-        .animate-slide-up { animation: slideUp 0.8s ease-out; }
-
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
-        .stagger-5 { animation-delay: 0.5s; }
-        .stagger-6 { animation-delay: 0.6s; }
-        .stagger-7 { animation-delay: 0.7s; }
-        .stagger-8 { animation-delay: 0.8s; }
-
-        .timeline-card {
-          transition: all 0.3s ease;
+        .animate-spin-slow { animation: spin 10s linear infinite; }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
+        
+        /* Timeline connector for mobile */
+        .timeline-connector::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          bottom: 0;
+          left: 30px;
+          width: 2px;
+          background: #e5e7eb;
+          z-index: 0;
         }
-
-        .timeline-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        
+        /* Testimonial animation */
+        @keyframes testimonialFadeIn {
+          from { opacity: 0; transform: translateX(30px); }
+          to { opacity: 1; transform: translateX(0); }
         }
-
-        .team-card {
-          transition: all 0.3s ease;
+        
+        .testimonial-enter {
+          animation: testimonialFadeIn 0.6s ease forwards;
         }
-
-        .team-card:hover {
-          transform: translateY(-10px);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        
+        /* Scroll reveal animation */
+        .reveal {
+          opacity: 0;
+          transform: translateY(30px);
+          transition: all 0.8s ease;
+        }
+        
+        .reveal.active {
+          opacity: 1;
+          transform: translateY(0);
         }
       `}</style>
 
-      <div className="min-h-screen bg-white text-black">
-        {/* Hero Section */}
-        <section className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
-          {/* Floating Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-20 h-20 bg-black/5 rounded-full blur-xl animate-float"></div>
-            <div className="absolute bottom-20 right-10 w-32 h-32 bg-black/5 rounded-full blur-xl animate-float stagger-2"></div>
-            <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-black/5 rounded-full blur-lg animate-float stagger-4"></div>
+      <div className="min-h-screen bg-white text-black overflow-hidden">
+        {/* Hero Section with Parallax Effect */}
+        <section className="relative py-16 md:py-24 overflow-hidden bg-gradient-to-b from-amber-50 to-white">
+          {/* Decorative Elements */}
+          <div className="absolute inset-0 opacity-20">
+            <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-amber-400 blur-3xl"></div>
+            <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-orange-400 blur-3xl"></div>
+            <div className="absolute top-1/3 left-1/2 w-40 h-40 rounded-full bg-red-400 blur-3xl"></div>
           </div>
           
+          {/* Small Floating Food Icons */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-[15%] left-[10%] animate-float" style={{animationDelay: '0.5s'}}>
+              <GiMeal className="text-3xl text-orange-300 opacity-60" />
+            </div>
+            <div className="absolute top-[30%] right-[15%] animate-float" style={{animationDelay: '1.2s'}}>
+              <FaUtensils className="text-2xl text-amber-400 opacity-60" />
+            </div>
+            <div className="absolute bottom-[25%] left-[20%] animate-float" style={{animationDelay: '0.8s'}}>
+              <GiHotMeal className="text-4xl text-orange-400 opacity-40" />
+            </div>
+            <div className="absolute bottom-[10%] right-[25%] animate-float" style={{animationDelay: '1.5s'}}>
+              <GiSparkles className="text-2xl text-amber-500 opacity-50" />
+            </div>
+          </div>
+          
+          {/* Hero Content */}
           <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center max-w-4xl mx-auto">
-              <div className="animate-fade-in-down">
-                <div className="inline-flex items-center space-x-2 bg-black/5 px-6 py-2 rounded-full mb-6">
-                  <GiCookingPot className="text-black animate-float" />
-                  <span className="text-gray-700 font-medium">Our Story</span>
+            <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+              <div className="md:w-1/2 text-center md:text-left">
+                <div className="animate-fade-in-down">
+                  <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-orange-100 px-5 py-2 rounded-full mb-6">
+                    <GiCookingPot className="text-amber-600 animate-float" />
+                    <span className="text-amber-800 font-medium">Our Story</span>
+                  </div>
+                  
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl font-black mb-6 text-gray-900 leading-tight">
+                    World Cup <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-red-500">Restaurant</span>
+                  </h1>
                 </div>
-                <h1 className="text-5xl md:text-7xl font-black mb-6 text-black">
-                  World Cup Restaurant
-                </h1>
-                <div className="w-24 h-1 bg-black mx-auto mb-6"></div>
+                
+                <div className="animate-fade-in-up delay-200">
+                  <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
+                    Dubai's premier destination where culinary excellence meets unforgettable dining experiences. A journey through global flavors crafted with passion.
+                  </p>
+                  
+                  <div className="flex flex-wrap gap-4 justify-center md:justify-start">
+                    <Link 
+                      href="/menu"
+                      className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+                    >
+                      <FaUtensils className="animate-pulse" />
+                      <span>Explore Menu</span>
+                    </Link>
+                    
+                    <Link 
+                      href="/contact"
+                      className="inline-flex items-center space-x-2 bg-white text-gray-800 border-2 border-amber-500 px-6 py-3 rounded-full text-lg font-semibold hover:bg-amber-50 transition-all duration-300 transform hover:-translate-y-1"
+                    >
+                      <FaMapMarkerAlt />
+                      <span>Find Us</span>
+                    </Link>
+                  </div>
+                </div>
               </div>
               
-              <div className="animate-fade-in-up stagger-1">
-                <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-                  Dubai's Premier Destination for Global Culinary Excellence
-                </p>
-                <Link 
-                  href="/menu"
-                  className="inline-flex items-center space-x-2 bg-black text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 transition-all duration-300"
-                >
-                  <FaUtensils className="animate-float" />
-                  <span>Explore Menu</span>
-                </Link>
+              {/* Hero Image with Animation */}
+              <div className="md:w-1/2 mt-10 md:mt-0 animate-fade-in-right delay-300">
+                <div className="relative">
+                  <div className="relative h-64 sm:h-80 md:h-96 w-full overflow-hidden rounded-2xl shadow-2xl">
+                    <Image 
+                      src="/about/img1.webp"
+                      alt="World Cup Restaurant Interior"
+                      fill
+                      priority
+                      className="object-cover"
+                    />
+                  </div>
+                  
+                  {/* Floating Badge */}
+                  <div className="absolute -bottom-6 -left-6 bg-white p-4 rounded-xl shadow-xl animate-float">
+                    <div className="flex items-center space-x-2">
+                      <FaAward className="text-amber-500 text-xl" />
+                      <div>
+                        <p className="text-xs text-gray-500">Recognized by</p>
+                        <p className="font-bold text-gray-900">Michelin Guide</p>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  {/* Stats Badge */}
+                  <div className="absolute -top-4 -right-4 bg-gradient-to-r from-amber-500 to-orange-500 p-4 rounded-xl shadow-xl text-white animate-float" style={{animationDelay: '1s'}}>
+                    <div className="text-center">
+                      <p className="text-2xl font-bold">8+</p>
+                      <p className="text-xs uppercase tracking-wide">Years of Excellence</p>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
-        {/* Our Journey Timeline */}
-        <section id="story" className="py-20 bg-gray-50 relative overflow-hidden">
+        {/* Our Journey Timeline - Responsive for Mobile & Desktop */}
+        <section id="story" className="py-16 md:py-24 bg-white relative">
           <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center mb-20 animate-fade-in-down">
-              <div className="inline-flex items-center space-x-2 bg-black/10 px-6 py-2 rounded-full mb-6">
-                <FaRocket className="text-black animate-pulse" />
-                <span className="text-gray-700 font-medium">Our Story</span>
+            <div className="text-center mb-16 animate-fade-in-down">
+              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-orange-100 px-5 py-2 rounded-full mb-6">
+                <FaRocket className="text-amber-600 animate-pulse" />
+                <span className="text-amber-800 font-medium">Our Journey</span>
               </div>
-              <h2 className="text-4xl md:text-6xl font-bold mb-6 text-black">
-                Our <span className="text-gray-600">Journey</span>
+              
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                Our Culinary <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-red-500">Story</span>
               </h2>
-              <p className="text-xl text-gray-600 max-w-4xl mx-auto leading-relaxed">
+              
+              <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
                 From a passionate dream to Dubai's most celebrated culinary destination
               </p>
-              <div className="mt-8 w-24 h-1 bg-black mx-auto rounded-full"></div>
             </div>
 
-            {/* Timeline */}
-            <div className="max-w-6xl mx-auto">
+            {/* Desktop Timeline */}
+            <div className="hidden md:block max-w-6xl mx-auto">
               <div className="relative">
-                {/* Central Timeline Line */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gray-300 rounded-full"></div>
+                {/* Timeline Connector Line */}
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-amber-200 via-orange-300 to-red-400 rounded-full"></div>
                 
                 {journey.map((milestone, index) => (
                   <div 
                     key={index} 
-                    className={`relative flex items-center mb-16 group ${
+                    className={`relative flex items-center mb-20 group ${
                       index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'
                     }`}
                   >
                     {/* Content Card */}
-                    <div className={`w-5/12 ${index % 2 === 0 ? 'pr-12 text-right' : 'pl-12 text-left'}`}>
-                      <div className={`timeline-card bg-white p-8 rounded-2xl border border-gray-200 shadow-lg animate-slide-up`}
+                    <div className={`w-5/12 ${index % 2 === 0 ? 'pr-16 text-right' : 'pl-16 text-left'}`}>
+                      <div className="bg-white p-6 rounded-2xl border border-gray-100 shadow-xl transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 animate-fade-in-up"
                            style={{ animationDelay: `${index * 0.2}s` }}>
                         
                         {/* Year Badge */}
-                        <div className={`inline-block mb-4 ${index % 2 === 0 ? 'float-right' : 'float-left'}`}>
-                          <span className="bg-black text-white px-4 py-2 rounded-full text-lg font-bold">
+                        <div className={`inline-block mb-4 ${index % 2 === 0 ? 'float-right ml-4' : 'float-left mr-4'}`}>
+                          <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold">
                             {milestone.year}
                           </span>
                         </div>
                         
                         <div className="clear-both">
-                          <h3 className="text-2xl md:text-3xl font-bold mb-4 text-black">
+                          <h3 className="text-xl md:text-2xl font-bold mb-3 text-gray-900">
                             {milestone.title}
                           </h3>
-                          <p className="text-gray-600 text-lg leading-relaxed">
+                          <p className="text-gray-700 leading-relaxed">
                             {milestone.description}
                           </p>
                         </div>
@@ -272,120 +403,72 @@ export default function AboutPage() {
                     
                     {/* Central Icon */}
                     <div className="absolute left-1/2 transform -translate-x-1/2 z-20">
-                      <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center border-4 border-white shadow-lg">
+                      <div className="w-16 h-16 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
                         <milestone.icon className="text-2xl text-white" />
                       </div>
                     </div>
                     
-                    {/* Spacer */}
-                    <div className="w-5/12"></div>
+                    {/* Image on opposite side */}
+                    <div className="w-5/12 animate-fade-in" style={{ animationDelay: `${index * 0.2 + 0.2}s` }}>
+                      <div className={`overflow-hidden rounded-2xl shadow-lg ${index % 2 === 0 ? 'ml-16' : 'mr-16'}`}>
+                        <div className="relative h-69 transition-transform duration-300 group-hover:scale-105">
+                          <Image 
+                            src={milestone.image || "/about/placeholder.jpg"}
+                            alt={milestone.title}
+                            fill
+                            className="object-cover"
+                          />
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-
-            {/* Journey Stats */}
-            <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 animate-fade-in-up stagger-6">
-              {[
-                { number: '8+', label: 'Years of Excellence', icon: FaClock },
-                { number: '75K+', label: 'Happy Guests', icon: FaUsers },
-                { number: '25+', label: 'Awards Won', icon: FaAward },
-                { number: '300+', label: 'Signature Dishes', icon: FaUtensils }
-              ].map((stat, index) => (
-                <div key={index} className="text-center bg-white p-6 rounded-2xl border border-gray-200 shadow-lg">
-                  <div className="mb-4">
-                    <stat.icon className="text-4xl text-black mx-auto animate-float" 
-                              style={{ animationDelay: `${index * 0.2}s` }} />
-                  </div>
-                  <div className="text-3xl font-bold text-black mb-2">{stat.number}</div>
-                  <div className="text-gray-600 font-medium">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Stats Section */}
-        <section className="py-16 bg-black">
-          <div className="container mx-auto px-4">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-              {stats.map((stat, index) => (
+            
+            {/* Mobile Timeline - Vertical */}
+            <div className="md:hidden relative timeline-connector">
+              {journey.map((milestone, index) => (
                 <div 
                   key={index} 
-                  className="text-center animate-scale-in"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="ml-16 mb-12 relative animate-fade-in-left"
+                  style={{ animationDelay: `${index * 0.15}s` }}
                 >
-                  <stat.icon className="text-4xl text-white mx-auto mb-3 animate-float" 
-                             style={{ animationDelay: `${index * 0.3}s` }} />
-                  <div className="text-2xl md:text-3xl font-bold mb-1 text-white">{stat.number}</div>
-                  <div className="text-sm text-gray-300">{stat.label}</div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Values Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12 animate-fade-in-down">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-black">
-                Why Choose <span className="text-gray-600">Us</span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                Our commitment to excellence sets us apart in Dubai's culinary scene
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
-              {values.map((value, index) => (
-                <div 
-                  key={index}
-                  className="text-center bg-gray-50 p-8 rounded-2xl border border-gray-200 hover:border-black/20 transition-all duration-300 group animate-fade-in-up shadow-lg"
-                  style={{ animationDelay: `${index * 0.2}s` }}
-                >
-                  <value.icon className="text-5xl text-black mx-auto mb-6 group-hover:scale-110 transition-transform animate-pulse" />
-                  <h3 className="text-2xl font-bold mb-4 text-black">{value.title}</h3>
-                  <p className="text-gray-600 leading-relaxed">{value.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Team Section */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="text-center mb-12 animate-fade-in-down">
-              <h2 className="text-4xl md:text-5xl font-bold mb-4 text-black">
-                Meet Our <span className="text-gray-600">Team</span>
-              </h2>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-                The passionate chefs behind our culinary excellence
-              </p>
-            </div>
-
-            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
-              {team.map((member, index) => (
-                <div 
-                  key={index}
-                  className="team-card bg-white rounded-2xl border border-gray-200 overflow-hidden animate-scale-in shadow-lg"
-                  style={{ animationDelay: `${index * 0.2}s` }}
-                >
-                  <div className="relative h-64 overflow-hidden">
-                    <Image
-                      src={member.image}
-                      alt={member.name}
-                      fill
-                      className="object-cover hover:scale-110 transition-transform duration-300"
-                    />
+                  {/* Icon */}
+                  <div className="absolute left-0 transform -translate-x-[50%] z-20">
+                    <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center border-4 border-white shadow-md">
+                      <milestone.icon className="text-lg text-white" />
+                    </div>
                   </div>
-                  <div className="p-6">
-                    <h3 className="text-xl font-bold mb-2 text-black">{member.name}</h3>
-                    <p className="text-gray-600 font-medium mb-3">{member.role}</p>
-                    <p className="text-gray-500 text-sm mb-4 leading-relaxed">{member.bio}</p>
-                    <div className="bg-black/5 px-3 py-1 rounded-full text-xs text-black inline-block">
-                      {member.expertise}
+                  
+                  {/* Year Badge */}
+                  <div className="absolute -left-8 top-14 z-20">
+                    <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                      {milestone.year}
+                    </span>
+                  </div>
+                  
+                  {/* Content Card */}
+                  <div className="bg-white p-5 rounded-2xl border border-gray-100 shadow-xl">
+                    <div className="mb-3 mt-1">
+                      <h3 className="text-xl font-bold text-gray-900">
+                        {milestone.title}
+                      </h3>
+                      <p className="text-gray-700 text-sm mt-2">
+                        {milestone.description}
+                      </p>
+                    </div>
+                    
+                    {/* Image */}
+                    <div className="overflow-hidden rounded-lg shadow-sm">
+                      <div className="relative h-52 w-full">
+                        <Image 
+                          src={milestone.image || "/about/placeholder.jpg"}
+                          alt={milestone.title}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -394,66 +477,50 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Testimonial Section */}
-        <section className="py-16 bg-white">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center animate-fade-in-up">
-              <FaQuoteLeft className="text-4xl text-black mx-auto mb-6 animate-float" />
-              <blockquote className="text-2xl md:text-3xl text-gray-700 mb-8 italic leading-relaxed">
-                "World Cup Restaurant is a culinary masterpiece! Their fusion of global flavors 
-                with local favorites creates an unforgettable dining experience."
-              </blockquote>
-              <div className="flex items-center justify-center space-x-4 mb-6">
-                <Image
-                  src="/testimonials/customer1.jpg"
-                  alt="Sarah Johnson"
-                  width={80}
-                  height={80}
-                  className="rounded-full border-4 border-black"
-                />
-                <div className="text-left">
-                  <div className="text-xl font-bold text-black">Sarah Johnson</div>
-                  <div className="text-gray-600">Food Blogger & Critic</div>
-                </div>
-              </div>
-              <div className="flex justify-center space-x-1">
-                {[...Array(5)].map((_, i) => (
-                  <FaStar key={i} className="text-2xl text-black animate-float" 
-                          style={{ animationDelay: `${i * 0.1}s` }} />
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
+      
 
-        {/* Call to Action */}
-        <section className="py-16 bg-black">
-          <div className="container mx-auto px-4 text-center">
-            <div className="max-w-3xl mx-auto animate-fade-in-up">
-              <GiChefToque className="text-6xl text-white mx-auto mb-6 animate-float" />
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-                Ready to Taste Excellence?
-              </h2>
-              <p className="text-xl mb-8 text-gray-300 leading-relaxed">
-                Join us for an extraordinary culinary journey that celebrates flavors from around the world
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link 
-                  href="/menu"
-                  className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
-                >
-                  View Our Menu
-                </Link>
-                <Link 
-                  href="/contact"
-                  className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition-all duration-300"
-                >
-                  Reserve Your Table
-                </Link>
+        {/* Values Section - Revised Design */}
+        <section className="py-16 md:py-24 bg-white">
+          <div className="container mx-auto px-4">
+            <div className="text-center mb-16 animate-fade-in-down">
+              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-orange-100 px-5 py-2 rounded-full mb-6">
+                <FaHeart className="text-amber-600 animate-pulse" />
+                <span className="text-amber-800 font-medium">Our Values</span>
               </div>
+              
+              <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-gray-900">
+                Why Guests <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-red-500">Choose Us</span>
+              </h2>
+              
+              <p className="text-lg text-gray-700 max-w-3xl mx-auto leading-relaxed">
+                Our commitment to excellence and passion for food creates an unforgettable dining experience
+              </p>
+            </div>
+
+            <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+              {values.map((value, index) => (
+                <div 
+                  key={index}
+                  className="bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 group animate-fade-in-up"
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                >
+                  {/* Gradient Top Bar */}
+                  <div className={`h-2 bg-gradient-to-r ${value.color}`}></div>
+                  
+                  <div className="p-8">
+                    {/* Icon with gradient background */}
+                    <div className={`w-16 h-16 rounded-full bg-gradient-to-r ${value.color} flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300`}>
+                      <value.icon className="text-2xl text-white" />
+                    </div>
+                    
+                    <h3 className="text-2xl font-bold mb-4 text-gray-900">{value.title}</h3>
+                    <p className="text-gray-700 leading-relaxed">{value.desc}</p>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
-        </section>
+        </section> 
       </div>
     </>
   )

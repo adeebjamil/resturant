@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { 
@@ -17,23 +17,60 @@ import {
   FaSearch,
   FaArrowRight,
   FaFire,
-  FaChartLine
+  FaChartLine,
+  FaEnvelope,
+  FaBookmark,
+  FaAngleRight,
+  FaFilter
 } from 'react-icons/fa'
 import { 
   GiCookingPot,
   GiChefToque,
   GiHotMeal,
-  GiSpoon
+  GiSpoon,
+  GiKnifeFork,
+  GiNewspaper
 } from 'react-icons/gi'
 
 export default function BlogPage() {
   const [selectedCategory, setSelectedCategory] = useState('All')
   const [searchTerm, setSearchTerm] = useState('')
   const [isVisible, setIsVisible] = useState(false)
-
+  const [isMobileFilterOpen, setIsMobileFilterOpen] = useState(false)
+  const [activePostIndex, setActivePostIndex] = useState(0)
+  
+  // Automatic featured post carousel
   useEffect(() => {
+    const interval = setInterval(() => {
+      setActivePostIndex(prev => (prev + 1) % featuredPosts.length);
+    }, 6000);
+    
+    return () => clearInterval(interval);
+  }, []);
+
+  // Scroll to top on category change
+  useEffect(() => {
+    window.scrollTo({
+      top: 0,
+      behavior: 'smooth'
+    });
     setIsVisible(true)
-  }, [])
+  }, [selectedCategory])
+  
+  const filterRef = useRef<HTMLDivElement>(null);
+  
+  // Close mobile filter when clicking outside
+  useEffect(() => {
+    function handleClickOutside(event: MouseEvent) {
+      if (filterRef.current && !filterRef.current.contains(event.target as Node)) {
+        setIsMobileFilterOpen(false);
+      }
+    }
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [filterRef]);
 
   const categories = ['All', 'Recipes', 'Food Tips', 'Restaurant News', 'Chef Stories', 'Events']
 
@@ -144,223 +181,317 @@ export default function BlogPage() {
   return (
     <>
       <style jsx>{`
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+        
         @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(40px); }
+          from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
-
+        
         @keyframes fadeInDown {
-          from { opacity: 0; transform: translateY(-40px); }
+          from { opacity: 0; transform: translateY(-20px); }
           to { opacity: 1; transform: translateY(0); }
         }
-
-        @keyframes slideInLeft {
-          from { opacity: 0; transform: translateX(-60px); }
+        
+        @keyframes fadeInLeft {
+          from { opacity: 0; transform: translateX(-30px); }
           to { opacity: 1; transform: translateX(0); }
         }
-
-        @keyframes slideInRight {
-          from { opacity: 0; transform: translateX(60px); }
+        
+        @keyframes fadeInRight {
+          from { opacity: 0; transform: translateX(30px); }
           to { opacity: 1; transform: translateX(0); }
         }
-
-        @keyframes scaleIn {
-          from { opacity: 0; transform: scale(0.9); }
-          to { opacity: 1; transform: scale(1); }
-        }
-
+        
         @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-8px); }
         }
-
+        
         @keyframes pulse {
           0%, 100% { transform: scale(1); }
           50% { transform: scale(1.05); }
         }
-
-        /* Animation classes */
-        .animate-fade-in-up { animation: fadeInUp 0.6s ease-out; }
-        .animate-fade-in-down { animation: fadeInDown 0.6s ease-out; }
-        .animate-slide-in-left { animation: slideInLeft 0.6s ease-out; }
-        .animate-slide-in-right { animation: slideInRight 0.6s ease-out; }
-        .animate-scale-in { animation: scaleIn 0.5s ease-out; }
+        
+        @keyframes zoomIn {
+          from { opacity: 0; transform: scale(0.95); }
+          to { opacity: 1; transform: scale(1); }
+        }
+        
+        .animate-fade-in { animation: fadeIn 0.8s ease forwards; }
+        .animate-fade-in-up { animation: fadeInUp 0.8s ease forwards; }
+        .animate-fade-in-down { animation: fadeInDown 0.8s ease forwards; }
+        .animate-fade-in-left { animation: fadeInLeft 0.8s ease forwards; }
+        .animate-fade-in-right { animation: fadeInRight 0.8s ease forwards; }
         .animate-float { animation: float 3s ease-in-out infinite; }
         .animate-pulse { animation: pulse 2s ease-in-out infinite; }
-
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
-        .stagger-5 { animation-delay: 0.5s; }
-        .stagger-6 { animation-delay: 0.6s; }
-
+        .animate-zoom-in { animation: zoomIn 0.6s ease forwards; }
+        
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
+        .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        
         .blog-card {
-          transition: all 0.3s ease;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .blog-card:hover {
-          transform: translateY(-10px);
+          transform: translateY(-8px);
           box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
         }
 
-        .category-filter {
-          transition: all 0.3s ease;
+        /* Carousel transition */
+        .carousel-item {
+          transition: all 0.5s ease;
         }
-
-        .category-filter.active {
-          background: #000000;
-          color: white;
+        
+        .carousel-enter {
+          opacity: 1;
+          transform: translateX(0);
+        }
+        
+        .carousel-exit {
+          opacity: 0;
+          transform: translateX(-30px);
         }
       `}</style>
 
-      <div className="min-h-screen bg-white text-black">
-        {/* Hero Section */}
-        <section className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
-          {/* Floating Elements */}
-          <div className="absolute inset-0">
-            <div className="absolute top-20 left-10 w-20 h-20 bg-black/5 rounded-full blur-xl animate-float"></div>
-            <div className="absolute bottom-20 right-10 w-32 h-32 bg-black/5 rounded-full blur-xl animate-float stagger-2"></div>
-            <div className="absolute top-1/2 left-1/3 w-16 h-16 bg-black/5 rounded-full blur-lg animate-float stagger-4"></div>
+      <div className="min-h-screen bg-white text-gray-900">
+        {/* Hero Section with Pattern Background */}
+        <section className="relative py-16 md:py-28 overflow-hidden bg-gradient-to-b from-amber-50 to-white">
+          {/* Decorative Background Pattern */}
+          <div className="absolute inset-0 z-0 opacity-5">
+            <svg className="absolute inset-0 w-full h-full" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
+              <defs>
+                <pattern id="food-pattern" x="0" y="0" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <path d="M0 20h40M20 0v40" stroke="#f97316" strokeWidth="0.5" fill="none" />
+                  <circle cx="20" cy="20" r="1" fill="#f97316" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#food-pattern)" />
+            </svg>
           </div>
           
-          <div className="container mx-auto px-4 relative z-10">
+          {/* Floating Food Icons */}
+          <div className="absolute inset-0 overflow-hidden">
+            <div className="absolute top-[15%] left-[10%] animate-float" style={{animationDelay: '0.5s'}}>
+              <GiSpoon className="text-3xl text-amber-300 opacity-40" />
+            </div>
+            <div className="absolute top-[30%] right-[15%] animate-float" style={{animationDelay: '1.2s'}}>
+              <FaUtensils className="text-2xl text-amber-400 opacity-40" />
+            </div>
+            <div className="absolute bottom-[25%] left-[20%] animate-float" style={{animationDelay: '0.8s'}}>
+              <GiKnifeFork className="text-4xl text-amber-400 opacity-30" />
+            </div>
+            <div className="absolute bottom-[15%] right-[25%] animate-float" style={{animationDelay: '1.5s'}}>
+              <GiCookingPot className="text-2xl text-amber-500 opacity-40" />
+            </div>
+          </div>
+          
+          {/* Hero Content */}
+          <div className="container mx-auto px-4 sm:px-6 relative z-10">
             <div className="text-center max-w-4xl mx-auto">
               <div className="animate-fade-in-down">
-                <div className="inline-flex items-center space-x-2 bg-black/5 px-6 py-2 rounded-full mb-6">
-                  <GiCookingPot className="text-black animate-float" />
-                  <span className="text-gray-700 font-medium">Food Stories & More</span>
+                <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-orange-100 px-5 py-2 rounded-full mb-6">
+                  <GiNewspaper className="text-amber-600 animate-float" />
+                  <span className="text-amber-800 font-medium">Food Stories & More</span>
                 </div>
-                <h1 className="text-5xl md:text-7xl font-black mb-6 text-black">
-                  World Cup Blog
+                <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-gray-900 leading-tight">
+                  World Cup <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Blog</span>
                 </h1>
-                <div className="w-24 h-1 bg-black mx-auto mb-6"></div>
               </div>
               
-              <div className="animate-fade-in-up stagger-1">
-                <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
+              <div className="animate-fade-in-up delay-200">
+                <p className="text-lg md:text-xl text-gray-700 mb-8 leading-relaxed">
                   Discover culinary secrets, chef stories, and the latest from our kitchen
                 </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Search and Filter Section */}
-        <section className="py-12 bg-gray-50">
-          <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              {/* Search Bar */}
-              <div className="mb-8 animate-fade-in-up">
-                <div className="relative max-w-md mx-auto">
-                  <FaSearch className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                  <input
-                    type="text"
-                    placeholder="Search articles..."
-                    value={searchTerm}
-                    onChange={(e) => setSearchTerm(e.target.value)}
-                    className="w-full pl-12 pr-4 py-3 bg-white border border-gray-300 rounded-full focus:outline-none focus:border-black text-black"
-                  />
-                </div>
-              </div>
-
-              {/* Category Filter */}
-              <div className="flex flex-wrap justify-center gap-4 animate-fade-in-up stagger-2">
-                {categories.map((category, index) => (
-                  <button
-                    key={category}
-                    onClick={() => setSelectedCategory(category)}
-                    className={`category-filter px-6 py-2 rounded-full font-medium transition-all duration-300 ${
-                      selectedCategory === category
-                        ? 'active'
-                        : 'bg-white text-gray-700 hover:bg-gray-100 border border-gray-200'
-                    }`}
-                  >
-                    {category}
-                  </button>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* Featured Posts */}
-        {selectedCategory === 'All' && (
-          <section className="py-16 bg-white">
-            <div className="container mx-auto px-4">
-              <div className="max-w-6xl mx-auto">
-                <div className="flex items-center justify-between mb-12 animate-fade-in-down">
-                  <h2 className="text-3xl md:text-4xl font-bold text-black">
-                    Featured <span className="text-gray-600">Stories</span>
-                  </h2>
-                  <FaFire className="text-3xl text-black animate-pulse" />
-                </div>
-
-                <div className="grid lg:grid-cols-3 gap-8">
-                  {featuredPosts.map((post, index) => (
-                    <article 
-                      key={post.id}
-                      className="blog-card bg-gray-50 rounded-2xl overflow-hidden border border-gray-200 hover:border-black/20 animate-scale-in shadow-lg"
-                      style={{ animationDelay: `${index * 0.2}s` }}
+                
+                <div className="hidden md:flex flex-wrap justify-center gap-x-8 gap-y-3 max-w-2xl mx-auto">
+                  {categories.map((category, index) => (
+                    <button
+                      key={category}
+                      onClick={() => setSelectedCategory(category)}
+                      className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                        selectedCategory === category
+                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md shadow-orange-200'
+                          : 'bg-white text-gray-700 hover:bg-amber-50 border border-amber-200'
+                      }`}
                     >
-                      <div className="relative h-48 overflow-hidden">
+                      {category}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          {/* Curved bottom edge */}
+          <div className="absolute bottom-0 left-0 right-0">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 48" fill="white" preserveAspectRatio="none">
+              <path d="M0,0 C480,48 960,48 1440,0 L1440,48 L0,48 Z"></path>
+            </svg>
+          </div>
+        </section>
+
+        {/* Mobile Category Filter & Search */}
+        <section className="md:hidden sticky top-0 z-40 bg-white shadow-md py-2">
+          <div className="container mx-auto px-4">
+            <div className="flex items-center justify-between">
+              <button 
+                onClick={() => setIsMobileFilterOpen(!isMobileFilterOpen)}
+                className="flex items-center space-x-2 bg-amber-50 px-3 py-2 rounded-full text-amber-700 border border-amber-200"
+              >
+                <FaFilter className="text-amber-500" />
+                <span className="font-medium text-sm">{selectedCategory}</span>
+              </button>
+              
+              <div className="relative">
+                <input
+                  type="text"
+                  placeholder="Search articles..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-9 pr-4 py-2 bg-gray-50 border border-gray-200 rounded-full text-sm focus:outline-none focus:border-amber-300 focus:ring-2 focus:ring-amber-100"
+                />
+                <FaSearch className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 text-sm" />
+              </div>
+            </div>
+            
+            {/* Mobile Category Filter Dropdown */}
+            {isMobileFilterOpen && (
+              <div 
+                ref={filterRef}
+                className="absolute top-full left-0 right-0 bg-white shadow-xl rounded-b-xl z-50 p-4 border-t border-gray-100 animate-fade-in-down"
+              >
+                <div className="grid grid-cols-2 gap-2">
+                  {categories.map((category) => (
+                    <button
+                      key={category}
+                      onClick={() => {
+                        setSelectedCategory(category);
+                        setIsMobileFilterOpen(false);
+                      }}
+                      className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
+                        selectedCategory === category
+                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
+                          : 'bg-gray-50 text-gray-700 hover:bg-amber-50'
+                      }`}
+                    >
+                      {category}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* Search Bar - Desktop */}
+        <section className="py-10 hidden md:block">
+          <div className="container mx-auto px-4 sm:px-6">
+            <div className="max-w-2xl mx-auto">
+              <div className="relative">
+                <FaSearch className="absolute left-5 top-1/2 transform -translate-y-1/2 text-amber-500" />
+                <input
+                  type="text"
+                  placeholder="Search for recipes, tips, stories and more..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                  className="w-full pl-12 pr-6 py-4 bg-white border border-gray-200 rounded-full focus:outline-none focus:border-amber-300 focus:ring-2 focus:ring-amber-100 shadow-sm hover:shadow-md transition-shadow duration-300"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* Featured Posts Carousel */}
+        {selectedCategory === 'All' && featuredPosts.length > 0 && (
+          <section className="py-10 bg-white overflow-hidden">
+            <div className="container mx-auto px-4 sm:px-6">
+              <div className="max-w-6xl mx-auto">
+                <div className="flex items-center justify-between mb-8 animate-fade-in-down">
+                  <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 flex items-center">
+                    <FaFire className="text-amber-500 mr-3" />
+                    Featured Stories
+                  </h2>
+                  
+                  {/* Carousel Indicators */}
+                  <div className="flex space-x-2">
+                    {featuredPosts.map((_, idx) => (
+                      <button
+                        key={idx}
+                        onClick={() => setActivePostIndex(idx)}
+                        className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                          idx === activePostIndex 
+                            ? 'w-8 bg-amber-500' 
+                            : 'bg-gray-300 hover:bg-amber-300'
+                        }`}
+                        aria-label={`Go to featured story ${idx + 1}`}
+                      />
+                    ))}
+                  </div>
+                </div>
+
+                {/* Carousel */}
+                <div className="relative overflow-hidden rounded-2xl shadow-xl">
+                  {featuredPosts.map((post, index) => (
+                    <div
+                      key={post.id}
+                      className={`relative ${
+                        index === activePostIndex ? 'block carousel-enter' : 'hidden carousel-exit'
+                      }`}
+                    >
+                      <div className="relative h-64 sm:h-96 w-full">
                         <Image
                           src={post.image}
                           alt={post.title}
                           fill
-                          className="object-cover transition-transform duration-300 hover:scale-110"
+                          className="object-cover"
+                          priority={index === activePostIndex}
                         />
-                        <div className="absolute top-4 left-4">
-                          <span className="bg-black text-white px-3 py-1 rounded-full text-sm font-medium">
-                            Featured
-                          </span>
-                        </div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/40 to-transparent"></div>
                       </div>
                       
-                      <div className="p-6">
-                        <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
-                          <span className="flex items-center space-x-1">
-                            <FaCalendar />
-                            <span>{new Date(post.date).toLocaleDateString()}</span>
-                          </span>
-                          <span className="flex items-center space-x-1">
-                            <FaClock />
-                            <span>{post.readTime}</span>
-                          </span>
-                        </div>
-                        
-                        <h3 className="text-xl font-bold mb-3 text-black hover:text-gray-700 transition-colors">
-                          <Link href={`/blog/${post.id}`}>
-                            {post.title}
-                          </Link>
-                        </h3>
-                        
-                        <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                          {post.excerpt}
-                        </p>
-                        
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-4 text-xs text-gray-400">
-                            <span className="flex items-center space-x-1">
-                              <FaEye />
-                              <span>{post.views}</span>
+                      <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-8">
+                        <div className="max-w-2xl">
+                          <div className="flex items-center space-x-2 mb-3">
+                            <span className="bg-amber-500 text-white px-3 py-1 rounded-full text-xs font-medium">
+                              Featured
                             </span>
-                            <span className="flex items-center space-x-1">
-                              <FaComment />
-                              <span>{post.comments}</span>
+                            <span className="text-white/80 text-sm flex items-center">
+                              <FaCalendar className="mr-1" />
+                              {new Date(post.date).toLocaleDateString()}
                             </span>
                           </div>
                           
+                          <h3 className="text-xl sm:text-3xl font-bold mb-2 text-white">
+                            <Link 
+                              href={`/blog/${post.id}`}
+                              className="hover:text-amber-200 transition-colors duration-300"
+                            >
+                              {post.title}
+                            </Link>
+                          </h3>
+                          
+                          <p className="text-white/80 mb-4 hidden sm:block">
+                            {post.excerpt}
+                          </p>
+                          
                           <Link 
                             href={`/blog/${post.id}`}
-                            className="text-black hover:text-gray-700 transition-colors flex items-center space-x-1 font-medium"
+                            className="inline-flex items-center space-x-2 bg-white/20 backdrop-blur-sm hover:bg-white/30 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors duration-300"
                           >
-                            <span>Read More</span>
+                            <span>Read Article</span>
                             <FaArrowRight />
                           </Link>
                         </div>
                       </div>
-                    </article>
+                    </div>
                   ))}
                 </div>
               </div>
@@ -369,85 +500,112 @@ export default function BlogPage() {
         )}
 
         {/* All Posts Grid */}
-        <section className="py-16 bg-gray-50">
-          <div className="container mx-auto px-4">
+        <section className="py-10 pb-16">
+          <div className="container mx-auto px-4 sm:px-6">
             <div className="max-w-6xl mx-auto">
               <div className="grid lg:grid-cols-3 gap-8">
                 {/* Main Content */}
                 <div className="lg:col-span-2">
-                  <div className="flex items-center justify-between mb-8 animate-fade-in-down">
-                    <h2 className="text-2xl md:text-3xl font-bold text-black">
+                  <div className="flex items-center justify-between mb-8 animate-fade-in">
+                    <h2 className="text-xl sm:text-2xl font-bold text-gray-900">
                       {selectedCategory === 'All' ? 'Latest' : selectedCategory} Articles
                     </h2>
-                    <span className="text-gray-500">
+                    <span className="text-amber-600 bg-amber-50 px-3 py-1 rounded-full text-sm font-medium">
                       {filteredPosts.length} {filteredPosts.length === 1 ? 'article' : 'articles'}
                     </span>
                   </div>
 
-                  <div className="space-y-8">
+                  {/* No results message */}
+                  {filteredPosts.length === 0 && (
+                    <div className="text-center py-16 px-4 bg-gray-50 rounded-xl">
+                      <GiCookingPot className="text-5xl text-amber-400 mx-auto mb-4" />
+                      <h3 className="text-xl font-semibold mb-2">No articles found</h3>
+                      <p className="text-gray-600 mb-6">
+                        We couldn't find any articles matching your search criteria.
+                      </p>
+                      <button
+                        onClick={() => {
+                          setSearchTerm('');
+                          setSelectedCategory('All');
+                        }}
+                        className="bg-amber-500 text-white px-4 py-2 rounded-full hover:bg-amber-600 transition-colors"
+                      >
+                        Clear filters
+                      </button>
+                    </div>
+                  )}
+
+                  {/* Articles List */}
+                  <div className="space-y-6">
                     {filteredPosts.map((post, index) => (
                       <article 
                         key={post.id}
-                        className="blog-card bg-white p-6 rounded-2xl border border-gray-200 hover:border-black/20 animate-fade-in-up shadow-lg"
+                        className="blog-card bg-white border border-gray-100 rounded-xl overflow-hidden shadow-md hover:shadow-xl animate-fade-in-up"
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
-                        <div className="grid md:grid-cols-3 gap-6">
-                          <div className="relative h-48 md:h-32 overflow-hidden rounded-xl">
-                            <Image
-                              src={post.image}
-                              alt={post.title}
-                              fill
-                              className="object-cover transition-transform duration-300 hover:scale-110"
-                            />
-                          </div>
-                          
-                          <div className="md:col-span-2">
-                            <div className="flex items-center space-x-4 text-sm text-gray-500 mb-3">
-                              <span className="bg-black/10 text-black px-2 py-1 rounded text-xs">
-                                {post.category}
-                              </span>
-                              <span className="flex items-center space-x-1">
-                                <FaUser />
-                                <span>{post.author}</span>
-                              </span>
-                              <span className="flex items-center space-x-1">
-                                <FaCalendar />
-                                <span>{new Date(post.date).toLocaleDateString()}</span>
-                              </span>
+                        <Link href={`/blog/${post.id}`} className="block">
+                          <div className="sm:flex">
+                            <div className="relative h-52 sm:h-auto sm:w-1/3 flex-shrink-0">
+                              <Image
+                                src={post.image}
+                                alt={post.title}
+                                fill
+                                className="object-cover transition-transform duration-500 hover:scale-105"
+                              />
+                              {post.featured && (
+                                <div className="absolute top-3 left-3">
+                                  <span className="bg-amber-500 text-white px-2 py-1 rounded-md text-xs font-medium">
+                                    Featured
+                                  </span>
+                                </div>
+                              )}
                             </div>
                             
-                            <h3 className="text-xl font-bold mb-3 text-black hover:text-gray-700 transition-colors">
-                              <Link href={`/blog/${post.id}`}>
+                            <div className="p-5 sm:p-6 sm:w-2/3">
+                              <div className="flex flex-wrap items-center gap-3 text-xs text-gray-600 mb-3">
+                                <span className="bg-amber-100 text-amber-800 px-2 py-1 rounded-md">
+                                  {post.category}
+                                </span>
+                                <span className="flex items-center">
+                                  <FaUser className="mr-1 text-amber-500" />
+                                  {post.author}
+                                </span>
+                                <span className="flex items-center">
+                                  <FaClock className="mr-1 text-amber-500" />
+                                  {post.readTime}
+                                </span>
+                                <span className="flex items-center">
+                                  <FaEye className="mr-1 text-amber-500" />
+                                  {post.views}
+                                </span>
+                              </div>
+                              
+                              <h3 className="text-xl sm:text-2xl font-bold mb-2 text-gray-900 group-hover:text-amber-600 transition-colors">
                                 {post.title}
-                              </Link>
-                            </h3>
-                            
-                            <p className="text-gray-600 text-sm mb-4 leading-relaxed">
-                              {post.excerpt}
-                            </p>
-                            
-                            <div className="flex items-center justify-between">
-                              <div className="flex flex-wrap gap-2">
-                                {post.tags.slice(0, 2).map((tag, idx) => (
+                              </h3>
+                              
+                              <p className="text-gray-600 mb-4 line-clamp-2">
+                                {post.excerpt}
+                              </p>
+                              
+                              <div className="flex flex-wrap gap-2 mb-4">
+                                {post.tags.slice(0, 3).map((tag, idx) => (
                                   <span key={idx} className="bg-gray-100 text-gray-700 px-2 py-1 rounded text-xs">
                                     #{tag}
                                   </span>
                                 ))}
                               </div>
                               
-                              <div className="flex items-center space-x-4 text-xs text-gray-400">
-                                <span className="flex items-center space-x-1">
-                                  <FaEye />
-                                  <span>{post.views}</span>
-                                </span>
-                                <span className="flex items-center space-x-1">
-                                  <FaClock />
-                                  <span>{post.readTime}</span>
-                                </span>
-                              </div>
+                              <Link 
+                                href={`/blog/${post.id}`}
+                                className="text-amber-600 hover:text-amber-700 transition-colors flex items-center space-x-1 text-sm font-medium"
+                              >
+                                <span>Continue Reading</span>
+                                <FaAngleRight className="mt-0.5" />
+                              </Link>
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       </article>
                     ))}
                   </div>
@@ -456,57 +614,105 @@ export default function BlogPage() {
                 {/* Sidebar */}
                 <div className="space-y-8">
                   {/* Trending Posts */}
-                  <div className="bg-white p-6 rounded-2xl border border-gray-200 animate-slide-in-right shadow-lg">
+                  <div className="bg-white p-6 rounded-xl border border-gray-100 shadow-md animate-fade-in-right">
                     <div className="flex items-center space-x-2 mb-6">
-                      <FaChartLine className="text-black" />
-                      <h3 className="text-xl font-bold text-black">Trending Now</h3>
+                      <FaChartLine className="text-amber-500" />
+                      <h3 className="text-xl font-bold text-gray-900">Trending Now</h3>
                     </div>
                     
-                    <div className="space-y-4">
+                    <div className="space-y-5">
                       {trendingPosts.map((post, index) => (
-                        <div key={post.id} className="flex space-x-3 group">
-                          <div className="relative w-16 h-16 flex-shrink-0 overflow-hidden rounded-lg">
-                            <Image
-                              src={post.image}
-                              alt={post.title}
-                              fill
-                              className="object-cover group-hover:scale-110 transition-transform"
-                            />
-                          </div>
-                          <div className="flex-1">
-                            <h4 className="text-sm font-medium text-black group-hover:text-gray-700 transition-colors leading-tight">
-                              <Link href={`/blog/${post.id}`}>
+                        <Link key={post.id} href={`/blog/${post.id}`} className="group block">
+                          <div className="flex space-x-4">
+                            <div className="relative w-20 h-20 flex-shrink-0">
+                              <Image
+                                src={post.image}
+                                alt={post.title}
+                                fill
+                                className="object-cover rounded-lg transition-transform duration-300 group-hover:scale-105"
+                              />
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent rounded-lg"></div>
+                              <div className="absolute bottom-1 right-1 bg-white/80 backdrop-blur-sm rounded-full w-5 h-5 flex items-center justify-center text-[10px] font-bold text-amber-600">
+                                {index + 1}
+                              </div>
+                            </div>
+                            <div className="flex-1">
+                              <h4 className="text-sm font-medium text-gray-900 group-hover:text-amber-600 transition-colors line-clamp-2 leading-snug mb-1">
                                 {post.title}
-                              </Link>
-                            </h4>
-                            <div className="flex items-center space-x-2 text-xs text-gray-500 mt-1">
-                              <FaEye />
-                              <span>{post.views} views</span>
+                              </h4>
+                              <div className="flex items-center justify-between text-xs text-gray-500">
+                                <span>{post.views} views</span>
+                                <span>{post.readTime}</span>
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        </Link>
                       ))}
+                    </div>
+                    
+                    <div className="mt-6 pt-4 border-t border-gray-100">
+                      <Link 
+                        href="/blog"
+                        className="text-amber-600 hover:text-amber-700 transition-colors flex items-center justify-center space-x-1 text-sm font-medium"
+                      >
+                        <span>View All Articles</span>
+                        <FaArrowRight className="text-xs" />
+                      </Link>
                     </div>
                   </div>
 
+                  {/* Categories */}
+                  <div className="bg-amber-50 p-6 rounded-xl border border-amber-100 shadow-md animate-fade-in-right delay-200">
+                    <h3 className="text-xl font-bold mb-4 text-gray-900">Categories</h3>
+                    
+                    <ul className="space-y-2">
+                      {categories.map((category) => (
+                        <li key={category}>
+                          <button
+                            onClick={() => setSelectedCategory(category)}
+                            className={`w-full flex items-center justify-between p-3 rounded-lg transition-all duration-300 ${
+                              selectedCategory === category
+                                ? 'bg-amber-500 text-white font-medium'
+                                : 'hover:bg-amber-100 text-gray-700'
+                            }`}
+                          >
+                            <span>{category}</span>
+                            <span className="text-xs">
+                              {category === 'All' 
+                                ? blogPosts.length
+                                : blogPosts.filter(post => post.category === category).length}
+                            </span>
+                          </button>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+
                   {/* Newsletter Signup */}
-                  <div className="bg-black p-6 rounded-2xl animate-slide-in-right stagger-2 shadow-lg">
+                  <div className="bg-gradient-to-br from-amber-500 to-orange-500 p-6 rounded-xl shadow-lg animate-fade-in-right delay-300">
                     <div className="text-center">
                       <GiSpoon className="text-4xl text-white mx-auto mb-4 animate-float" />
-                      <h3 className="text-xl font-bold mb-3 text-white">Stay Updated</h3>
-                      <p className="text-gray-300 text-sm mb-4">
-                        Get the latest recipes, tips, and stories delivered to your inbox.
+                      <h3 className="text-xl font-bold mb-2 text-white">Food Inspiration</h3>
+                      <p className="text-white/90 text-sm mb-6">
+                        Subscribe for recipes, cooking tips, and exclusive restaurant news
                       </p>
-                      <div className="space-y-3">
-                        <input
-                          type="email"
-                          placeholder="Your email address"
-                          className="w-full px-4 py-2 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 text-white placeholder-gray-400 focus:outline-none focus:border-white"
-                        />
-                        <button className="w-full bg-white text-black py-2 rounded-full font-medium hover:bg-gray-100 transition-colors">
-                          Subscribe
+                      <form className="space-y-3">
+                        <div className="relative">
+                          <FaEnvelope className="absolute left-4 top-1/2 transform -translate-y-1/2 text-amber-300" />
+                          <input
+                            type="email"
+                            placeholder="Enter your email"
+                            className="w-full pl-11 pr-4 py-3 rounded-full bg-white/10 backdrop-blur-sm border border-white/30 text-white placeholder-white/70 focus:outline-none focus:bg-white/20"
+                          />
+                        </div>
+                        <button 
+                          type="submit"
+                          className="w-full bg-white text-amber-600 font-medium py-3 rounded-full hover:bg-gray-100 transition-colors flex items-center justify-center space-x-2"
+                        >
+                          <span>Subscribe</span>
+                          <FaBookmark />
                         </button>
-                      </div>
+                      </form>
                     </div>
                   </div>
                 </div>
@@ -515,33 +721,7 @@ export default function BlogPage() {
           </div>
         </section>
 
-        {/* Call to Action */}
-        <section className="py-16 bg-black">
-          <div className="container mx-auto px-4 text-center">
-            <div className="max-w-3xl mx-auto animate-fade-in-up">
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-                Hungry for More Stories?
-              </h2>
-              <p className="text-xl mb-8 text-gray-300">
-                Visit us to experience these flavors firsthand
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link 
-                  href="/menu"
-                  className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
-                >
-                  View Our Menu
-                </Link>
-                <Link 
-                  href="/contact"
-                  className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition-all duration-300"
-                >
-                  Visit Restaurant
-                </Link>
-              </div>
-            </div>
-          </div>
-        </section>
+        
       </div>
     </>
   )

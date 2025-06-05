@@ -19,7 +19,7 @@ import {
   FaFire,
   FaPepperHot
 } from 'react-icons/fa6'
-import { FaCoffee, FaSearch } from 'react-icons/fa'
+import { FaCoffee, FaSearch, FaTimes } from 'react-icons/fa'
 import { 
   GiNoodles, 
   GiFrenchFries, 
@@ -30,19 +30,24 @@ import {
   GiOrangeSlice,
   GiCarrot
 } from 'react-icons/gi'
-import { IoGridOutline, IoListOutline, IoFilterOutline } from 'react-icons/io5'
+import { IoGridOutline, IoListOutline, IoFilterOutline, IoChevronDown } from 'react-icons/io5'
 
 export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState('all')
   const [isVisible, setIsVisible] = useState(false)
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState('popular')
-  const [viewMode, setViewMode] = useState('grid') // grid or list
+  const [viewMode, setViewMode] = useState('grid')
   const [showMobileFilters, setShowMobileFilters] = useState(false)
+  const [showMobileCategories, setShowMobileCategories] = useState(false)
+  const [showSearchBar, setShowSearchBar] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
   }, [])
+  
+  // Group categories for mobile tabs
+  const popularCategories = ['all', 'porotta-sandwich', 'tea-special', 'soup-point', 'burger-specials']
 
   const categories = [
     { id: 'all', name: 'All Items', icon: FaUtensils },
@@ -71,6 +76,7 @@ export default function MenuPage() {
     { id: 'dessert-items', name: 'Dessert Items', icon: FaCakeCandles }
   ]
 
+  // Menu Items data
   const menuItems = [
     {
       id: 1,
@@ -192,14 +198,13 @@ export default function MenuPage() {
       calories: 720,
       cookTime: "25 mins"
     },
-    // Poratta Items
     {
       id: 9,
-      name: "Butter Chicken Poratta",
+      name: "Butter Chicken Porotta",
       category: "porotta-sandwich",
       price: 8.50,
       originalPrice: null,
-      description: "Crispy poratta served with rich and creamy butter chicken curry",
+      description: "Crispy porotta served with rich and creamy butter chicken curry",
       image: "/menu/butter-chicken-poratta.webp",
       rating: 4.6,
       reviews: 124,
@@ -210,11 +215,11 @@ export default function MenuPage() {
     },
     {
       id: 10,
-      name: "Chicken Poratta",
+      name: "Chicken Porotta",
       category: "porotta-sandwich",
       price: 7.50,
       originalPrice: null,
-      description: "Flaky poratta served with spiced chicken curry",
+      description: "Flaky porotta served with spiced chicken curry",
       image: "/menu/chicken-poratta.jpg",
       rating: 4.5,
       reviews: 156,
@@ -255,6 +260,7 @@ export default function MenuPage() {
     }
   ]
 
+  // Filter logic
   const filteredItems = menuItems.filter(item => {
     const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory
     const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -262,6 +268,7 @@ export default function MenuPage() {
     return matchesCategory && matchesSearch
   })
 
+  // Sort logic
   const sortedItems = [...filteredItems].sort((a, b) => {
     switch (sortBy) {
       case 'price-low':
@@ -276,151 +283,109 @@ export default function MenuPage() {
     }
   })
 
+  // Close mobile menus when a category is selected
+  const handleCategorySelect = (categoryId: string) => {
+    setSelectedCategory(categoryId)
+    setShowMobileCategories(false)
+  }
+
   return (
     <>
       <style jsx>{`
-        @keyframes fadeInDown {
-          from {
-            opacity: 0;
-            transform: translateY(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        /* Basic animations */
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
-
-        @keyframes fadeInUp {
-          from {
-            opacity: 0;
-            transform: translateY(30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
+        
+        @keyframes slideUp {
+          from { transform: translateY(20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
         }
-
-        @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-50px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
+        
+        @keyframes slideDown {
+          from { transform: translateY(-20px); opacity: 0; }
+          to { transform: translateY(0); opacity: 1; }
         }
-
-        @keyframes float {
-          0%, 100% {
-            transform: translateY(0px);
-          }
-          50% {
-            transform: translateY(-6px);
-          }
+        
+        @keyframes slideInRight {
+          from { transform: translateX(30px); opacity: 0; }
+          to { transform: translateX(0); opacity: 1; }
         }
-
+        
         @keyframes pulse {
-          0%, 100% {
-            opacity: 1;
-          }
-          50% {
-            opacity: 0.7;
-          }
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
         }
-
-        @keyframes gentleGlow {
-          0%, 100% {
-            box-shadow: 0 0 20px rgba(249, 115, 22, 0.1);
-          }
-          50% {
-            box-shadow: 0 0 30px rgba(249, 115, 22, 0.2);
-          }
+        
+        /* Mobile-specific animations */
+        @keyframes slideInBottom {
+          from { transform: translateY(100%); }
+          to { transform: translateY(0); }
         }
-
-        @keyframes scaleIn {
-          from {
-            opacity: 0;
-            transform: scale(0.95);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
+        
+        /* Hide scrollbars */
+        .scrollbar-hide {
+          -ms-overflow-style: none;
+          scrollbar-width: none;
         }
-
-        @keyframes sparkle {
-          0%, 100% {
-            opacity: 1;
-            transform: scale(1);
-          }
-          50% {
-            opacity: 0.8;
-            transform: scale(1.1);
-          }
+        .scrollbar-hide::-webkit-scrollbar {
+          display: none;
         }
-
-        .animate-fade-in-down {
-          animation: fadeInDown 0.6s ease-out;
+        
+        /* Text clipping */
+        .line-clamp-1 {
+          display: -webkit-box;
+          -webkit-line-clamp: 1;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
-
-        .animate-fade-in-up {
-          animation: fadeInUp 0.6s ease-out;
+        
+        .line-clamp-2 {
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+          overflow: hidden;
         }
-
-        .animate-slide-in-left {
-          animation: slideInLeft 0.6s ease-out;
-        }
-
-        .animate-float {
-          animation: float 3s ease-in-out infinite;
-        }
-
-        .animate-pulse-gentle {
-          animation: pulse 2s ease-in-out infinite;
-        }
-
-        .animate-gentle-glow:focus {
-          animation: gentleGlow 2s ease-in-out infinite;
-        }
-
-        .animate-scale-in {
-          animation: scaleIn 0.4s ease-out;
-        }
-
-        .animate-sparkle {
-          animation: sparkle 2s ease-in-out infinite;
-        }
-
-        .stagger-1 { animation-delay: 0.1s; }
-        .stagger-2 { animation-delay: 0.2s; }
-        .stagger-3 { animation-delay: 0.3s; }
-        .stagger-4 { animation-delay: 0.4s; }
+        
+        /* Animations */
+        .animate-fade-in { animation: fadeIn 0.4s ease forwards; }
+        .animate-slide-up { animation: slideUp 0.4s ease forwards; }
+        .animate-slide-down { animation: slideDown 0.4s ease forwards; }
+        .animate-slide-in-right { animation: slideInRight 0.4s ease forwards; }
+        .animate-slide-in-bottom { animation: slideInBottom 0.3s ease forwards; }
+        .animate-pulse { animation: pulse 2s ease infinite; }
+        
+        /* Stagger delays */
+        .delay-100 { animation-delay: 0.1s; }
+        .delay-200 { animation-delay: 0.2s; }
+        .delay-300 { animation-delay: 0.3s; }
       `}</style>
 
       <div className="min-h-screen bg-gray-50">
-        {/* Modern Header */}
-        <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 animate-fade-in-down">
-          <div className="container mx-auto px-4 py-4">
-            {/* Desktop Header */}
-            <div className="hidden md:flex items-center justify-between">
+        {/* Modern Header - Desktop & Mobile */}
+        <header className="sticky top-0 z-40 bg-white shadow-sm">
+          {/* Desktop Header */}
+          <div className="hidden md:block py-4 px-6">
+            <div className="flex items-center justify-between">
               <div className="flex items-center space-x-6">
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
                   Restaurant Menu
                 </h1>
-                <div className="flex items-center space-x-4 animate-slide-in-left stagger-1">
-                  <span className="text-sm text-gray-600 animate-pulse-gentle">{filteredItems.length} items</span>
-                  <div className="flex items-center space-x-2">
+                <div className="flex items-center space-x-4">
+                  <span className="text-sm text-gray-600">{filteredItems.length} items</span>
+                  <div className="flex items-center space-x-1">
                     <button
                       onClick={() => setViewMode('grid')}
-                      className={`p-2 rounded-lg transition-all duration-300 hover:scale-110 ${viewMode === 'grid' ? 'bg-orange-100 text-orange-600' : 'text-gray-400'}`}
+                      className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-orange-100 text-orange-600' : 'text-gray-400 hover:bg-gray-100'}`}
+                      aria-label="Grid view"
                     >
                       <IoGridOutline className="w-5 h-5" />
                     </button>
                     <button
                       onClick={() => setViewMode('list')}
-                      className={`p-2 rounded-lg transition-all duration-300 hover:scale-110 ${viewMode === 'list' ? 'bg-orange-100 text-orange-600' : 'text-gray-400'}`}
+                      className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-orange-100 text-orange-600' : 'text-gray-400 hover:bg-gray-100'}`}
+                      aria-label="List view"
                     >
                       <IoListOutline className="w-5 h-5" />
                     </button>
@@ -428,310 +393,406 @@ export default function MenuPage() {
                 </div>
               </div>
               
-              <div className="flex items-center space-x-4 animate-slide-in-left stagger-2">
+              <div className="flex items-center space-x-4">
                 <div className="relative">
                   <input
                     type="text"
                     placeholder="Search menu..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-64 bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:bg-white focus:ring-2 focus:ring-orange-500 transition-all animate-gentle-glow"
+                    className="w-64 bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white transition-all"
                   />
-                  <FaSearch className="absolute right-3 top-2.5 w-4 h-4 text-gray-400 animate-float" />
+                  <FaSearch className="absolute right-3 top-2.5 w-4 h-4 text-gray-400" />
                 </div>
                 
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:bg-white focus:ring-2 focus:ring-orange-500 transition-all duration-300"
+                  className="bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white"
                 >
-                  <option value="popular">Popular</option>
+                  <option value="popular">Most Popular</option>
                   <option value="rating">Top Rated</option>
-                  <option value="price-low">Price ↑</option>
-                  <option value="price-high">Price ↓</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
                 </select>
               </div>
             </div>
+          </div>
 
-            {/* Mobile Header */}
-            <div className="md:hidden">
-              <div className="flex items-center justify-between mb-4">
+          {/* Mobile Header */}
+          <div className="md:hidden p-3 border-b border-gray-100">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center">
                 <h1 className="text-xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
                   Menu
                 </h1>
-                <div className="flex items-center space-x-2">
-                  <button
-                    onClick={() => setShowMobileFilters(!showMobileFilters)}
-                    className="p-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
-                  >
-                    <IoFilterOutline className="w-5 h-5" />
-                  </button>
-                  <div className="flex items-center space-x-1">
-                    <button
-                      onClick={() => setViewMode('grid')}
-                      className={`p-2 rounded-lg transition-all duration-300 ${viewMode === 'grid' ? 'bg-orange-100 text-orange-600' : 'bg-gray-100 text-gray-400'}`}
-                    >
-                      <IoGridOutline className="w-4 h-4" />
-                    </button>
-                    <button
-                      onClick={() => setViewMode('list')}
-                      className={`p-2 rounded-lg transition-all duration-300 ${viewMode === 'list' ? 'bg-orange-100 text-orange-600' : 'bg-gray-100 text-gray-400'}`}
-                    >
-                      <IoListOutline className="w-4 h-4" />
-                    </button>
-                  </div>
-                </div>
+                <span className="ml-2 text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded-md">
+                  {filteredItems.length}
+                </span>
               </div>
               
-              {/* Mobile Search */}
-              <div className="relative mb-4">
-                <input
-                  type="text"
-                  placeholder="Search menu..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="w-full bg-gray-100 border-0 rounded-full px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-orange-500 transition-all"
-                />
-                <FaSearch className="absolute right-4 top-3.5 w-4 h-4 text-gray-400" />
-              </div>
-
-              {/* Mobile Filters */}
-              {showMobileFilters && (
-                <div className="mb-4 p-4 bg-white rounded-xl border border-gray-200 animate-fade-in-up">
-                  <div className="mb-3">
-                    <label className="block text-sm font-medium text-gray-700 mb-2">Sort by</label>
-                    <select
-                      value={sortBy}
-                      onChange={(e) => setSortBy(e.target.value)}
-                      className="w-full bg-gray-100 border-0 rounded-lg px-3 py-2 text-sm focus:bg-white focus:ring-2 focus:ring-orange-500"
-                    >
-                      <option value="popular">Popular</option>
-                      <option value="rating">Top Rated</option>
-                      <option value="price-low">Price ↑</option>
-                      <option value="price-high">Price ↓</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Items found: {filteredItems.length}
-                    </label>
-                  </div>
+              <div className="flex items-center space-x-1">
+                {!showSearchBar && (
+                  <button 
+                    onClick={() => setShowSearchBar(true)}
+                    className="p-2.5 rounded-full text-gray-600 hover:bg-gray-100"
+                    aria-label="Search"
+                  >
+                    <FaSearch className="w-4 h-4" />
+                  </button>
+                )}
+                <button 
+                  onClick={() => setShowMobileFilters(!showMobileFilters)}
+                  className={`p-2.5 rounded-full ${showMobileFilters ? 'bg-orange-100 text-orange-600' : 'text-gray-600 hover:bg-gray-100'}`}
+                  aria-label="Filter"
+                >
+                  <IoFilterOutline className="w-4 h-4" />
+                </button>
+                <button 
+                  onClick={() => setShowMobileCategories(!showMobileCategories)}
+                  className={`p-2.5 rounded-full flex items-center ${showMobileCategories ? 'bg-orange-100 text-orange-600' : 'text-gray-600 hover:bg-gray-100'}`}
+                  aria-label="Categories"
+                >
+                  <FaUtensils className="w-4 h-4" />
+                  <IoChevronDown className={`w-3 h-3 ml-1 transform transition-transform ${showMobileCategories ? 'rotate-180' : ''}`} />
+                </button>
+                <div className="flex items-center border-l border-gray-200 ml-1 pl-1">
+                  <button
+                    onClick={() => setViewMode('grid')}
+                    className={`p-2.5 rounded-full ${viewMode === 'grid' ? 'text-orange-500' : 'text-gray-400'}`}
+                    aria-label="Grid view"
+                  >
+                    <IoGridOutline className="w-4 h-4" />
+                  </button>
+                  <button
+                    onClick={() => setViewMode('list')}
+                    className={`p-2.5 rounded-full ${viewMode === 'list' ? 'text-orange-500' : 'text-gray-400'}`}
+                    aria-label="List view"
+                  >
+                    <IoListOutline className="w-4 h-4" />
+                  </button>
                 </div>
-              )}
+              </div>
             </div>
-          </div>
-        </header>
-
-        <div className="container mx-auto px-4 py-8">
-          <div className="flex gap-8">
-            {/* Sidebar Categories - Desktop Only */}
-            <aside className="hidden lg:block w-80 bg-white rounded-2xl p-6 h-fit sticky top-24 shadow-sm animate-slide-in-left stagger-3">
-              <h2 className="text-lg font-semibold mb-6 text-gray-900 animate-fade-in-up">Categories</h2>
-              <div className="space-y-2">
-                {categories.map((category, index) => {
+            
+            {/* Mobile Search Bar - Expandable */}
+            {showSearchBar && (
+              <div className="mt-3 animate-slide-down">
+                <div className="relative flex items-center">
+                  <input
+                    type="text"
+                    placeholder="Search menu..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full bg-gray-100 border-0 rounded-full px-4 py-2.5 pr-10 text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white"
+                    autoFocus
+                  />
+                  <button 
+                    onClick={() => {
+                      setShowSearchBar(false)
+                      setSearchQuery('')
+                    }}
+                    className="absolute right-3 text-gray-400 hover:text-gray-600"
+                    aria-label="Close search"
+                  >
+                    <FaTimes className="w-4 h-4" />
+                  </button>
+                </div>
+              </div>
+            )}
+            
+            {/* Mobile Filter Panel */}
+            {showMobileFilters && (
+              <div className="mt-3 p-3 bg-gray-50 rounded-lg border border-gray-200 animate-slide-down">
+                <div className="flex items-center justify-between mb-2">
+                  <label className="text-sm font-medium text-gray-700">Sort by</label>
+                  <span className="text-xs text-gray-500">{filteredItems.length} items found</span>
+                </div>
+                <select
+                  value={sortBy}
+                  onChange={(e) => setSortBy(e.target.value)}
+                  className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-orange-500"
+                >
+                  <option value="popular">Most Popular</option>
+                  <option value="rating">Top Rated</option>
+                  <option value="price-low">Price: Low to High</option>
+                  <option value="price-high">Price: High to Low</option>
+                </select>
+              </div>
+            )}
+            
+            {/* Mobile Category Tabs */}
+            <div className="mt-3 border-t border-gray-100 pt-2 overflow-x-auto scrollbar-hide">
+              <div className="flex space-x-2 pb-1">
+                {categories.filter(cat => popularCategories.includes(cat.id)).map((category) => {
                   const IconComponent = category.icon;
                   return (
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`w-full flex items-center space-x-3 px-4 py-3 rounded-xl text-left transition-all duration-300 hover:scale-105 animate-fade-in-up ${
+                      className={`flex-shrink-0 flex items-center px-3 py-1.5 rounded-full text-xs font-medium ${
                         selectedCategory === category.id
-                          ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg'
+                          ? 'bg-orange-500 text-white'
+                          : 'bg-gray-100 text-gray-700'
+                      }`}
+                    >
+                      <IconComponent className="mr-1.5 text-xs" />
+                      {category.name}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
+            
+            {/* Mobile Categories Dropdown Panel */}
+            {showMobileCategories && (
+              <div className="fixed inset-0 z-50 flex flex-col bg-white">
+                <div className="p-4 border-b border-gray-200 flex justify-between items-center">
+                  <h2 className="font-bold text-lg">All Categories</h2>
+                  <button 
+                    onClick={() => setShowMobileCategories(false)}
+                    className="p-2 text-gray-500"
+                    aria-label="Close categories"
+                  >
+                    <FaTimes className="w-5 h-5" />
+                  </button>
+                </div>
+                <div className="flex-1 overflow-y-auto p-2">
+                  <div className="grid grid-cols-2 gap-2">
+                    {categories.map((category, index) => {
+                      const IconComponent = category.icon;
+                      const itemCount = menuItems.filter(item => category.id === 'all' || item.category === category.id).length;
+                      return (
+                        <button
+                          key={category.id}
+                          onClick={() => handleCategorySelect(category.id)}
+                          className={`flex items-center p-3 rounded-lg animate-fade-in ${
+                            selectedCategory === category.id
+                              ? 'bg-orange-500 text-white'
+                              : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
+                          }`}
+                          style={{ animationDelay: `${index * 0.03}s` }}
+                        >
+                          <IconComponent className="text-lg mr-3" />
+                          <div className="text-left">
+                            <div className="font-medium text-sm">{category.name}</div>
+                            <div className="text-xs opacity-70">{itemCount} items</div>
+                          </div>
+                        </button>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            )}
+          </div>
+        </header>
+        
+        {/* Main Content Wrapper */}
+        <div className="md:flex md:container mx-auto">
+          {/* Sidebar Categories - Desktop */}
+          <aside className="hidden md:block w-64 bg-white border-r border-gray-100 h-[calc(100vh-73px)] sticky top-[73px] overflow-y-auto scrollbar-hide flex-shrink-0">
+            <div className="py-4 px-4">
+              <h2 className="text-sm font-bold uppercase tracking-wide text-gray-500 mb-4 ml-2">Categories</h2>
+              <div className="space-y-1">
+                {categories.map((category) => {
+                  const IconComponent = category.icon;
+                  const itemCount = menuItems.filter(item => category.id === 'all' || item.category === category.id).length;
+                  return (
+                    <button
+                      key={category.id}
+                      onClick={() => setSelectedCategory(category.id)}
+                      className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-colors ${
+                        selectedCategory === category.id
+                          ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white'
                           : 'hover:bg-gray-50 text-gray-700'
                       }`}
-                      style={{ animationDelay: `${index * 0.05}s` }}
                     >
-                      <IconComponent className="text-lg" />
-                      <span className="font-medium">{category.name}</span>
-                      <span className="ml-auto text-xs opacity-60">
-                        {menuItems.filter(item => category.id === 'all' || item.category === category.id).length}
+                      <div className="flex items-center space-x-3">
+                        <IconComponent className="text-base" />
+                        <span className="text-sm">{category.name}</span>
+                      </div>
+                      <span className={`text-xs px-1.5 py-0.5 rounded-full ${selectedCategory === category.id ? 'bg-white/20' : 'bg-gray-100'}`}>
+                        {itemCount}
                       </span>
                     </button>
                   );
                 })}
               </div>
-            </aside>
+            </div>
+          </aside>
 
-            {/* Main Content */}
-            <main className="flex-1">
-              {/* Mobile Categories */}
-              <div className="lg:hidden mb-6 animate-fade-in-up stagger-4">
-                <div className="flex overflow-x-auto pb-4 space-x-3 scrollbar-hide">
-                  {categories.map((category) => {
-                    const IconComponent = category.icon;
-                    return (
-                      <button
-                        key={category.id}
-                        onClick={() => setSelectedCategory(category.id)}
-                        className={`flex-shrink-0 flex flex-col items-center space-y-1 p-3 rounded-xl text-xs font-medium transition-all duration-300 hover:scale-105 min-w-[80px] ${
-                          selectedCategory === category.id
-                            ? 'bg-orange-500 text-white shadow-lg'
-                            : 'bg-white text-gray-600 hover:bg-gray-50 shadow-sm'
-                        }`}
-                      >
-                        <IconComponent className="text-lg" />
-                        <span className="text-center leading-tight">{category.name}</span>
-                      </button>
-                    );
-                  })}
-                </div>
+          {/* Main Content */}
+          <main className="flex-1 p-4">
+            {/* Menu Items Grid/List */}
+            {viewMode === 'grid' ? (
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+                {sortedItems.map((item, index) => (
+                  <div 
+                    key={item.id} 
+                    className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up"
+                    style={{ animationDelay: `${index * 0.05}s` }}
+                  >
+                    <div className="relative h-36 sm:h-40 overflow-hidden">
+                      <Image
+                        src={item.image}
+                        alt={item.name}
+                        fill
+                        className="object-cover"
+                      />
+                      
+                      {/* Mobile-friendly tags */}
+                      <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                        {item.tags.slice(0, 1).map((tag) => (
+                          <span key={tag} className="bg-white/90 text-gray-800 px-2 py-0.5 rounded-full text-xs font-medium">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      {/* Price badge */}
+                      <div className="absolute top-2 right-2">
+                        <div className="bg-white/90 rounded-full px-2 py-1 shadow-sm">
+                          <div className="flex items-center">
+                            {item.originalPrice && (
+                              <span className="text-gray-500 line-through text-xs mr-1">${item.originalPrice}</span>
+                            )}
+                            <span className="font-bold text-orange-600">${item.price.toFixed(2)}</span>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Spicy indicator on image */}
+                      {item.spicyLevel > 0 && (
+                        <div className="absolute bottom-2 left-2 flex space-x-0.5 bg-white/80 rounded-full py-0.5 px-1.5">
+                          {Array(item.spicyLevel).fill(0).map((_, i) => (
+                            <FaPepperHot key={i} className="text-red-500 text-xs" />
+                          ))}
+                        </div>
+                      )}
+                    </div>
+
+                    <div className="p-3 sm:p-4">
+                      <div className="flex items-start justify-between mb-1">
+                        <h3 className="font-bold text-gray-900 text-sm sm:text-base line-clamp-1">
+                          {item.name}
+                        </h3>
+                        <div className="flex items-center ml-1 flex-shrink-0">
+                          <FaStar className="text-yellow-400 w-3 h-3 sm:w-4 sm:h-4" />
+                          <span className="text-xs text-gray-600 ml-1">{item.rating}</span>
+                        </div>
+                      </div>
+
+                      <p className="text-gray-600 text-xs mb-2 line-clamp-2">{item.description}</p>
+
+                      <div className="flex items-center justify-between text-xs text-gray-500">
+                        <span className="flex items-center">
+                          <FaClock className="w-3 h-3 mr-1 opacity-75" />
+                          {item.cookTime}
+                        </span>
+                        <span className="flex items-center">
+                          <FaFire className="w-3 h-3 mr-1 opacity-75" />
+                          {item.calories} cal
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                ))}
               </div>
-
-              {/* Menu Items */}
-              {viewMode === 'grid' ? (
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
-                  {sortedItems.map((item, index) => (
-                    <div 
-                      key={item.id} 
-                      className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group animate-scale-in"
-                      style={{ animationDelay: `${index * 0.1}s` }}
-                    >
-                      <div className="relative h-40 md:h-48 overflow-hidden">
+            ) : (
+              <div className="space-y-3">
+                {sortedItems.map((item, index) => (
+                  <div 
+                    key={item.id} 
+                    className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-in-right"
+                    style={{ animationDelay: `${index * 0.05}s` }}
+                  >
+                    <div className="flex">
+                      <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
                         <Image
                           src={item.image}
                           alt={item.name}
                           fill
-                          className="object-cover group-hover:scale-110 transition-transform duration-300"
+                          className="object-cover"
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                         
-                        {/* Tags */}
-                        <div className="absolute top-2 md:top-3 left-2 md:left-3 flex flex-wrap gap-1 md:gap-2">
-                          {item.tags.slice(0, 2).map((tag, tagIndex) => (
-                            <span 
-                              key={tagIndex} 
-                              className="bg-white/90 text-gray-800 px-2 py-0.5 md:py-1 rounded-full text-xs font-medium animate-scale-in"
-                              style={{ animationDelay: `${(index * 0.1) + (tagIndex * 0.05)}s` }}
-                            >
-                              {tag}
-                            </span>
-                          ))}
-                        </div>
-
-                        {/* Price */}
-                        <div className="absolute top-2 md:top-3 right-2 md:right-3 animate-scale-in" style={{ animationDelay: `${index * 0.1 + 0.1}s` }}>
-                          <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 md:px-3 py-1">
-                            <div className="flex items-center space-x-1">
-                              {item.originalPrice && (
-                                <span className="text-gray-500 line-through text-xs md:text-sm">${item.originalPrice}</span>
-                              )}
-                              <span className="font-bold text-orange-600 text-sm md:text-base">${item.price}</span>
-                            </div>
+                        {/* Spicy indicator */}
+                        {item.spicyLevel > 0 && (
+                          <div className="absolute bottom-1 left-1 flex space-x-0.5 bg-white/80 rounded-full py-0.5 px-1.5">
+                            {Array(item.spicyLevel).fill(0).map((_, i) => (
+                              <FaPepperHot key={i} className="text-red-500 text-xs" />
+                            ))}
                           </div>
-                        </div>
+                        )}
                       </div>
-
-                      <div className="p-4 md:p-6">
-                        <div className="flex items-start justify-between mb-2">
-                          <h3 className="font-bold text-gray-900 text-base md:text-lg line-clamp-1">{item.name}</h3>
-                          {item.spicyLevel > 0 && (
-                            <div className="flex space-x-1">
-                              {Array(item.spicyLevel).fill(0).map((_, i) => (
-                                <FaPepperHot key={i} className="text-red-500 text-xs md:text-sm animate-sparkle" style={{ animationDelay: `${i * 0.2}s` }} />
+                      
+                      <div className="flex-1 p-3 min-w-0">
+                        <div className="flex justify-between items-start">
+                          <div>
+                            <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-0.5 line-clamp-1">
+                              {item.name}
+                            </h3>
+                            
+                            {/* Tags in list view */}
+                            <div className="flex flex-wrap gap-1 mb-1">
+                              {item.tags.slice(0, 2).map((tag) => (
+                                <span key={tag} className="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">
+                                  {tag}
+                                </span>
                               ))}
-                            </div>
-                          )}
-                        </div>
-
-                        <p className="text-gray-600 text-xs md:text-sm mb-3 md:mb-4 line-clamp-2">{item.description}</p>
-
-                        <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-1 md:space-x-2">
-                            <div className="flex text-yellow-400">
-                              {[...Array(5)].map((_, i) => (
-                                <FaStar key={i} className="w-3 h-3 md:w-4 md:h-4 animate-sparkle" style={{ animationDelay: `${i * 0.1}s` }} />
-                              ))}
-                            </div>
-                            <span className="text-xs md:text-sm text-gray-600">{item.rating}</span>
-                          </div>
-                          <div className="flex items-center space-x-2 md:space-x-3 text-xs text-gray-500">
-                            <span className="flex items-center space-x-1">
-                              <FaClock className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                              <span className="hidden sm:inline">{item.cookTime}</span>
-                            </span>
-                            <span className="flex items-center space-x-1">
-                              <FaFire className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                              <span className="hidden sm:inline">{item.calories}</span>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              ) : (
-                <div className="space-y-3 md:space-y-4">
-                  {sortedItems.map((item, index) => (
-                    <div 
-                      key={item.id} 
-                      className="bg-white rounded-2xl p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-in-left"
-                      style={{ animationDelay: `${index * 0.1}s` }}
-                    >
-                      <div className="flex gap-3 md:gap-6">
-                        <div className="relative w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
-                          <Image
-                            src={item.image}
-                            alt={item.name}
-                            fill
-                            className="object-cover rounded-xl hover:scale-105 transition-transform duration-300"
-                          />
-                        </div>
-                        
-                        <div className="flex-1 min-w-0">
-                          <div className="flex justify-between items-start mb-1 md:mb-2">
-                            <h3 className="font-bold text-base md:text-xl text-gray-900 line-clamp-1">{item.name}</h3>
-                            <div className="flex items-center space-x-1 md:space-x-2 flex-shrink-0 ml-2">
-                              {item.originalPrice && (
-                                <span className="text-gray-500 line-through text-sm md:text-base">${item.originalPrice}</span>
-                              )}
-                              <span className="font-bold text-base md:text-xl text-orange-600">${item.price}</span>
                             </div>
                           </div>
                           
-                          <p className="text-gray-600 text-sm md:text-base mb-2 md:mb-3 line-clamp-2">{item.description}</p>
-                          
-                          <div className="flex items-center flex-wrap gap-2 md:gap-4">
-                            <div className="flex items-center space-x-1">
-                              <div className="flex text-yellow-400">
-                                {[...Array(5)].map((_, i) => (
-                                  <FaStar key={i} className="w-3 h-3 md:w-4 md:h-4 animate-sparkle" style={{ animationDelay: `${i * 0.1}s` }} />
-                                ))}
-                              </div>
-                              <span className="text-xs md:text-sm text-gray-600">{item.rating}</span>
-                            </div>
-                            <span className="text-xs md:text-sm text-gray-500 flex items-center space-x-1">
-                              <FaClock className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                              <span>{item.cookTime}</span>
-                            </span>
-                            <span className="text-xs md:text-sm text-gray-500 flex items-center space-x-1">
-                              <FaFire className="w-2.5 h-2.5 md:w-3 md:h-3" />
-                              <span>{item.calories} cal</span>
-                            </span>
-                            {item.spicyLevel > 0 && (
-                              <div className="flex space-x-1">
-                                {Array(item.spicyLevel).fill(0).map((_, i) => (
-                                  <FaPepperHot key={i} className="text-red-500 text-xs md:text-sm animate-sparkle" style={{ animationDelay: `${i * 0.2}s` }} />
-                                ))}
-                              </div>
+                          {/* Price */}
+                          <div className="flex items-center ml-2 flex-shrink-0">
+                            {item.originalPrice && (
+                              <span className="text-gray-500 line-through text-xs mr-1">${item.originalPrice}</span>
                             )}
+                            <span className="font-bold text-orange-600 text-sm sm:text-base">${item.price.toFixed(2)}</span>
                           </div>
+                        </div>
+                        
+                        <p className="text-gray-600 text-xs mb-2 line-clamp-2">{item.description}</p>
+                        
+                        <div className="flex items-center justify-between text-xs text-gray-500">
+                          <div className="flex items-center">
+                            <FaStar className="text-yellow-400 w-3 h-3 mr-1" />
+                            <span>{item.rating}</span>
+                          </div>
+                          <span className="flex items-center">
+                            <FaClock className="w-3 h-3 mr-1 opacity-75" />
+                            {item.cookTime}
+                          </span>
+                          <span className="flex items-center">
+                            <FaFire className="w-3 h-3 mr-1 opacity-75" />
+                            {item.calories} cal
+                          </span>
                         </div>
                       </div>
                     </div>
-                  ))}
-                </div>
-              )}
+                  </div>
+                ))}
+              </div>
+            )}
 
-              {/* No Results */}
-              {sortedItems.length === 0 && (
-                <div className="text-center py-12 md:py-20 animate-fade-in-up">
-                  <FaSearch className="text-4xl md:text-6xl mb-4 mx-auto text-gray-400 animate-float" />
-                  <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">No items found</h3>
-                  <p className="text-gray-600 text-sm md:text-base">Try adjusting your search or filter criteria</p>
-                </div>
-              )}
-            </main>
-          </div>
+            {/* Empty State */}
+            {sortedItems.length === 0 && (
+              <div className="text-center py-12 bg-white rounded-xl shadow-sm mt-4">
+                <FaSearch className="text-4xl mb-4 mx-auto text-gray-300" />
+                <h3 className="text-lg font-bold text-gray-800 mb-2">No menu items found</h3>
+                <p className="text-gray-600 text-sm mb-4">Try adjusting your search or filter criteria</p>
+                <button 
+                  onClick={() => {
+                    setSelectedCategory('all')
+                    setSearchQuery('')
+                  }}
+                  className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors"
+                >
+                  Reset filters
+                </button>
+              </div>
+            )}
+          </main>
         </div>
       </div>
     </>

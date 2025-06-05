@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { 
@@ -7,7 +7,6 @@ import {
   FaEnvelope,
   FaMapMarkerAlt,
   FaClock,
-  FaUtensils,
   FaCalendarAlt,
   FaUsers,
   FaCheckCircle,
@@ -23,13 +22,19 @@ import {
   FaChild,
   FaSmokingBan,
   FaPaperPlane,
-  FaMapPin
+  FaMapPin,
+  FaChevronDown,
+  FaArrowRight,
+  FaInfoCircle
 } from 'react-icons/fa'
 import { 
   GiCookingPot,
   GiPartyFlags,
-  GiTable
+  GiTable,
+  GiShrimp,
+  GiKnifeFork
 } from 'react-icons/gi'
+import { MdDinnerDining } from 'react-icons/md'
 
 export default function ContactPage() {
   const [isVisible, setIsVisible] = useState(false)
@@ -45,9 +50,18 @@ export default function ContactPage() {
   })
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [submitStatus, setSubmitStatus] = useState('')
+  const [activeTab, setActiveTab] = useState('reservation')
+  const reservationRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setIsVisible(true)
+    
+    // Check if URL has a hash and scroll to that section
+    if (window.location.hash === '#reservation' && reservationRef.current) {
+      setTimeout(() => {
+        reservationRef.current?.scrollIntoView({ behavior: 'smooth' });
+      }, 500);
+    }
   }, [])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -90,28 +104,32 @@ export default function ContactPage() {
       title: 'Phone',
       info: '+971 4 123 4567',
       subInfo: 'Available 24/7',
-      action: 'tel:+97141234567'
+      action: 'tel:+97141234567',
+      color: 'from-blue-500 to-blue-600'
     },
     {
       icon: FaWhatsapp,
       title: 'WhatsApp',
       info: '+971 50 123 4567',
       subInfo: 'Quick responses',
-      action: 'https://wa.me/971501234567'
+      action: 'https://wa.me/971501234567',
+      color: 'from-green-500 to-green-600'
     },
     {
       icon: FaEnvelope,
       title: 'Email',
       info: 'info@worldcuprestaurant.ae',
       subInfo: 'We reply within 2 hours',
-      action: 'mailto:info@worldcuprestaurant.ae'
+      action: 'mailto:info@worldcuprestaurant.ae',
+      color: 'from-amber-500 to-amber-600'
     },
     {
       icon: FaMapMarkerAlt,
       title: 'Location',
       info: 'Al Karama, Dubai, UAE',
       subInfo: 'Easy parking available',
-      action: 'https://maps.google.com'
+      action: 'https://maps.google.com',
+      color: 'from-red-500 to-red-600'
     }
   ]
 
@@ -152,31 +170,74 @@ export default function ContactPage() {
           from { opacity: 0; transform: translateY(20px); }
           to { opacity: 1; transform: translateY(0); }
         }
+        
+        @keyframes slideInRight {
+          from { opacity: 0; transform: translateX(30px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
+        
+        @keyframes slideInLeft {
+          from { opacity: 0; transform: translateX(-30px); }
+          to { opacity: 1; transform: translateX(0); }
+        }
 
         @keyframes spin {
           from { transform: rotate(0deg); }
           to { transform: rotate(360deg); }
         }
+        
+        @keyframes pulse {
+          0%, 100% { transform: scale(1); }
+          50% { transform: scale(1.05); }
+        }
+        
+        @keyframes float {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-10px); }
+        }
 
         /* Main animation classes */
-        .fade-in { animation: fadeIn 0.6s ease-out; }
-        .slide-up { animation: slideUp 0.6s ease-out; }
+        .fade-in { 
+          opacity: 0;
+          animation: fadeIn 0.8s ease-out forwards; 
+        }
+        
+        .slide-up { 
+          opacity: 0;
+          animation: slideUp 0.8s ease-out forwards; 
+        }
+        
+        .slide-in-right {
+          opacity: 0;
+          animation: slideInRight 0.8s ease-out forwards;
+        }
+        
+        .slide-in-left {
+          opacity: 0;
+          animation: slideInLeft 0.8s ease-out forwards;
+        }
+        
         .spin { animation: spin 1s linear infinite; }
+        .pulse { animation: pulse 2s ease-in-out infinite; }
+        .float { animation: float 3s ease-in-out infinite; }
 
         /* Stagger delays */
         .delay-100 { animation-delay: 0.1s; }
         .delay-200 { animation-delay: 0.2s; }
         .delay-300 { animation-delay: 0.3s; }
         .delay-400 { animation-delay: 0.4s; }
+        .delay-500 { animation-delay: 0.5s; }
+        .delay-600 { animation-delay: 0.6s; }
+        .delay-700 { animation-delay: 0.7s; }
 
-        /* Hover effects - no keyframes needed */
+        /* Hover effects */
         .contact-card {
-          transition: all 0.3s ease;
+          transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
         .contact-card:hover {
-          transform: translateY(-5px);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+          transform: translateY(-8px);
+          box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
         }
 
         .form-input {
@@ -193,92 +254,69 @@ export default function ContactPage() {
         }
 
         .icon-hover:hover {
-          transform: scale(1.1);
+          transform: scale(1.15);
         }
 
         .social-icon {
-          transition: transform 0.3s ease;
+          transition: all 0.3s ease;
         }
 
         .social-icon:hover {
-          transform: scale(1.1);
+          transform: translateY(-5px);
+          box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
         }
 
         .floating-element {
           opacity: 0.6;
           transition: opacity 0.3s ease;
         }
+        
+        .tab-button {
+          transition: all 0.3s ease;
+        }
+        
+        .tab-content {
+          transition: all 0.5s ease;
+        }
       `}</style>
 
       <div className="min-h-screen bg-white text-black">
-        {/* Hero Section */}
-        <section className="relative py-20 overflow-hidden bg-gradient-to-br from-gray-50 to-white">
-          {/* Simplified Floating Elements */}
-          <div className="absolute inset-0">
-            <div className="floating-element absolute top-20 left-10 w-20 h-20 bg-black/5 rounded-full blur-xl"></div>
-            <div className="floating-element absolute bottom-20 right-10 w-32 h-32 bg-black/5 rounded-full blur-xl"></div>
-            <div className="floating-element absolute top-1/2 left-1/3 w-16 h-16 bg-black/5 rounded-full blur-lg"></div>
-          </div>
-          
-          <div className="container mx-auto px-4 relative z-10">
-            <div className="text-center max-w-4xl mx-auto">
-              <div className="fade-in">
-                <div className="inline-flex items-center space-x-2 bg-black/5 px-6 py-2 rounded-full mb-6">
-                  <FaMapMarkerAlt className="text-black" />
-                  <span className="text-gray-700 font-medium">Get In Touch</span>
-                </div>
-                <h1 className="text-5xl md:text-7xl font-black mb-6 text-black">
-                  Contact Us
-                </h1>
-                <div className="w-24 h-1 bg-black mx-auto mb-6"></div>
-              </div>
-              
-              <div className="slide-up delay-100">
-                <p className="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed">
-                  Ready for an unforgettable dining experience? We're here to serve you!
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                  <a 
-                    href="tel:+97141234567"
-                    className="inline-flex items-center space-x-2 bg-black text-white px-8 py-3 rounded-full text-lg font-semibold hover:bg-gray-800 transition-all duration-300"
-                  >
-                    <FaPhone />
-                    <span>Call Now</span>
-                  </a>
-                  <a 
-                    href="#reservation"
-                    className="inline-flex items-center space-x-2 border-2 border-black text-black px-8 py-3 rounded-full text-lg font-semibold hover:bg-black hover:text-white transition-all duration-300"
-                  >
-                    <FaCalendarAlt />
-                    <span>Book Table</span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
+   
 
         {/* Contact Info Cards */}
-        <section className="py-16 bg-gray-50">
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
-              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="max-w-7xl mx-auto">
+              <div className="text-center mb-16 slide-up">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                  How Can We <span className="text-amber-500">Help You?</span>
+                </h2>
+                <p className="text-gray-600 max-w-2xl mx-auto">
+                  Choose the most convenient way to reach us. We're always ready to assist you with any questions or reservations.
+                </p>
+              </div>
+              
+              <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8">
                 {contactInfo.map((info, index) => (
                   <a
                     key={index}
                     href={info.action}
                     target={info.action.startsWith('http') ? '_blank' : '_self'}
                     rel={info.action.startsWith('http') ? 'noopener noreferrer' : ''}
-                    className={`contact-card bg-white p-6 rounded-2xl border border-gray-200 hover:border-black/20 text-center group shadow-lg slide-up delay-${(index + 1) * 100}`}
+                    className={`contact-card bg-white p-8 rounded-3xl border border-gray-100 text-center group shadow-xl slide-up delay-${(index + 2) * 100}`}
                   >
-                    <div className="w-16 h-16 bg-black rounded-full flex items-center justify-center mx-auto mb-4 icon-hover">
+                    <div className={`w-16 h-16 bg-gradient-to-r ${info.color} rounded-2xl flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 shadow-lg`}>
                       <info.icon className="text-2xl text-white" />
                     </div>
-                    <h3 className="text-xl font-bold text-black mb-2 group-hover:text-gray-700 transition-colors">
+                    <h3 className="text-xl font-bold text-gray-900 mb-3">
                       {info.title}
                     </h3>
-                    <p className="text-black font-medium mb-1">{info.info}</p>
+                    <p className="text-gray-900 font-medium mb-2 transition-colors group-hover:text-amber-600">{info.info}</p>
                     <p className="text-gray-500 text-sm">{info.subInfo}</p>
+                    <div className="mt-5 text-amber-500 font-medium flex items-center justify-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span className="text-sm">Contact Now</span>
+                      <FaArrowRight className="text-xs" />
+                    </div>
                   </a>
                 ))}
               </div>
@@ -287,31 +325,73 @@ export default function ContactPage() {
         </section>
 
         {/* Main Content - Reservation Form & Info */}
-        <section id="reservation" className="py-16 bg-white">
+        <section id="reservation" ref={reservationRef} className="py-20 bg-gray-50">
           <div className="container mx-auto px-4">
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-7xl mx-auto">
+              {/* Section Title */}
+              <div className="text-center mb-16 slide-up">
+                <GiTable className="text-5xl text-amber-500 mx-auto mb-4" />
+                <h2 className="text-3xl md:text-5xl font-bold mb-4 text-gray-900">
+                  Table Reservation & Information
+                </h2>
+                <p className="text-gray-600 max-w-2xl mx-auto">
+                  Book your table in advance or find key information about our restaurant
+                </p>
+              </div>
+
+              {/* Tabs - Mobile */}
+              <div className="md:hidden mb-8 slide-up">
+                <div className="bg-white rounded-xl p-2 shadow-md">
+                  <div className="grid grid-cols-2 gap-2">
+                    <button
+                      onClick={() => setActiveTab('reservation')}
+                      className={`tab-button p-4 rounded-lg text-center font-medium ${
+                        activeTab === 'reservation' 
+                          ? 'bg-amber-500 text-white' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      <FaCalendarAlt className="mx-auto mb-1" />
+                      <span>Book a Table</span>
+                    </button>
+                    <button
+                      onClick={() => setActiveTab('info')}
+                      className={`tab-button p-4 rounded-lg text-center font-medium ${
+                        activeTab === 'info' 
+                          ? 'bg-amber-500 text-white' 
+                          : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                    >
+                      <FaInfoCircle className="mx-auto mb-1" />
+                      <span>Restaurant Info</span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+
               <div className="grid lg:grid-cols-2 gap-12">
                 {/* Reservation Form */}
-                <div className="slide-up">
-                  <div className="bg-gray-50 p-8 rounded-2xl border border-gray-200 shadow-lg">
+                <div className={`tab-content slide-in-left ${activeTab === 'reservation' ? 'block' : 'hidden md:block'}`}>
+                  <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl">
                     <div className="text-center mb-8">
-                      <h2 className="text-3xl md:text-4xl font-bold mb-4 text-black">
-                        Reserve Your <span className="text-gray-600">Table</span>
-                      </h2>
+                      <h3 className="text-2xl md:text-3xl font-bold mb-3 text-gray-900">
+                        Reserve Your <span className="text-amber-500">Table</span>
+                      </h3>
                       <p className="text-gray-600">
                         Book your perfect dining experience with us
                       </p>
                     </div>
 
                     {submitStatus === 'success' && (
-                      <div className="bg-green-50 border border-green-200 text-green-700 p-4 rounded-xl mb-6 text-center fade-in">
-                        <FaCheckCircle className="inline mr-2" />
-                        Reservation request sent successfully! We'll confirm within 2 hours.
+                      <div className="bg-green-50 border border-green-200 text-green-700 p-5 rounded-xl mb-8 text-center fade-in">
+                        <FaCheckCircle className="text-xl inline mr-2" />
+                        <span className="font-medium">Reservation request sent successfully!</span> 
+                        <p className="text-sm mt-1">We'll confirm your booking within 2 hours.</p>
                       </div>
                     )}
 
                     <form onSubmit={handleSubmit} className="space-y-6">
-                      <div className="grid md:grid-cols-2 gap-4">
+                      <div className="grid md:grid-cols-2 gap-5">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">
                             Full Name *
@@ -322,7 +402,7 @@ export default function ContactPage() {
                             value={formData.name}
                             onChange={handleInputChange}
                             required
-                            className="form-input w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none text-black"
+                            className="form-input w-full px-4 py-3.5 bg-white border border-gray-300 rounded-xl focus:outline-none text-black"
                             placeholder="Your full name"
                           />
                         </div>
@@ -336,13 +416,13 @@ export default function ContactPage() {
                             value={formData.email}
                             onChange={handleInputChange}
                             required
-                            className="form-input w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none text-black"
+                            className="form-input w-full px-4 py-3.5 bg-white border border-gray-300 rounded-xl focus:outline-none text-black"
                             placeholder="your@email.com"
                           />
                         </div>
                       </div>
 
-                      <div className="grid md:grid-cols-2 gap-4">
+                      <div className="grid md:grid-cols-2 gap-5">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">
                             Phone Number *
@@ -353,7 +433,7 @@ export default function ContactPage() {
                             value={formData.phone}
                             onChange={handleInputChange}
                             required
-                            className="form-input w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none text-black"
+                            className="form-input w-full px-4 py-3.5 bg-white border border-gray-300 rounded-xl focus:outline-none text-black"
                             placeholder="+971 XX XXX XXXX"
                           />
                         </div>
@@ -366,7 +446,8 @@ export default function ContactPage() {
                             value={formData.guests}
                             onChange={handleInputChange}
                             required
-                            className="form-input w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none text-black"
+                            className="form-input w-full px-4 py-3.5 bg-white border border-gray-300 rounded-xl focus:outline-none text-black appearance-none"
+                            style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'%23666666\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1rem' }}
                           >
                             {[...Array(12)].map((_, i) => (
                               <option key={i + 1} value={i + 1}>
@@ -378,7 +459,7 @@ export default function ContactPage() {
                         </div>
                       </div>
 
-                      <div className="grid md:grid-cols-2 gap-4">
+                      <div className="grid md:grid-cols-2 gap-5">
                         <div>
                           <label className="block text-sm font-medium text-gray-700 mb-2">
                             Preferred Date *
@@ -390,7 +471,7 @@ export default function ContactPage() {
                             onChange={handleInputChange}
                             required
                             min={new Date().toISOString().split('T')[0]}
-                            className="form-input w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none text-black"
+                            className="form-input w-full px-4 py-3.5 bg-white border border-gray-300 rounded-xl focus:outline-none text-black"
                           />
                         </div>
                         <div>
@@ -402,7 +483,8 @@ export default function ContactPage() {
                             value={formData.time}
                             onChange={handleInputChange}
                             required
-                            className="form-input w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none text-black"
+                            className="form-input w-full px-4 py-3.5 bg-white border border-gray-300 rounded-xl focus:outline-none text-black appearance-none"
+                            style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'%23666666\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1rem' }}
                           >
                             <option value="">Select time</option>
                             <option value="11:00">11:00 AM</option>
@@ -433,7 +515,8 @@ export default function ContactPage() {
                           name="occasion"
                           value={formData.occasion}
                           onChange={handleInputChange}
-                          className="form-input w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none text-black"
+                          className="form-input w-full px-4 py-3.5 bg-white border border-gray-300 rounded-xl focus:outline-none text-black appearance-none"
+                          style={{ backgroundImage: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' fill=\'none\' viewBox=\'0 0 24 24\' stroke=\'%23666666\'%3E%3Cpath stroke-linecap=\'round\' stroke-linejoin=\'round\' stroke-width=\'2\' d=\'M19 9l-7 7-7-7\'%3E%3C/path%3E%3C/svg%3E")', backgroundRepeat: 'no-repeat', backgroundPosition: 'right 1rem center', backgroundSize: '1rem' }}
                         >
                           <option value="">Select occasion (optional)</option>
                           {occasions.map((occasion, index) => (
@@ -451,7 +534,7 @@ export default function ContactPage() {
                           value={formData.message}
                           onChange={handleInputChange}
                           rows={4}
-                          className="form-input w-full px-4 py-3 bg-white border border-gray-300 rounded-xl focus:outline-none text-black resize-none"
+                          className="form-input w-full px-4 py-3.5 bg-white border border-gray-300 rounded-xl focus:outline-none text-black resize-none"
                           placeholder="Any dietary restrictions, seating preferences, or special requests..."
                         />
                       </div>
@@ -459,59 +542,67 @@ export default function ContactPage() {
                       <button
                         type="submit"
                         disabled={isSubmitting}
-                        className="w-full bg-black text-white py-4 rounded-xl font-bold text-lg hover:bg-gray-800 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed"
+                        className="w-full bg-amber-500 text-white py-4 rounded-xl font-bold text-lg hover:bg-amber-600 transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-amber-500/30"
                       >
                         {isSubmitting ? (
                           <div className="flex items-center justify-center space-x-2">
                             <div className="spin">
                               <div className="w-5 h-5 border-2 border-white border-t-transparent rounded-full"></div>
                             </div>
-                            <span>Submitting...</span>
+                            <span>Processing Request...</span>
                           </div>
                         ) : (
                           <div className="flex items-center justify-center space-x-2">
                             <FaPaperPlane />
-                            <span>Reserve Table</span>
+                            <span>Confirm Reservation</span>
                           </div>
                         )}
                       </button>
+                      
+                      <p className="text-xs text-gray-500 text-center mt-4">
+                        By making a reservation, you agree to our reservation policy.
+                      </p>
                     </form>
                   </div>
                 </div>
 
                 {/* Restaurant Info */}
-                <div className="space-y-8 slide-up delay-200">
+                <div className={`tab-content space-y-8 slide-in-right ${activeTab === 'info' ? 'block' : 'hidden md:block'}`}>
                   {/* Opening Hours */}
-                  <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 shadow-lg">
-                    <div className="flex items-center space-x-3 mb-6">
-                      <FaClock className="text-2xl text-black" />
-                      <h3 className="text-2xl font-bold text-black">Opening Hours</h3>
+                  <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl">
+                    <div className="flex items-center space-x-4 mb-6">
+                      <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+                        <FaClock className="text-2xl text-amber-600" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900">Opening Hours</h3>
                     </div>
-                    <div className="space-y-3">
+                    <div className="space-y-4">
                       {openingHours.map((schedule, index) => (
-                        <div key={index} className="flex justify-between items-center py-2 border-b border-gray-200 last:border-b-0">
+                        <div key={index} className="flex justify-between items-center py-3 border-b border-gray-100 last:border-b-0">
                           <span className="text-gray-700 font-medium">{schedule.day}</span>
-                          <span className="text-black font-bold">{schedule.hours}</span>
+                          <span className="text-amber-600 font-bold">{schedule.hours}</span>
                         </div>
                       ))}
                     </div>
-                    <div className="mt-6 p-4 bg-black/5 rounded-xl border border-black/10">
-                      <p className="text-black text-sm text-center">
-                        <FaStar className="inline mr-1" />
-                        Highest hygiene standards maintained for your safety
+                    <div className="mt-6 p-5 bg-amber-50 rounded-xl border border-amber-100">
+                      <p className="text-gray-800 text-sm flex items-center">
+                        <FaStar className="text-amber-500 mr-2 flex-shrink-0" />
+                        <span>We maintain the highest hygiene standards for your safety and comfort</span>
                       </p>
                     </div>
                   </div>
 
                   {/* Location & Map */}
-                  <div className="bg-gray-50 p-6 rounded-2xl border border-gray-200 shadow-lg">
-                    <div className="flex items-center space-x-3 mb-6">
-                      <FaMapPin className="text-2xl text-black" />
-                      <h3 className="text-2xl font-bold text-black">Find Us</h3>
+                  <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl">
+                    <div className="flex items-center space-x-4 mb-6">
+                      <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+                        <FaMapPin className="text-2xl text-amber-600" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900">Find Us</h3>
                     </div>
-                    <div className="mb-4">
-                      <p className="text-gray-700 mb-2">
-                        <strong>World Cup Restaurant</strong>
+                    <div className="mb-6">
+                      <p className="text-gray-900 font-bold mb-2">
+                        World Cup Restaurant
                       </p>
                       <p className="text-gray-600 leading-relaxed">
                         Al Karama Street, Near Dubai Mall<br />
@@ -519,31 +610,75 @@ export default function ContactPage() {
                         P.O. Box 12345
                       </p>
                     </div>
-                    <div className="relative h-48 rounded-xl overflow-hidden mb-4 bg-gray-200">
-                      <div className="absolute inset-0 bg-gray-300/50 flex items-center justify-center">
+                    <div className="relative h-56 rounded-xl overflow-hidden mb-6 border border-gray-200">
+                      {/* Map would typically go here, using a placeholder for now */}
+                      <div className="absolute inset-0 bg-gray-200 flex items-center justify-center">
                         <a
                           href="https://maps.google.com"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="bg-black text-white px-6 py-3 rounded-full font-semibold hover:bg-gray-800 transition-colors"
+                          className="bg-amber-500 text-white px-6 py-3 rounded-full font-semibold hover:bg-amber-600 transition-colors shadow-lg"
                         >
                           View on Google Maps
                         </a>
                       </div>
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
-                      <div className="text-center">
-                        <div className="text-black font-bold">15 min</div>
+                    <div className="grid grid-cols-2 gap-4">
+                      <div className="bg-gray-50 p-4 rounded-xl text-center">
+                        <div className="text-gray-900 font-bold text-lg">15 min</div>
                         <div className="text-gray-600 text-sm">from Dubai Mall</div>
                       </div>
-                      <div className="text-center">
-                        <div className="text-black font-bold">10 min</div>
+                      <div className="bg-gray-50 p-4 rounded-xl text-center">
+                        <div className="text-gray-900 font-bold text-lg">10 min</div>
                         <div className="text-gray-600 text-sm">from ADCB Metro</div>
                       </div>
                     </div>
                   </div>
 
-                  
+                  {/* Amenities - Mobile Only */}
+                  <div className="md:hidden bg-white p-8 rounded-3xl border border-gray-100 shadow-xl">
+                    <div className="flex items-center space-x-4 mb-6">
+                      <div className="w-12 h-12 bg-amber-100 rounded-xl flex items-center justify-center">
+                        <FaWifi className="text-2xl text-amber-600" />
+                      </div>
+                      <h3 className="text-2xl font-bold text-gray-900">Amenities</h3>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4">
+                      {amenities.slice(0, 4).map((item, index) => (
+                        <div key={index} className="flex items-center space-x-3 p-3 border border-gray-100 rounded-lg">
+                          <item.icon className="text-amber-500 text-lg flex-shrink-0" />
+                          <span className="text-sm font-medium text-gray-700">{item.title}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Amenities - Desktop */}
+              <div className="hidden md:block mt-12 slide-up delay-400">
+                <div className="bg-white p-8 rounded-3xl border border-gray-100 shadow-xl">
+                  <div className="text-center mb-8">
+                    <h3 className="text-2xl font-bold text-gray-900 mb-3">
+                      Restaurant <span className="text-amber-500">Amenities</span>
+                    </h3>
+                    <p className="text-gray-600 max-w-2xl mx-auto">
+                      We offer a range of amenities to make your dining experience comfortable and enjoyable
+                    </p>
+                  </div>
+                  <div className="grid md:grid-cols-3 gap-6">
+                    {amenities.map((item, index) => (
+                      <div key={index} className="flex items-center space-x-4 p-4 border border-gray-100 rounded-xl hover:border-amber-200 transition-colors">
+                        <div className="w-12 h-12 bg-amber-50 rounded-full flex items-center justify-center flex-shrink-0">
+                          <item.icon className="text-amber-500 text-xl" />
+                        </div>
+                        <div>
+                          <h4 className="font-medium text-gray-900">{item.title}</h4>
+                          <p className="text-sm text-gray-500">{item.desc}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -551,63 +686,88 @@ export default function ContactPage() {
         </section>
 
         {/* Social Media & Quick Contact */}
-        <section className="py-16 bg-gray-50">
+        <section className="py-20 bg-white">
           <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto text-center">
-              <div className="fade-in">
-                <h2 className="text-3xl md:text-4xl font-bold mb-6 text-black">
-                  Stay <span className="text-gray-600">Connected</span>
+            <div className="max-w-5xl mx-auto">
+              <div className="text-center mb-12 slide-up">
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-900">
+                  Stay <span className="text-amber-500">Connected</span>
                 </h2>
-                <p className="text-gray-600 mb-8">
+                <p className="text-gray-600 max-w-2xl mx-auto">
                   Follow us on social media for the latest updates, special offers, and behind-the-scenes content
                 </p>
+              </div>
+              
+              <div className="grid md:grid-cols-4 gap-6 mb-12">
+                <a 
+                  href="https://instagram.com/worldcuprestaurant"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon bg-gradient-to-br from-purple-500 to-pink-500 p-6 rounded-3xl text-center slide-up delay-100"
+                >
+                  <FaInstagram className="text-4xl text-white mx-auto mb-4" />
+                  <h3 className="text-white font-bold">Instagram</h3>
+                  <p className="text-white/80 text-sm mt-1">@worldcuprestaurant</p>
+                </a>
                 
-                <div className="flex justify-center space-x-6 mb-8">
-                  <a 
-                    href="https://instagram.com/worldcuprestaurant"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-icon w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-full flex items-center justify-center"
-                  >
-                    <FaInstagram className="text-2xl text-white" />
-                  </a>
-                  <a 
-                    href="https://facebook.com/worldcuprestaurant"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-icon w-14 h-14 bg-blue-600 rounded-full flex items-center justify-center"
-                  >
-                    <FaFacebook className="text-2xl text-white" />
-                  </a>
-                  <a 
-                    href="https://twitter.com/worldcuprest"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-icon w-14 h-14 bg-black rounded-full flex items-center justify-center"
-                  >
-                    <FaTwitter className="text-2xl text-white" />
-                  </a>
-                  <a 
-                    href="https://wa.me/971501234567"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="social-icon w-14 h-14 bg-green-500 rounded-full flex items-center justify-center"
-                  >
-                    <FaWhatsapp className="text-2xl text-white" />
-                  </a>
-                </div>
+                <a 
+                  href="https://facebook.com/worldcuprestaurant"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon bg-gradient-to-br from-blue-600 to-blue-700 p-6 rounded-3xl text-center slide-up delay-200"
+                >
+                  <FaFacebook className="text-4xl text-white mx-auto mb-4" />
+                  <h3 className="text-white font-bold">Facebook</h3>
+                  <p className="text-white/80 text-sm mt-1">@worldcuprestaurant</p>
+                </a>
+                
+                <a 
+                  href="https://twitter.com/worldcuprest"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon bg-gradient-to-br from-blue-400 to-blue-500 p-6 rounded-3xl text-center slide-up delay-300"
+                >
+                  <FaTwitter className="text-4xl text-white mx-auto mb-4" />
+                  <h3 className="text-white font-bold">Twitter</h3>
+                  <p className="text-white/80 text-sm mt-1">@worldcuprest</p>
+                </a>
+                
+                <a 
+                  href="https://wa.me/971501234567"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="social-icon bg-gradient-to-br from-green-500 to-green-600 p-6 rounded-3xl text-center slide-up delay-400"
+                >
+                  <FaWhatsapp className="text-4xl text-white mx-auto mb-4" />
+                  <h3 className="text-white font-bold">WhatsApp</h3>
+                  <p className="text-white/80 text-sm mt-1">Quick Chat</p>
+                </a>
+              </div>
 
-                <div className="bg-white p-6 rounded-2xl border border-gray-200 inline-block shadow-lg">
-                  <div className="flex items-center space-x-4">
-                    <div className="w-12 h-12 bg-black rounded-full flex items-center justify-center">
-                      <FaPhone className="text-white" />
-                    </div>
-                    <div className="text-left">
-                      <div className="text-gray-600 text-sm">Quick Call</div>
-                      <a href="tel:+97141234567" className="text-xl font-bold text-black hover:text-gray-700 transition-colors">
-                        +971 4 123 4567
-                      </a>
-                    </div>
+              <div className="flex flex-col md:flex-row gap-6 items-center justify-center slide-up delay-500">
+                <div className="bg-amber-50 p-6 md:p-8 rounded-3xl border border-amber-100 flex flex-col md:flex-row items-center gap-6 shadow-lg w-full md:w-auto">
+                  <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <FaPhone className="text-2xl text-white" />
+                  </div>
+                  <div className="text-center md:text-left">
+                    <div className="text-gray-600 text-sm mb-1">For Quick Reservations</div>
+                    <a href="tel:+97141234567" className="text-2xl font-bold text-gray-900 hover:text-amber-600 transition-colors">
+                      +971 4 123 4567
+                    </a>
+                    <p className="text-sm text-gray-500 mt-1">Available 24/7 for your convenience</p>
+                  </div>
+                </div>
+                
+                <div className="bg-gray-900 p-6 md:p-8 rounded-3xl flex flex-col md:flex-row items-center gap-6 shadow-lg w-full md:w-auto">
+                  <div className="w-16 h-16 bg-amber-500 rounded-full flex items-center justify-center flex-shrink-0">
+                    <FaEnvelope className="text-2xl text-white" />
+                  </div>
+                  <div className="text-center md:text-left">
+                    <div className="text-gray-400 text-sm mb-1">Email Us</div>
+                    <a href="mailto:info@worldcuprestaurant.ae" className="text-xl font-bold text-white hover:text-amber-400 transition-colors">
+                      info@worldcuprestaurant.ae
+                    </a>
+                    <p className="text-sm text-gray-400 mt-1">We respond within 2 hours</p>
                   </div>
                 </div>
               </div>
@@ -615,34 +775,7 @@ export default function ContactPage() {
           </div>
         </section>
 
-        {/* Call to Action */}
-        <section className="py-16 bg-black">
-          <div className="container mx-auto px-4 text-center">
-            <div className="max-w-3xl mx-auto fade-in">
-              <GiCookingPot className="text-6xl text-white mx-auto mb-6" />
-              <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-                Ready to Dine with Us?
-              </h2>
-              <p className="text-xl mb-8 text-gray-300">
-                Experience world-class cuisine in the heart of Dubai
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link 
-                  href="/menu"
-                  className="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
-                >
-                  View Our Menu
-                </Link>
-                <a 
-                  href="#reservation"
-                  className="border-2 border-white text-white px-8 py-3 rounded-full font-semibold hover:bg-white hover:text-black transition-all duration-300"
-                >
-                  Contact Us for Table
-                </a>
-              </div>
-            </div>
-          </div>
-        </section>
+    
       </div>
     </>
   )
