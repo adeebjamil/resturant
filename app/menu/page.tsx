@@ -30,7 +30,7 @@ import {
   GiOrangeSlice,
   GiCarrot
 } from 'react-icons/gi'
-import { IoGridOutline, IoListOutline } from 'react-icons/io5'
+import { IoGridOutline, IoListOutline, IoFilterOutline } from 'react-icons/io5'
 
 export default function MenuPage() {
   const [selectedCategory, setSelectedCategory] = useState('all')
@@ -38,6 +38,7 @@ export default function MenuPage() {
   const [searchQuery, setSearchQuery] = useState('')
   const [sortBy, setSortBy] = useState('popular')
   const [viewMode, setViewMode] = useState('grid') // grid or list
+  const [showMobileFilters, setShowMobileFilters] = useState(false)
 
   useEffect(() => {
     setIsVisible(true)
@@ -402,12 +403,13 @@ export default function MenuPage() {
         {/* Modern Header */}
         <header className="sticky top-0 z-50 bg-white/80 backdrop-blur-xl border-b border-gray-200/50 animate-fade-in-down">
           <div className="container mx-auto px-4 py-4">
-            <div className="flex items-center justify-between">
+            {/* Desktop Header */}
+            <div className="hidden md:flex items-center justify-between">
               <div className="flex items-center space-x-6">
                 <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
                   Restaurant Menu
                 </h1>
-                <div className="hidden md:flex items-center space-x-4 animate-slide-in-left stagger-1">
+                <div className="flex items-center space-x-4 animate-slide-in-left stagger-1">
                   <span className="text-sm text-gray-600 animate-pulse-gentle">{filteredItems.length} items</span>
                   <div className="flex items-center space-x-2">
                     <button
@@ -450,12 +452,79 @@ export default function MenuPage() {
                 </select>
               </div>
             </div>
+
+            {/* Mobile Header */}
+            <div className="md:hidden">
+              <div className="flex items-center justify-between mb-4">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                  Menu
+                </h1>
+                <div className="flex items-center space-x-2">
+                  <button
+                    onClick={() => setShowMobileFilters(!showMobileFilters)}
+                    className="p-2 rounded-lg bg-gray-100 text-gray-600 hover:bg-gray-200 transition-colors"
+                  >
+                    <IoFilterOutline className="w-5 h-5" />
+                  </button>
+                  <div className="flex items-center space-x-1">
+                    <button
+                      onClick={() => setViewMode('grid')}
+                      className={`p-2 rounded-lg transition-all duration-300 ${viewMode === 'grid' ? 'bg-orange-100 text-orange-600' : 'bg-gray-100 text-gray-400'}`}
+                    >
+                      <IoGridOutline className="w-4 h-4" />
+                    </button>
+                    <button
+                      onClick={() => setViewMode('list')}
+                      className={`p-2 rounded-lg transition-all duration-300 ${viewMode === 'list' ? 'bg-orange-100 text-orange-600' : 'bg-gray-100 text-gray-400'}`}
+                    >
+                      <IoListOutline className="w-4 h-4" />
+                    </button>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Mobile Search */}
+              <div className="relative mb-4">
+                <input
+                  type="text"
+                  placeholder="Search menu..."
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  className="w-full bg-gray-100 border-0 rounded-full px-4 py-3 text-sm focus:bg-white focus:ring-2 focus:ring-orange-500 transition-all"
+                />
+                <FaSearch className="absolute right-4 top-3.5 w-4 h-4 text-gray-400" />
+              </div>
+
+              {/* Mobile Filters */}
+              {showMobileFilters && (
+                <div className="mb-4 p-4 bg-white rounded-xl border border-gray-200 animate-fade-in-up">
+                  <div className="mb-3">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Sort by</label>
+                    <select
+                      value={sortBy}
+                      onChange={(e) => setSortBy(e.target.value)}
+                      className="w-full bg-gray-100 border-0 rounded-lg px-3 py-2 text-sm focus:bg-white focus:ring-2 focus:ring-orange-500"
+                    >
+                      <option value="popular">Popular</option>
+                      <option value="rating">Top Rated</option>
+                      <option value="price-low">Price ↑</option>
+                      <option value="price-high">Price ↓</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Items found: {filteredItems.length}
+                    </label>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </header>
 
         <div className="container mx-auto px-4 py-8">
           <div className="flex gap-8">
-            {/* Sidebar Categories */}
+            {/* Sidebar Categories - Desktop Only */}
             <aside className="hidden lg:block w-80 bg-white rounded-2xl p-6 h-fit sticky top-24 shadow-sm animate-slide-in-left stagger-3">
               <h2 className="text-lg font-semibold mb-6 text-gray-900 animate-fade-in-up">Categories</h2>
               <div className="space-y-2">
@@ -487,21 +556,21 @@ export default function MenuPage() {
             <main className="flex-1">
               {/* Mobile Categories */}
               <div className="lg:hidden mb-6 animate-fade-in-up stagger-4">
-                <div className="flex overflow-x-auto pb-4 space-x-3">
+                <div className="flex overflow-x-auto pb-4 space-x-3 scrollbar-hide">
                   {categories.map((category) => {
                     const IconComponent = category.icon;
                     return (
                       <button
                         key={category.id}
                         onClick={() => setSelectedCategory(category.id)}
-                        className={`flex-shrink-0 flex items-center space-x-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 hover:scale-105 ${
+                        className={`flex-shrink-0 flex flex-col items-center space-y-1 p-3 rounded-xl text-xs font-medium transition-all duration-300 hover:scale-105 min-w-[80px] ${
                           selectedCategory === category.id
-                            ? 'bg-orange-500 text-white'
-                            : 'bg-white text-gray-600 hover:bg-gray-50'
+                            ? 'bg-orange-500 text-white shadow-lg'
+                            : 'bg-white text-gray-600 hover:bg-gray-50 shadow-sm'
                         }`}
                       >
-                        <IconComponent />
-                        <span>{category.name}</span>
+                        <IconComponent className="text-lg" />
+                        <span className="text-center leading-tight">{category.name}</span>
                       </button>
                     );
                   })}
@@ -510,14 +579,14 @@ export default function MenuPage() {
 
               {/* Menu Items */}
               {viewMode === 'grid' ? (
-                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
                   {sortedItems.map((item, index) => (
                     <div 
                       key={item.id} 
                       className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300 group animate-scale-in"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      <div className="relative h-48 overflow-hidden">
+                      <div className="relative h-40 md:h-48 overflow-hidden">
                         <Image
                           src={item.image}
                           alt={item.name}
@@ -527,11 +596,11 @@ export default function MenuPage() {
                         <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
                         
                         {/* Tags */}
-                        <div className="absolute top-3 left-3 flex flex-wrap gap-2">
+                        <div className="absolute top-2 md:top-3 left-2 md:left-3 flex flex-wrap gap-1 md:gap-2">
                           {item.tags.slice(0, 2).map((tag, tagIndex) => (
                             <span 
                               key={tagIndex} 
-                              className="bg-white/90 text-gray-800 px-2 py-1 rounded-full text-xs font-medium animate-scale-in"
+                              className="bg-white/90 text-gray-800 px-2 py-0.5 md:py-1 rounded-full text-xs font-medium animate-scale-in"
                               style={{ animationDelay: `${(index * 0.1) + (tagIndex * 0.05)}s` }}
                             >
                               {tag}
@@ -540,49 +609,49 @@ export default function MenuPage() {
                         </div>
 
                         {/* Price */}
-                        <div className="absolute top-3 right-3 animate-scale-in" style={{ animationDelay: `${index * 0.1 + 0.1}s` }}>
-                          <div className="bg-white/90 backdrop-blur-sm rounded-full px-3 py-1">
+                        <div className="absolute top-2 md:top-3 right-2 md:right-3 animate-scale-in" style={{ animationDelay: `${index * 0.1 + 0.1}s` }}>
+                          <div className="bg-white/90 backdrop-blur-sm rounded-full px-2 md:px-3 py-1">
                             <div className="flex items-center space-x-1">
                               {item.originalPrice && (
-                                <span className="text-gray-500 line-through text-sm">${item.originalPrice}</span>
+                                <span className="text-gray-500 line-through text-xs md:text-sm">${item.originalPrice}</span>
                               )}
-                              <span className="font-bold text-orange-600">${item.price}</span>
+                              <span className="font-bold text-orange-600 text-sm md:text-base">${item.price}</span>
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <div className="p-6">
+                      <div className="p-4 md:p-6">
                         <div className="flex items-start justify-between mb-2">
-                          <h3 className="font-bold text-gray-900 text-lg">{item.name}</h3>
+                          <h3 className="font-bold text-gray-900 text-base md:text-lg line-clamp-1">{item.name}</h3>
                           {item.spicyLevel > 0 && (
                             <div className="flex space-x-1">
                               {Array(item.spicyLevel).fill(0).map((_, i) => (
-                                <FaPepperHot key={i} className="text-red-500 text-sm animate-sparkle" style={{ animationDelay: `${i * 0.2}s` }} />
+                                <FaPepperHot key={i} className="text-red-500 text-xs md:text-sm animate-sparkle" style={{ animationDelay: `${i * 0.2}s` }} />
                               ))}
                             </div>
                           )}
                         </div>
 
-                        <p className="text-gray-600 text-sm mb-4 line-clamp-2">{item.description}</p>
+                        <p className="text-gray-600 text-xs md:text-sm mb-3 md:mb-4 line-clamp-2">{item.description}</p>
 
                         <div className="flex items-center justify-between">
-                          <div className="flex items-center space-x-2">
+                          <div className="flex items-center space-x-1 md:space-x-2">
                             <div className="flex text-yellow-400">
                               {[...Array(5)].map((_, i) => (
-                                <FaStar key={i} className="w-4 h-4 animate-sparkle" style={{ animationDelay: `${i * 0.1}s` }} />
+                                <FaStar key={i} className="w-3 h-3 md:w-4 md:h-4 animate-sparkle" style={{ animationDelay: `${i * 0.1}s` }} />
                               ))}
                             </div>
-                            <span className="text-sm text-gray-600">{item.rating} ({item.reviews})</span>
+                            <span className="text-xs md:text-sm text-gray-600">{item.rating}</span>
                           </div>
-                          <div className="flex items-center space-x-3 text-xs text-gray-500">
+                          <div className="flex items-center space-x-2 md:space-x-3 text-xs text-gray-500">
                             <span className="flex items-center space-x-1">
-                              <FaClock className="w-3 h-3" />
-                              <span>{item.cookTime}</span>
+                              <FaClock className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                              <span className="hidden sm:inline">{item.cookTime}</span>
                             </span>
                             <span className="flex items-center space-x-1">
-                              <FaFire className="w-3 h-3" />
-                              <span>{item.calories} cal</span>
+                              <FaFire className="w-2.5 h-2.5 md:w-3 md:h-3" />
+                              <span className="hidden sm:inline">{item.calories}</span>
                             </span>
                           </div>
                         </div>
@@ -591,15 +660,15 @@ export default function MenuPage() {
                   ))}
                 </div>
               ) : (
-                <div className="space-y-4">
+                <div className="space-y-3 md:space-y-4">
                   {sortedItems.map((item, index) => (
                     <div 
                       key={item.id} 
-                      className="bg-white rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-in-left"
+                      className="bg-white rounded-2xl p-4 md:p-6 shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-in-left"
                       style={{ animationDelay: `${index * 0.1}s` }}
                     >
-                      <div className="flex gap-6">
-                        <div className="relative w-32 h-32 flex-shrink-0">
+                      <div className="flex gap-3 md:gap-6">
+                        <div className="relative w-20 h-20 md:w-32 md:h-32 flex-shrink-0">
                           <Image
                             src={item.image}
                             alt={item.name}
@@ -608,40 +677,40 @@ export default function MenuPage() {
                           />
                         </div>
                         
-                        <div className="flex-1">
-                          <div className="flex justify-between items-start mb-2">
-                            <h3 className="font-bold text-xl text-gray-900">{item.name}</h3>
-                            <div className="flex items-center space-x-2">
+                        <div className="flex-1 min-w-0">
+                          <div className="flex justify-between items-start mb-1 md:mb-2">
+                            <h3 className="font-bold text-base md:text-xl text-gray-900 line-clamp-1">{item.name}</h3>
+                            <div className="flex items-center space-x-1 md:space-x-2 flex-shrink-0 ml-2">
                               {item.originalPrice && (
-                                <span className="text-gray-500 line-through">${item.originalPrice}</span>
+                                <span className="text-gray-500 line-through text-sm md:text-base">${item.originalPrice}</span>
                               )}
-                              <span className="font-bold text-xl text-orange-600">${item.price}</span>
+                              <span className="font-bold text-base md:text-xl text-orange-600">${item.price}</span>
                             </div>
                           </div>
                           
-                          <p className="text-gray-600 mb-3">{item.description}</p>
+                          <p className="text-gray-600 text-sm md:text-base mb-2 md:mb-3 line-clamp-2">{item.description}</p>
                           
-                          <div className="flex items-center space-x-4">
+                          <div className="flex items-center flex-wrap gap-2 md:gap-4">
                             <div className="flex items-center space-x-1">
                               <div className="flex text-yellow-400">
                                 {[...Array(5)].map((_, i) => (
-                                  <FaStar key={i} className="w-4 h-4 animate-sparkle" style={{ animationDelay: `${i * 0.1}s` }} />
+                                  <FaStar key={i} className="w-3 h-3 md:w-4 md:h-4 animate-sparkle" style={{ animationDelay: `${i * 0.1}s` }} />
                                 ))}
                               </div>
-                              <span className="text-sm text-gray-600">{item.rating}</span>
+                              <span className="text-xs md:text-sm text-gray-600">{item.rating}</span>
                             </div>
-                            <span className="text-sm text-gray-500 flex items-center space-x-1">
-                              <FaClock className="w-3 h-3" />
+                            <span className="text-xs md:text-sm text-gray-500 flex items-center space-x-1">
+                              <FaClock className="w-2.5 h-2.5 md:w-3 md:h-3" />
                               <span>{item.cookTime}</span>
                             </span>
-                            <span className="text-sm text-gray-500 flex items-center space-x-1">
-                              <FaFire className="w-3 h-3" />
+                            <span className="text-xs md:text-sm text-gray-500 flex items-center space-x-1">
+                              <FaFire className="w-2.5 h-2.5 md:w-3 md:h-3" />
                               <span>{item.calories} cal</span>
                             </span>
                             {item.spicyLevel > 0 && (
                               <div className="flex space-x-1">
                                 {Array(item.spicyLevel).fill(0).map((_, i) => (
-                                  <FaPepperHot key={i} className="text-red-500 animate-sparkle" style={{ animationDelay: `${i * 0.2}s` }} />
+                                  <FaPepperHot key={i} className="text-red-500 text-xs md:text-sm animate-sparkle" style={{ animationDelay: `${i * 0.2}s` }} />
                                 ))}
                               </div>
                             )}
@@ -655,10 +724,10 @@ export default function MenuPage() {
 
               {/* No Results */}
               {sortedItems.length === 0 && (
-                <div className="text-center py-20 animate-fade-in-up">
-                  <FaSearch className="text-6xl mb-4 mx-auto text-gray-400 animate-float" />
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">No items found</h3>
-                  <p className="text-gray-600">Try adjusting your search or filter criteria</p>
+                <div className="text-center py-12 md:py-20 animate-fade-in-up">
+                  <FaSearch className="text-4xl md:text-6xl mb-4 mx-auto text-gray-400 animate-float" />
+                  <h3 className="text-xl md:text-2xl font-bold text-gray-800 mb-2">No items found</h3>
+                  <p className="text-gray-600 text-sm md:text-base">Try adjusting your search or filter criteria</p>
                 </div>
               )}
             </main>
