@@ -376,82 +376,105 @@ export default function Section1() {
         .spin-animation {
           animation: spin 10s linear infinite;
         }
+
+        /* Mobile-specific responsive adjustments */
+        @media (max-width: 768px) {
+          .floating-element {
+            animation: float 6s ease-in-out infinite;
+          }
+          
+          .scale-hover:hover {
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+          }
+          
+          .moving-text-left,
+          .moving-text-right {
+            animation-duration: 20s;
+          }
+        }
+
+        @media (max-width: 480px) {
+          .scale-hover:hover {
+            transform: none;
+          }
+        }
       `}</style>
 
       <section className="relative min-h-screen bg-gray-50 overflow-hidden section-container">
-        {/* Moving Text Background */}
+        {/* Moving Text Background - Mobile Responsive */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          {/* Top Moving Text */}
-          <div className="absolute top-16 left-0 w-full">
-            <div className="moving-text-left text-8xl md:text-9xl font-black text-gray-200/30 whitespace-nowrap">
+          {/* Top Moving Text - Responsive sizes */}
+          <div className="absolute top-4 sm:top-8 md:top-16 left-0 w-full">
+            <div className="moving-text-left text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-gray-200/20 sm:text-gray-200/25 md:text-gray-200/30 whitespace-nowrap">
               ITALIAN PIZZA • DELICIOUS FOOD • ITALIAN PIZZA • DELICIOUS FOOD • 
             </div>
           </div>
           
-          {/* Bottom Moving Text */}
-          <div className="absolute bottom-16 left-0 w-full">
-            <div className="moving-text-right text-8xl md:text-9xl font-black text-gray-200/30 whitespace-nowrap">
+          {/* Bottom Moving Text - Responsive sizes */}
+          <div className="absolute bottom-4 sm:bottom-8 md:bottom-16 left-0 w-full">
+            <div className="moving-text-right text-3xl sm:text-5xl md:text-7xl lg:text-8xl xl:text-9xl font-black text-gray-200/20 sm:text-gray-200/25 md:text-gray-200/30 whitespace-nowrap">
               BURGER • TASTY FOOD • BURGER • TASTY FOOD • BURGER • TASTY FOOD • 
             </div>
           </div>
         </div>
 
-        {/* Animated Background Elements */}
+        {/* Animated Background Elements - Mobile Responsive */}
         <div className="absolute inset-0">
-          {/* Floating Real Food Images */}
-          <div className="floating-element absolute top-20 left-10">
+          {/* Floating Real Food Images - Responsive positioning and sizes */}
+          <div className="floating-element absolute top-8 sm:top-12 md:top-20 left-2 sm:left-4 md:left-10">
             <Image
               src="/section1/chillies.png"
               alt="Chillies"
               width={80}
               height={80}
-              className="opacity-30 spin-animation"
+              className="opacity-20 sm:opacity-25 md:opacity-30 spin-animation w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20"
             />
           </div>
           
-          <div className="floating-element absolute top-40 right-20">
+          <div className="floating-element absolute top-16 sm:top-24 md:top-40 right-2 sm:right-8 md:right-20">
             <Image
               src="/section1/tomato.png"
               alt="Tomato"
               width={100}
               height={100}
-              className="opacity-25"
+              className="opacity-15 sm:opacity-20 md:opacity-25 w-10 h-10 sm:w-16 sm:h-16 md:w-20 md:h-20 lg:w-24 lg:h-24"
             />
           </div>
           
-          <div className="floating-element absolute bottom-40 left-20">
+          <div className="floating-element absolute bottom-16 sm:bottom-24 md:bottom-40 left-2 sm:left-8 md:left-20">
             <Image
               src="/section1/pizza-three (1).png"
               alt="Pizza"
               width={120}
               height={120}
-              className="opacity-20 rotate-hover"
+              className="opacity-10 sm:opacity-15 md:opacity-20 rotate-hover w-12 h-12 sm:w-20 sm:h-20 md:w-24 md:h-24 lg:w-28 lg:h-28"
             />
           </div>
           
-          {/* Morphing Background Shapes */}
-          <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-orange-200/30 morphing-shape"></div>
-          <div className="absolute bottom-1/4 right-1/4 w-24 h-24 bg-red-200/20 morphing-shape" style={{animationDelay: '2s'}}></div>
+          {/* Morphing Background Shapes - Responsive */}
+          <div className="absolute top-1/4 left-1/4 w-8 h-8 sm:w-16 sm:h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 bg-orange-200/20 sm:bg-orange-200/25 md:bg-orange-200/30 morphing-shape"></div>
+          <div className="absolute bottom-1/4 right-1/4 w-6 h-6 sm:w-12 sm:h-12 md:w-18 md:h-18 lg:w-24 lg:h-24 bg-red-200/10 sm:bg-red-200/15 md:bg-red-200/20 morphing-shape" style={{animationDelay: '2s'}}></div>
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 py-20">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
+        <div className="relative z-10 container mx-auto px-4 py-8 sm:py-12 md:py-16 lg:py-20">
+          <div className="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
             
-            {/* Left Content - Chef Image Section */}
-            <div className="chef-image relative">
-              <div className="relative max-w-lg mx-auto">
-                {/* Main Circle Container with Morphing Effect */}
+            {/* Left Content - Chef Image Section - Mobile First Design */}
+            <div className="chef-image relative order-2 lg:order-1">
+              <div className="relative max-w-xs sm:max-w-sm md:max-w-md lg:max-w-lg mx-auto">
+                {/* Main Circle Container with Morphing Effect - Responsive */}
                 <div className="relative">
-                  {/* Outer Decorative Circles */}
+                  {/* Outer Decorative Circles - Responsive */}
                   <div className="absolute inset-0 w-full h-full">
                     {/* Outer Circle 1 */}
-                    <div className="absolute top-0 left-0 w-full h-full border-2 border-orange-300/30 rounded-full scale-110 pulse-effect"></div>
+                    <div className="absolute top-0 left-0 w-full h-full border border-orange-300/20 sm:border-2 sm:border-orange-300/25 md:border-2 md:border-orange-300/30 rounded-full scale-105 sm:scale-110 pulse-effect"></div>
                     {/* Outer Circle 2 */}
-                    <div className="absolute top-0 left-0 w-full h-full border border-orange-200/20 rounded-full scale-125 pulse-effect" style={{animationDelay: '1s'}}></div>
+                    <div className="absolute top-0 left-0 w-full h-full border border-orange-200/15 sm:border sm:border-orange-200/20 rounded-full scale-115 sm:scale-125 pulse-effect" style={{animationDelay: '1s'}}></div>
                   </div>
 
-                  {/* Main Chef Image Container */}
-                  <div className="relative w-96 h-96 mx-auto rounded-full overflow-hidden glow-effect scale-hover">
+                  {/* Main Chef Image Container - Fully Responsive */}
+                  <div className="relative w-64 h-64 sm:w-72 sm:h-72 md:w-80 md:h-80 lg:w-96 lg:h-96 mx-auto rounded-full overflow-hidden glow-effect scale-hover">
                     <Image
                       src="/section1/about (1).jpg"
                       alt="Professional Chef"
@@ -460,89 +483,72 @@ export default function Section1() {
                       priority
                     />
                     
-                    {/* Quality Badge */}
-                    <div className="absolute top-8 right-8 bg-orange-500 text-white rounded-full p-4 wiggle-animation">
-                      <div className="text-center">
-                        <div className="text-xs font-bold">QUALITY</div>
-                        <div className="text-xs font-bold">FOOD</div>
-                      </div>
-                    </div>
-
-                    {/* Customer Review Bubble */}
-                    <div className="absolute top-16 -left-8 bg-white rounded-full p-3 shadow-lg bounce-element">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-orange-500 text-sm">⭐</span>
-                        <div className="text-xs">
-                          <div className="font-bold text-gray-800">VERY GOOD COOK</div>
-                          <div className="text-orange-500">★★★★★</div>
-                        </div>
-                      </div>
-                    </div>
+                    
                   </div>
                 </div>
               </div>
             </div>
 
-            {/* Right Content */}
-            <div className="content-right space-y-8">
+            {/* Right Content - Mobile First Responsive Design */}
+            <div className="content-right space-y-6 sm:space-y-8 order-1 lg:order-2 text-center lg:text-left">
               
-              {/* Section Badge */}
-              <div className="stagger-1">
-                <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-600 px-4 py-2 rounded-full text-sm font-semibold bounce-element">
-                  <span className="w-2 h-2 bg-orange-500 rounded-full pulse-effect"></span>
+              {/* Section Badge - Responsive */}
+              <div className="stagger-1 flex justify-center lg:justify-start">
+                <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-600 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bounce-element">
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-orange-500 rounded-full pulse-effect"></span>
                   <span>LEARN ABOUT WELLFOOD</span>
                 </div>
               </div>
 
-              {/* Main Heading */}
+              {/* Main Heading - Fully Responsive Typography */}
               <div className="stagger-2">
-                <h2 className="text-4xl lg:text-5xl font-black text-gray-900 leading-tight">
+                <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-black text-gray-900 leading-tight">
                   <span className="block">THE AMAZING &</span>
                   <span className="block shimmer-text">QUALITY FOOD</span>
                   <span className="block gradient-text">FOR YOUR GOOD HEALTH</span>
                 </h2>
               </div>
 
-              {/* Description */}
+              {/* Description - Responsive */}
               <div className="stagger-3">
-                <p className="text-gray-600 text-lg leading-relaxed max-w-lg">
+                <p className="text-gray-600 text-sm sm:text-base md:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0">
                   Welcome to our restaurant, where culinary excellence meets warm 
                   hospitality. In every dish we serve, Nestled in the heart of City Name our 
                   eatery invites you on a journey.
                 </p>
               </div>
 
-              {/* Action Buttons */}
-              <div className="stagger-4 flex flex-col sm:flex-row gap-6">
-                <button className="group bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 button-hover glow-effect scale-hover">
-                  <span className="flex items-center space-x-2">
-                    <span>LEARN MORE</span>
-                    <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              {/* Action Buttons - Mobile First Design */}
+              <div className="stagger-4 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
+                <button className="group bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 button-hover glow-effect scale-hover">
+                  <span className="flex items-center justify-center space-x-2">
+                    <span className="text-sm sm:text-base">LEARN MORE</span>
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </span>
                 </button>
 
-                <button className="group border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 scale-hover">
-                  <span className="flex items-center space-x-2">
-                    <span>FOR ONLINE ORDER</span>
-                    <svg className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <button className="group border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 scale-hover">
+                  <span className="flex items-center justify-center space-x-2">
+                    <span className="text-sm sm:text-base">ONLINE ORDER</span>
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 3h2l.4 2M7 13h10l4-8H5.4m0 0L7 13m0 0l-2.5 5M7 13h10m0 0l2.5 5" />
                     </svg>
                   </span>
                 </button>
               </div>
 
-              {/* Feature Cards */}
-              <div className="grid grid-cols-2 gap-6 pt-8">
-                <div className="feature-card stagger-5 bg-white p-6 rounded-lg shadow-lg scale-hover">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center bounce-element">
-                      <span className="text-orange-500 text-2xl">👨‍🍳</span>
+              {/* Feature Cards - Mobile Responsive Grid */}
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pt-6 sm:pt-8">
+                <div className="feature-card stagger-5 bg-white p-4 sm:p-6 rounded-lg shadow-lg scale-hover">
+                  <div className="flex items-start space-x-3 sm:space-x-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-100 rounded-full flex items-center justify-center bounce-element flex-shrink-0">
+                      <span className="text-orange-500 text-lg sm:text-2xl">👨‍🍳</span>
                     </div>
-                    <div>
-                      <h3 className="font-bold text-gray-900 mb-2">BEST QUALITY FOOD</h3>
-                      <p className="text-gray-600 text-sm">
+                    <div className="flex-1">
+                      <h3 className="font-bold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">BEST QUALITY FOOD</h3>
+                      <p className="text-gray-600 text-xs sm:text-sm">
                         Our talented chefs craft each dish with 
                         precision and artistry
                       </p>
@@ -550,14 +556,14 @@ export default function Section1() {
                   </div>
                 </div>
 
-                <div className="feature-card stagger-6 bg-white p-6 rounded-lg shadow-lg scale-hover">
-                  <div className="flex items-start space-x-4">
-                    <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center bounce-element">
-                      <span className="text-orange-500 text-2xl">🥘</span>
+                <div className="feature-card stagger-6 bg-white p-4 sm:p-6 rounded-lg shadow-lg scale-hover">
+                  <div className="flex items-start space-x-3 sm:space-x-4">
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-100 rounded-full flex items-center justify-center bounce-element flex-shrink-0">
+                      <span className="text-orange-500 text-lg sm:text-2xl">🥘</span>
                     </div>
-                    <div>
-                      <h3 className="font-bold text-gray-900 mb-2">EXPERIENCE OUR CHEFS</h3>
-                      <p className="text-gray-600 text-sm">
+                    <div className="flex-1">
+                      <h3 className="font-bold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">EXPERIENCE OUR CHEFS</h3>
+                      <p className="text-gray-600 text-xs sm:text-sm">
                         Our talented chefs craft each dish with 
                         precision and artistry
                       </p>
@@ -569,12 +575,12 @@ export default function Section1() {
           </div>
         </div>
 
-        {/* Decorative Elements */}
-        <div className="absolute bottom-10 left-10">
-          <div className="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-full opacity-20 pulse-effect"></div>
+        {/* Decorative Elements - Responsive */}
+        <div className="absolute bottom-4 sm:bottom-6 md:bottom-10 left-4 sm:left-6 md:left-10">
+          <div className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-full opacity-15 sm:opacity-20 pulse-effect"></div>
         </div>
-        <div className="absolute top-10 right-10">
-          <div className="w-16 h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-15 pulse-effect" style={{animationDelay: '2s'}}></div>
+        <div className="absolute top-4 sm:top-6 md:top-10 right-4 sm:right-6 md:right-10">
+          <div className="w-6 h-6 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-10 sm:opacity-15 pulse-effect" style={{animationDelay: '2s'}}></div>
         </div>
       </section>
     </>

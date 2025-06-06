@@ -441,9 +441,9 @@ const Gallery: React.FC = () => {
       </section>
 
       {/* Quality Service Section */}
-      <section className="relative bg-gradient-to-br from-orange-50 to-pink-50 py-20 overflow-hidden">
-        {/* Background Decorations */}
-        <div className="background-decoration absolute top-10 right-10 w-32 h-32 opacity-20">
+      <section className="relative bg-gradient-to-br from-orange-50 via-amber-50 to-pink-50 py-20 lg:py-28 overflow-hidden">
+        {/* Background Decorations - Enhanced with larger elements and blur effects */}
+        <div className="background-decoration absolute top-10 right-10 w-40 h-40 opacity-20 blur-sm">
           <Image
             src="/section3/pizza.webp"
             alt="Pizza decoration"
@@ -451,7 +451,7 @@ const Gallery: React.FC = () => {
             className="object-contain"
           />
         </div>
-        <div className="background-decoration absolute bottom-10 right-64 w-24 h-24 opacity-20">
+        <div className="background-decoration absolute bottom-10 right-64 w-32 h-32 opacity-20 blur-sm">
           <Image
             src="/section3/pizza.webp"
             alt="Tomato decoration"
@@ -459,7 +459,7 @@ const Gallery: React.FC = () => {
             className="object-contain"
           />
         </div>
-        <div className="background-decoration absolute top-32 left-10 w-16 h-16 opacity-20">
+        <div className="background-decoration absolute top-32 left-10 w-24 h-24 opacity-20 blur-sm">
           <Image
             src="/section3/pizza.webp"
             alt="Pepper decoration"
@@ -467,15 +467,32 @@ const Gallery: React.FC = () => {
             className="object-contain"
           />
         </div>
+        
+        {/* Decorative circles */}
+        <div className="absolute top-1/4 left-10 w-40 h-40 bg-orange-300/10 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-1/4 right-10 w-40 h-40 bg-amber-300/10 rounded-full blur-3xl"></div>
 
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
             {/* Left Content */}
-            <div className="space-y-8">
+            <div className="space-y-8 relative">
+              {/* Decorative accents */}
+              <div className="absolute w-20 h-2 bg-gradient-to-r from-orange-400 to-orange-600 rounded-full -left-4 top-14 hidden lg:block"></div>
+              
               <div>
-                <p className="service-title text-orange-500 font-bold text-lg mb-4 uppercase tracking-wider">Why Choose Us</p>
+                <p className="service-title text-orange-500 font-bold text-lg mb-4 uppercase tracking-wider relative inline-block">
+                  WHY CHOOSE US
+                  <span className="absolute bottom-0 left-0 w-full h-1 bg-orange-500/30"></span>
+                </p>
                 <h2 className="service-subtitle text-4xl lg:text-5xl font-black text-gray-800 leading-tight mb-6">
-                  We Offer Quality Service<br />
+                  We Offer Quality 
+                  <span className="relative inline-block text-orange-600 px-2">
+                    Service
+                    <svg className="absolute -bottom-1 left-0 w-full" viewBox="0 0 100 15" preserveAspectRatio="none" height="15">
+                      <path d="M0,15 Q50,0 100,15 L100,0 L0,0 Z" fill="rgba(249, 115, 22, 0.2)"></path>
+                    </svg>
+                  </span>
+                  <br />
                   That Customers Needs
                 </h2>
                 <p className="service-description text-gray-600 text-lg leading-relaxed mb-8">
@@ -485,14 +502,17 @@ const Gallery: React.FC = () => {
                 </p>
               </div>
 
-              {/* CTA Button and Profile */}
-              <div className="flex items-center space-x-6">
-                <button className="service-button bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 hover:scale-105 shadow-lg">
-                  LEARN MORE
+              {/* CTA Button and Profile - Enhanced with better styling */}
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 sm:space-x-6 mb-6">
+                <button className="service-button bg-gradient-to-r from-orange-500 to-orange-600 text-white font-bold py-4 px-8 rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-orange-300/20 shadow-lg flex items-center space-x-2 group">
+                  <span>LEARN MORE</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 transform group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                  </svg>
                 </button>
-                <div className="service-profile flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-orange-100 rounded-full flex items-center justify-center">
-                    <span className="text-orange-500 font-bold">BC</span>
+                <div className="service-profile flex items-center space-x-3 border-l-4 pl-4 border-orange-300 sm:border-none sm:pl-0">
+                  <div className="w-12 h-12 bg-gradient-to-br from-orange-100 to-orange-200 rounded-full flex items-center justify-center shadow-md">
+                    <span className="text-orange-600 font-bold">BC</span>
                   </div>
                   <div>
                     <p className="font-bold text-gray-800">BEN A. COOPER</p>
@@ -501,28 +521,28 @@ const Gallery: React.FC = () => {
                 </div>
               </div>
 
-              {/* Stats */}
-              <div className="grid grid-cols-3 gap-8 pt-8">
-                <div className="stats-item text-center">
-                  <div className="stats-number text-4xl font-black text-gray-800 mb-2">34K+</div>
-                  <p className="text-gray-600">Organic Planting</p>
+              {/* Stats - Enhanced with modern card design */}
+              <div className="grid grid-cols-3 gap-4 lg:gap-8 pt-4">
+                <div className="stats-item text-center bg-white/60 backdrop-blur-sm p-4 rounded-2xl shadow-sm hover:shadow-md transition-all">
+                  <div className="stats-number text-3xl lg:text-4xl font-black text-orange-600 mb-1">34K+</div>
+                  <p className="text-gray-600 text-sm lg:text-base">Organic Planting</p>
                 </div>
-                <div className="stats-item text-center">
-                  <div className="stats-number text-4xl font-black text-gray-800 mb-2">356+</div>
-                  <p className="text-gray-600">Passionate Chef's</p>
+                <div className="stats-item text-center bg-white/60 backdrop-blur-sm p-4 rounded-2xl shadow-sm hover:shadow-md transition-all">
+                  <div className="stats-number text-3xl lg:text-4xl font-black text-orange-600 mb-1">356+</div>
+                  <p className="text-gray-600 text-sm lg:text-base">Passionate Chef's</p>
                 </div>
-                <div className="stats-item text-center">
-                  <div className="stats-number text-4xl font-black text-gray-800 mb-2">953+</div>
-                  <p className="text-gray-600">Favourite Dishes</p>
+                <div className="stats-item text-center bg-white/60 backdrop-blur-sm p-4 rounded-2xl shadow-sm hover:shadow-md transition-all">
+                  <div className="stats-number text-3xl lg:text-4xl font-black text-orange-600 mb-1">953+</div>
+                  <p className="text-gray-600 text-sm lg:text-base">Favourite Dishes</p>
                 </div>
               </div>
             </div>
 
-            {/* Right Content - Features */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Right Content - Features - Enhanced card styles and responsiveness */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {/* Best Quality Food */}
-              <div className="feature-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className="feature-icon w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+              <div className="feature-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-t-4 border-orange-500">
+                <div className="feature-icon w-16 h-16 bg-gradient-to-br from-orange-100 to-orange-200 rounded-full flex items-center justify-center mb-4 shadow-inner">
                   <svg className="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 100 4m0-4v2m0-6V4" />
                   </svg>
@@ -532,8 +552,8 @@ const Gallery: React.FC = () => {
               </div>
 
               {/* Money Back Guarantee */}
-              <div className="feature-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className="feature-icon w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+              <div className="feature-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-t-4 border-amber-500">
+                <div className="feature-icon w-16 h-16 bg-gradient-to-br from-amber-100 to-amber-200 rounded-full flex items-center justify-center mb-4 shadow-inner">
                   <svg className="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -543,8 +563,8 @@ const Gallery: React.FC = () => {
               </div>
 
               {/* Fast Food Delivery */}
-              <div className="feature-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className="feature-icon w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+              <div className="feature-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-t-4 border-red-500">
+                <div className="feature-icon w-16 h-16 bg-gradient-to-br from-red-100 to-red-200 rounded-full flex items-center justify-center mb-4 shadow-inner">
                   <svg className="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
@@ -554,8 +574,8 @@ const Gallery: React.FC = () => {
               </div>
 
               {/* 100% Natural Food */}
-              <div className="feature-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2">
-                <div className="feature-icon w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mb-4">
+              <div className="feature-card bg-white rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-2 border-t-4 border-green-500">
+                <div className="feature-icon w-16 h-16 bg-gradient-to-br from-green-100 to-green-200 rounded-full flex items-center justify-center mb-4 shadow-inner">
                   <svg className="w-8 h-8 text-orange-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
                   </svg>

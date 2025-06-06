@@ -299,19 +299,19 @@ export default function Hero() {
         {/* Animated Background Elements */}
         <div className="absolute inset-0">
           {/* Floating Food Elements */}
-          <div className="floating-element absolute top-20 left-10 text-6xl opacity-30">
+          <div className="floating-element absolute top-20 left-4 sm:left-10 text-3xl sm:text-6xl opacity-30">
             🌶️
           </div>
-          <div className="floating-element absolute top-40 right-20 text-5xl opacity-20">
+          <div className="floating-element absolute top-40 right-4 sm:right-20 text-3xl sm:text-5xl opacity-20">
             🍅
           </div>
-          <div className="floating-element absolute bottom-40 left-20 text-4xl opacity-25">
+          <div className="floating-element absolute bottom-40 left-4 sm:left-20 text-2xl sm:text-4xl opacity-25">
             🧄
           </div>
-          <div className="floating-element absolute top-60 left-1/4 text-3xl opacity-15">
+          <div className="floating-element absolute top-60 left-1/4 text-xl sm:text-3xl opacity-15">
             🌿
           </div>
-          <div className="floating-element absolute bottom-20 right-1/4 text-5xl opacity-20">
+          <div className="floating-element absolute bottom-20 right-1/4 text-3xl sm:text-5xl opacity-20">
             🥕
           </div>
           
@@ -319,34 +319,34 @@ export default function Hero() {
           <div className="absolute inset-0 bg-gradient-to-r from-black via-transparent to-black opacity-70"></div>
         </div>
 
-        <div className="relative z-10 container mx-auto px-4 py-20">
-          <div className="grid lg:grid-cols-2 gap-12 items-center min-h-screen">
+        <div className="relative z-10 container mx-auto px-4 py-12 sm:py-20">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center min-h-screen">
             
             {/* Left Content */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8 text-center lg:text-left">
               
               {/* Price Badge with Animation */}
-              <div className="hero-subtitle">
-                <div className="inline-flex items-center space-x-3 bg-gradient-to-r from-orange-500/20 to-red-500/20 backdrop-blur-sm border border-orange-500/30 rounded-full px-6 py-3 price-badge">
-                  <span className="text-orange-400 text-2xl bounce-element">🍔</span>
-                  <span className="text-orange-400 font-semibold">Start price Only $25</span>
+              <div className="hero-subtitle flex justify-center lg:justify-start">
+                <div className="inline-flex items-center space-x-2 sm:space-x-3 bg-gradient-to-r from-orange-500/20 to-red-500/20 backdrop-blur-sm border border-orange-500/30 rounded-full px-4 sm:px-6 py-2 sm:py-3 price-badge">
+                  <span className="text-orange-400 text-xl sm:text-2xl bounce-element">🍔</span>
+                  <span className="text-orange-400 font-semibold text-sm sm:text-base">Start price Only $25</span>
                 </div>
               </div>
 
               {/* Main Title with Staggered Animation */}
-              <div className="hero-title space-y-4">
-                <h1 className="text-6xl lg:text-8xl font-black leading-none">
+              <div className="hero-title space-y-2 sm:space-y-4">
+                <h1 className="text-4xl sm:text-6xl lg:text-8xl font-black leading-none">
                   <span className="block shimmer-text stagger-1">DELICIOUS</span>
                   <span className="block gradient-text stagger-2">FOOD</span>
                 </h1>
-                <h2 className="text-4xl lg:text-6xl font-bold text-gray-300 typewriter stagger-3">
+                <h2 className="text-2xl sm:text-4xl lg:text-6xl font-bold text-gray-300 typewriter stagger-3">
                   NEAR YOUR TOWN
                 </h2>
               </div>
 
               {/* Description */}
               <div className="hero-description">
-                <p className="text-xl text-gray-300 leading-relaxed max-w-lg">
+                <p className="text-lg sm:text-xl text-gray-300 leading-relaxed max-w-lg mx-auto lg:mx-0">
                   Welcome to our culinary sanctuary, where every dish tells a story. 
                   Every bite is an adventure at our food website, we invite you to 
                   experience flavors that dance on your palate.
@@ -354,11 +354,11 @@ export default function Hero() {
               </div>
 
               {/* Action Buttons */}
-              <div className="hero-buttons flex flex-col sm:flex-row gap-6">
-                <button className="group relative bg-orange-500 hover:bg-orange-600 text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 scale-hover glow-effect overflow-hidden">
-                  <span className="relative z-10 flex items-center space-x-2">
-                    <span>VIEW ALL MENU</span>
-                    <svg className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <div className="hero-buttons flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
+                <button className="group relative bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 scale-hover glow-effect overflow-hidden">
+                  <span className="relative z-10 flex items-center justify-center space-x-2">
+                    <span className="text-sm sm:text-base">VIEW ALL MENU</span>
+                    <svg className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                     </svg>
                   </span>
@@ -367,10 +367,10 @@ export default function Hero() {
                 </button>
 
                 <Link href="/contact">
-                  <button className="group border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-bold py-4 px-8 rounded-lg transition-all duration-300 scale-hover">
-                    <span className="flex items-center space-x-2">
-                      <span>BOOK NOW</span>
-                      <svg className="w-5 h-5 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <button className="group border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 scale-hover w-full sm:w-auto">
+                    <span className="flex items-center justify-center space-x-2">
+                      <span className="text-sm sm:text-base">BOOK NOW</span>
+                      <svg className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
                     </span>
@@ -379,28 +379,28 @@ export default function Hero() {
               </div>
 
               {/* Stats with Animation */}
-              <div className="hero-description grid grid-cols-3 gap-8 pt-8">
+              <div className="hero-description grid grid-cols-3 gap-4 sm:gap-8 pt-6 sm:pt-8">
                 <div className="text-center scale-hover">
-                  <div className="text-3xl font-bold gradient-text stagger-1">500+</div>
-                  <div className="text-gray-400 text-sm">Happy Customers</div>
+                  <div className="text-2xl sm:text-3xl font-bold gradient-text stagger-1">500+</div>
+                  <div className="text-gray-400 text-xs sm:text-sm">Happy Customers</div>
                 </div>
                 <div className="text-center scale-hover">
-                  <div className="text-3xl font-bold gradient-text stagger-2">50+</div>
-                  <div className="text-gray-400 text-sm">Delicious Dishes</div>
+                  <div className="text-2xl sm:text-3xl font-bold gradient-text stagger-2">50+</div>
+                  <div className="text-gray-400 text-xs sm:text-sm">Delicious Dishes</div>
                 </div>
                 <div className="text-center scale-hover">
-                  <div className="text-3xl font-bold gradient-text stagger-3">5★</div>
-                  <div className="text-gray-400 text-sm">Average Rating</div>
+                  <div className="text-2xl sm:text-3xl font-bold gradient-text stagger-3">5★</div>
+                  <div className="text-gray-400 text-xs sm:text-sm">Average Rating</div>
                 </div>
               </div>
             </div>
 
             {/* Right Content - Hero Image */}
-            <div className="hero-image relative">
+            <div className="hero-image relative mt-8 lg:mt-0">
               <div className="relative">
                 {/* Main Food Image */}
                 <div className="relative z-10 transform rotate-hover">
-                  <div className="relative bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm rounded-full p-8 glow-effect">
+                  <div className="relative bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm rounded-full p-4 sm:p-8 glow-effect">
                     <Image
                       src="/hero/hero-right.png"
                       alt="Delicious Food"
@@ -411,44 +411,44 @@ export default function Hero() {
                     />
                     
                     {/* Price Tag using actual price image */}
-                    <div className="absolute -top-4 -right-4 price-badge">
+                    <div className="absolute -top-2 -right-2 sm:-top-4 sm:-right-4 price-badge">
                       <Image
                         src="/hero/price.png"
                         alt="Price Tag"
                         width={100}
                         height={100}
-                        className="w-20 h-20 drop-shadow-lg"
+                        className="w-12 h-12 sm:w-20 sm:h-20 drop-shadow-lg"
                       />
                     </div>
                   </div>
                 </div>
 
                 {/* Decorative Elements */}
-                <div className="absolute -top-8 -left-8 w-16 h-16 bg-orange-500/20 rounded-full blur-xl floating-element"></div>
-                <div className="absolute -bottom-8 -right-8 w-20 h-20 bg-red-500/20 rounded-full blur-xl floating-element"></div>
-                <div className="absolute top-1/2 -left-12 w-12 h-12 bg-yellow-500/20 rounded-full blur-lg floating-element"></div>
+                <div className="absolute -top-4 -left-4 sm:-top-8 sm:-left-8 w-8 h-8 sm:w-16 sm:h-16 bg-orange-500/20 rounded-full blur-xl floating-element"></div>
+                <div className="absolute -bottom-4 -right-4 sm:-bottom-8 sm:-right-8 w-10 h-10 sm:w-20 sm:h-20 bg-red-500/20 rounded-full blur-xl floating-element"></div>
+                <div className="absolute top-1/2 -left-6 sm:-left-12 w-6 h-6 sm:w-12 sm:h-12 bg-yellow-500/20 rounded-full blur-lg floating-element"></div>
               </div>
 
               {/* Floating Action Cards */}
-              <div className="absolute -left-16 top-20 bg-white/10 backdrop-blur-sm rounded-lg p-4 floating-element scale-hover">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm">✓</span>
+              <div className="hidden sm:block absolute -left-8 lg:-left-16 top-20 bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 floating-element scale-hover">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-green-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-xs sm:text-sm">✓</span>
                   </div>
                   <div>
-                    <div className="text-white text-sm font-semibold">Fresh Ingredients</div>
+                    <div className="text-white text-xs sm:text-sm font-semibold">Fresh Ingredients</div>
                     <div className="text-gray-300 text-xs">100% Organic</div>
                   </div>
                 </div>
               </div>
 
-              <div className="absolute -right-16 bottom-20 bg-white/10 backdrop-blur-sm rounded-lg p-4 floating-element scale-hover">
-                <div className="flex items-center space-x-3">
-                  <div className="w-8 h-8 bg-orange-500 rounded-full flex items-center justify-center">
-                    <span className="text-white text-sm">🚀</span>
+              <div className="hidden sm:block absolute -right-8 lg:-right-16 bottom-20 bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 floating-element scale-hover">
+                <div className="flex items-center space-x-2 sm:space-x-3">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                    <span className="text-white text-xs sm:text-sm">🚀</span>
                   </div>
                   <div>
-                    <div className="text-white text-sm font-semibold">Fast Delivery</div>
+                    <div className="text-white text-xs sm:text-sm font-semibold">Fast Delivery</div>
                     <div className="text-gray-300 text-xs">30 min or less</div>
                   </div>
                 </div>
@@ -457,12 +457,7 @@ export default function Hero() {
           </div>
         </div>
 
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <div className="w-6 h-10 border-2 border-orange-500 rounded-full flex justify-center">
-            <div className="w-1 h-3 bg-orange-500 rounded-full mt-2 animate-pulse"></div>
-          </div>
-        </div>
+       
       </section>
     </>
   )

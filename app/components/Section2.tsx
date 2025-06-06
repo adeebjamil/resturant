@@ -187,11 +187,22 @@ export default function Section2() {
         }
 
         /* Responsive adjustments */
+        @media (max-width: 1024px) {
+          .food-card {
+            min-width: 50%;
+            height: 350px;
+          }
+          
+          .background-text {
+            font-size: 3rem;
+          }
+        }
+        
         @media (max-width: 768px) {
           .food-card {
             min-width: 100%;
-            height: 300px;
-            margin-bottom: 20px;
+            height: 280px;
+            margin-bottom: 1px;
           }
           
           .background-text {
@@ -199,29 +210,67 @@ export default function Section2() {
           }
           
           .food-title {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+          }
+          
+          .badge {
+            width: 50px;
+            height: 50px;
+            font-size: 12px;
+          }
+          
+          .food-image {
+            width: 120px !important;
+            height: 120px !important;
+          }
+        }
+        
+        @media (max-width: 480px) {
+          .food-card {
+            height: 250px;
+          }
+          
+          .background-text {
             font-size: 2rem;
+          }
+          
+          .food-title {
+            font-size: 1.5rem;
+          }
+          
+          .badge {
+            width: 45px;
+            height: 45px;
+            font-size: 11px;
+            top: 4px;
+            right: 4px;
+          }
+          
+          .goodfood-logo {
+            font-size: 1rem !important;
           }
         }
       `}</style>
 
-      <section className="relative py-16 bg-white overflow-hidden section-container">
+      <section className="relative bg-white overflow-hidden section-container">
         {/* Food Cards Container - Horizontal Layout */}
         <div className="w-full">
-          <div className="flex flex-wrap lg:flex-nowrap gap-0">
+          <div className="flex flex-wrap lg:flex-nowrap">
             {foodCategories.map((category, index) => (
               <div
                 key={category.id}
                 className={`food-card bg-gradient-to-br ${category.background} relative group`}
               >
                 {/* Good Food Logo */}
-                <div className="absolute top-6 left-6 z-20">
-                  <div className="goodfood-logo text-white font-bold text-xl">
+                <div className="absolute top-4 sm:top-6 left-4 sm:left-6 z-20">
+                  <div className="goodfood-logo text-white font-bold text-sm sm:text-xl">
                     ✨GoodFood
                   </div>
                 </div>
 
                 {/* Badge */}
-                <div className={`badge absolute top-6 right-6 ${category.badgeColor} text-white z-20`}>
+                <div className={`badge absolute top-4 sm:top-6 right-4 sm:right-6 ${category.badgeColor} text-white z-20`}>
                   {category.badge}
                 </div>
 
@@ -234,7 +283,7 @@ export default function Section2() {
 
                 {/* Food Image */}
                 <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-15">
-                  <div className="food-image w-40 h-40 lg:w-48 lg:h-48 relative rounded-full overflow-hidden border-4 border-white/20">
+                  <div className="food-image w-32 h-32 sm:w-40 sm:h-40 lg:w-48 lg:h-48 relative rounded-full overflow-hidden border-4 border-white/20">
                     <Image
                       src={category.image}
                       alt={category.title}
@@ -246,15 +295,10 @@ export default function Section2() {
                 </div>
 
                 {/* Title and Button */}
-                <div className="absolute bottom-8 left-0 right-0 text-center z-20">
-                  <h3 className="food-title text-white mb-4">
+                <div className="absolute bottom-4 sm:bottom-8 left-0 right-0 text-center z-20">
+                  <h3 className="food-title text-white mb-2 sm:mb-4">
                     {category.title}
                   </h3>
-                  
-                  {/* Browse Button */}
-                  <button className="browse-button bg-white/20 text-white font-bold py-3 px-6 rounded-full hover:bg-white hover:text-gray-900">
-                    🍽️ BROWSE MENU ITEMS
-                  </button>
                 </div>
 
                 {/* Subtle Overlay */}
