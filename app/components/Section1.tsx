@@ -453,7 +453,7 @@ export default function Section1() {
           </div>
           
           {/* Morphing Background Shapes - Responsive */}
-          <div className="absolute top-1/4 left-1/4 w-8 h-8 sm:w-16 sm:h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 bg-orange-200/20 sm:bg-orange-200/25 md:bg-orange-200/30 morphing-shape"></div>
+          <div className="absolute top-1/4 left-1/4 w-8 h-8 sm:w-16 sm:h-16 md:w-24 md:h-24 lg:w-32 lg:h-32 bg-teal-200/20 sm:bg-teal-200/25 md:bg-teal-200/30 morphing-shape"></div>
           <div className="absolute bottom-1/4 right-1/4 w-6 h-6 sm:w-12 sm:h-12 md:w-18 md:h-18 lg:w-24 lg:h-24 bg-red-200/10 sm:bg-red-200/15 md:bg-red-200/20 morphing-shape" style={{animationDelay: '2s'}}></div>
         </div>
 
@@ -468,9 +468,9 @@ export default function Section1() {
                   {/* Outer Decorative Circles - Responsive */}
                   <div className="absolute inset-0 w-full h-full">
                     {/* Outer Circle 1 */}
-                    <div className="absolute top-0 left-0 w-full h-full border border-orange-300/20 sm:border-2 sm:border-orange-300/25 md:border-2 md:border-orange-300/30 rounded-full scale-105 sm:scale-110 pulse-effect"></div>
+                    <div className="absolute top-0 left-0 w-full h-full border border-teal-300/20 sm:border-2 sm:border-teal-300/25 md:border-2 md:border-teal-300/30 rounded-full scale-105 sm:scale-110 pulse-effect"></div>
                     {/* Outer Circle 2 */}
-                    <div className="absolute top-0 left-0 w-full h-full border border-orange-200/15 sm:border sm:border-orange-200/20 rounded-full scale-115 sm:scale-125 pulse-effect" style={{animationDelay: '1s'}}></div>
+                    <div className="absolute top-0 left-0 w-full h-full border border-teal-200/15 sm:border sm:border-teal-200/20 rounded-full scale-115 sm:scale-125 pulse-effect" style={{animationDelay: '1s'}}></div>
                   </div>
 
                   {/* Main Chef Image Container - Fully Responsive */}
@@ -494,8 +494,8 @@ export default function Section1() {
               
               {/* Section Badge - Responsive */}
               <div className="stagger-1 flex justify-center lg:justify-start">
-                <div className="inline-flex items-center space-x-2 bg-orange-100 text-orange-600 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bounce-element">
-                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-orange-500 rounded-full pulse-effect"></span>
+                <div className="inline-flex items-center space-x-2 bg-teal-100 text-teal-600 px-3 sm:px-4 py-2 rounded-full text-xs sm:text-sm font-semibold bounce-element">
+                  <span className="w-1.5 h-1.5 sm:w-2 sm:h-2 bg-teal-500 rounded-full pulse-effect"></span>
                   <span>LEARN ABOUT WELLFOOD</span>
                 </div>
               </div>
@@ -520,7 +520,7 @@ export default function Section1() {
 
               {/* Action Buttons - Mobile First Design */}
               <div className="stagger-4 flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
-                <button className="group bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 button-hover glow-effect scale-hover">
+                <button className="group bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 button-hover glow-effect scale-hover">
                   <span className="flex items-center justify-center space-x-2">
                     <span className="text-sm sm:text-base">LEARN MORE</span>
                     <svg className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -529,7 +529,7 @@ export default function Section1() {
                   </span>
                 </button>
 
-                <button className="group border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 scale-hover">
+                <button className="group border-2 border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 scale-hover">
                   <span className="flex items-center justify-center space-x-2">
                     <span className="text-sm sm:text-base">ONLINE ORDER</span>
                     <svg className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -543,8 +543,8 @@ export default function Section1() {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6 pt-6 sm:pt-8">
                 <div className="feature-card stagger-5 bg-white p-4 sm:p-6 rounded-lg shadow-lg scale-hover">
                   <div className="flex items-start space-x-3 sm:space-x-4">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-100 rounded-full flex items-center justify-center bounce-element flex-shrink-0">
-                      <span className="text-orange-500 text-lg sm:text-2xl">👨‍🍳</span>
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-teal-100 rounded-full flex items-center justify-center bounce-element flex-shrink-0">
+                      <span className="text-teal-500 text-lg sm:text-2xl">👨‍🍳</span>
                     </div>
                     <div className="flex-1">
                       <h3 className="font-bold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">BEST QUALITY FOOD</h3>
@@ -558,8 +558,8 @@ export default function Section1() {
 
                 <div className="feature-card stagger-6 bg-white p-4 sm:p-6 rounded-lg shadow-lg scale-hover">
                   <div className="flex items-start space-x-3 sm:space-x-4">
-                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-orange-100 rounded-full flex items-center justify-center bounce-element flex-shrink-0">
-                      <span className="text-orange-500 text-lg sm:text-2xl">🥘</span>
+                    <div className="w-10 h-10 sm:w-12 sm:h-12 bg-teal-100 rounded-full flex items-center justify-center bounce-element flex-shrink-0">
+                      <span className="text-teal-500 text-lg sm:text-2xl">🥘</span>
                     </div>
                     <div className="flex-1">
                       <h3 className="font-bold text-gray-900 mb-1 sm:mb-2 text-sm sm:text-base">EXPERIENCE OUR CHEFS</h3>
@@ -577,10 +577,10 @@ export default function Section1() {
 
         {/* Decorative Elements - Responsive */}
         <div className="absolute bottom-4 sm:bottom-6 md:bottom-10 left-4 sm:left-6 md:left-10">
-          <div className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-orange-400 to-red-500 rounded-full opacity-15 sm:opacity-20 pulse-effect"></div>
+          <div className="w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-20 lg:h-20 bg-gradient-to-br from-teal-400 to-red-500 rounded-full opacity-15 sm:opacity-20 pulse-effect"></div>
         </div>
         <div className="absolute top-4 sm:top-6 md:top-10 right-4 sm:right-6 md:right-10">
-          <div className="w-6 h-6 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full opacity-10 sm:opacity-15 pulse-effect" style={{animationDelay: '2s'}}></div>
+          <div className="w-6 h-6 sm:w-10 sm:h-10 md:w-12 md:h-12 lg:w-16 lg:h-16 bg-gradient-to-br from-yellow-400 to-teal-500 rounded-full opacity-10 sm:opacity-15 pulse-effect" style={{animationDelay: '2s'}}></div>
         </div>
       </section>
     </>

@@ -458,17 +458,17 @@ const Blog: React.FC = () => {
       `}</style>
 
       {/* Blog Section */}
-      <section className="relative min-h-screen bg-gradient-to-br from-slate-50 via-orange-50 to-amber-50 py-16 sm:py-20 overflow-hidden">
+      <section className="relative min-h-screen bg-gradient-to-br from-slate-50 via-teal-50 to-amber-50 py-16 sm:py-20 overflow-hidden">
         {/* Animated Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="floating-element absolute top-20 right-20 w-20 h-20 bg-gradient-to-r from-orange-400 to-red-400 rounded-full opacity-20 blur-xl"></div>
-          <div className="floating-element absolute bottom-32 left-20 w-16 h-16 bg-gradient-to-r from-amber-400 to-orange-400 rounded-full opacity-20 blur-lg"></div>
+          <div className="floating-element absolute top-20 right-20 w-20 h-20 bg-gradient-to-r from-teal-400 to-red-400 rounded-full opacity-20 blur-xl"></div>
+          <div className="floating-element absolute bottom-32 left-20 w-16 h-16 bg-gradient-to-r from-amber-400 to-teal-400 rounded-full opacity-20 blur-lg"></div>
           <div className="floating-element absolute top-1/2 left-1/2 w-12 h-12 bg-gradient-to-r from-red-400 to-pink-400 rounded-full opacity-20 blur-md"></div>
         </div>
 
         {/* Geometric Shapes */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none opacity-5">
-          <div className="absolute top-40 left-10 w-32 h-32 border-4 border-orange-500 rounded-full animate-[spin_30s_linear_infinite]"></div>
+          <div className="absolute top-40 left-10 w-32 h-32 border-4 border-teal-500 rounded-full animate-[spin_30s_linear_infinite]"></div>
           <div className="absolute bottom-40 right-10 w-24 h-24 border-4 border-red-500 transform rotate-45"></div>
         </div>
 
@@ -491,7 +491,7 @@ const Blog: React.FC = () => {
                   placeholder="Search recipes, stories, tips..."
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
-                  className="search-input w-full px-5 py-3 sm:px-6 sm:py-4 text-base sm:text-lg border-2 border-orange-200 rounded-2xl focus:border-orange-500 focus:outline-none bg-white/80 backdrop-blur-sm"
+                  className="search-input w-full px-5 py-3 sm:px-6 sm:py-4 text-base sm:text-lg border-2 border-teal-200 rounded-2xl focus:border-teal-500 focus:outline-none bg-white/80 backdrop-blur-sm"
                 />
                 <div className="absolute right-4 top-1/2 transform -translate-y-1/2 flex items-center">
                   {searchTerm && (
@@ -502,7 +502,7 @@ const Blog: React.FC = () => {
                       <FiX size={18} className="text-gray-500" />
                     </button>
                   )}
-                  <FiSearch className="w-5 h-5 sm:w-6 sm:h-6 text-orange-500" />
+                  <FiSearch className="w-5 h-5 sm:w-6 sm:h-6 text-teal-500" />
                 </div>
               </div>
             </div>
@@ -512,10 +512,10 @@ const Blog: React.FC = () => {
             <div className="filter-controls flex items-center justify-between gap-4 md:hidden mb-6">
               <button
                 onClick={toggleFilters}
-                className={`filter-toggle-btn p-2.5 bg-white/80 backdrop-blur-sm rounded-xl border-2 border-orange-200 shadow-sm ${filtersVisible ? 'active' : ''}`}
+                className={`filter-toggle-btn p-2.5 bg-white/80 backdrop-blur-sm rounded-xl border-2 border-teal-200 shadow-sm ${filtersVisible ? 'active' : ''}`}
               >
                 <div className="flex items-center space-x-2">
-                  <HiOutlineAdjustments size={20} className="text-orange-500" />
+                  <HiOutlineAdjustments size={20} className="text-teal-500" />
                   <span className="text-sm text-gray-700">Filters</span>
                 </div>
               </button>
@@ -543,8 +543,8 @@ const Blog: React.FC = () => {
                       onClick={() => handleCategorySelect(category)}
                       className={`category-btn px-5 py-3 rounded-xl font-bold text-sm tracking-wide transition-all duration-300 ${
                         activeCategory === category
-                          ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg active'
-                          : 'bg-white/80 text-gray-700 hover:bg-orange-100 hover:text-orange-600 border border-orange-200'
+                          ? 'bg-gradient-to-r from-teal-500 to-red-500 text-white shadow-lg active'
+                          : 'bg-white/80 text-gray-700 hover:bg-teal-100 hover:text-teal-600 border border-teal-200'
                       }`}
                     >
                       {category}
@@ -563,8 +563,8 @@ const Blog: React.FC = () => {
                 onClick={() => setActiveCategory(category)}
                 className={`category-btn px-5 py-2.5 md:px-8 md:py-3 rounded-xl sm:rounded-2xl font-bold text-xs sm:text-sm tracking-wide transition-all duration-300 ${
                   activeCategory === category
-                    ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white shadow-lg active'
-                    : 'bg-white/80 text-gray-700 hover:bg-orange-100 hover:text-orange-600 border border-orange-200'
+                    ? 'bg-gradient-to-r from-teal-500 to-red-500 text-white shadow-lg active'
+                    : 'bg-white/80 text-gray-700 hover:bg-teal-100 hover:text-teal-600 border border-teal-200'
                 }`}
               >
                 {category}
@@ -577,9 +577,9 @@ const Blog: React.FC = () => {
             <div className="search-results-info text-center mb-6">
               <p className="text-gray-600">
                 {filteredPosts.length === 0 ? (
-                  <span>No results found for "<span className="font-semibold text-orange-600">{searchTerm}</span>"</span>
+                  <span>No results found for "<span className="font-semibold text-teal-600">{searchTerm}</span>"</span>
                 ) : (
-                  <span>Showing {filteredPosts.length} results for "<span className="font-semibold text-orange-600">{searchTerm}</span>"</span>
+                  <span>Showing {filteredPosts.length} results for "<span className="font-semibold text-teal-600">{searchTerm}</span>"</span>
                 )}
               </p>
             </div>
@@ -588,15 +588,15 @@ const Blog: React.FC = () => {
           {/* Active Filter Info */}
           {activeCategory !== 'ALL' && (
             <div className="active-filter-info text-center mb-6">
-              <div className="inline-flex items-center px-3 py-1.5 bg-orange-500/10 rounded-full">
-                <span className="text-orange-600 text-sm font-medium mr-2">
+              <div className="inline-flex items-center px-3 py-1.5 bg-teal-500/10 rounded-full">
+                <span className="text-teal-600 text-sm font-medium mr-2">
                   Filtering by: {activeCategory}
                 </span>
                 <button 
                   onClick={() => setActiveCategory('ALL')}
-                  className="p-1 hover:bg-orange-500/10 rounded-full"
+                  className="p-1 hover:bg-teal-500/10 rounded-full"
                 >
-                  <FiX size={14} className="text-orange-600" />
+                  <FiX size={14} className="text-teal-600" />
                 </button>
               </div>
             </div>
@@ -605,8 +605,8 @@ const Blog: React.FC = () => {
           {/* No Results State */}
           {filteredPosts.length === 0 && (
             <div className="no-results flex flex-col items-center justify-center py-20">
-              <div className="w-20 h-20 bg-orange-100 rounded-full flex items-center justify-center mb-6">
-                <FiSearch size={36} className="text-orange-500" />
+              <div className="w-20 h-20 bg-teal-100 rounded-full flex items-center justify-center mb-6">
+                <FiSearch size={36} className="text-teal-500" />
               </div>
               <h3 className="text-2xl font-bold text-gray-800 mb-4">No posts found</h3>
               <p className="text-gray-600 text-center max-w-md mb-8">
@@ -617,7 +617,7 @@ const Blog: React.FC = () => {
                   setActiveCategory('ALL')
                   setSearchTerm('')
                 }}
-                className="px-6 py-3 bg-gradient-to-r from-orange-500 to-red-500 text-white font-bold rounded-xl shadow-md"
+                className="px-6 py-3 bg-gradient-to-r from-teal-500 to-red-500 text-white font-bold rounded-xl shadow-md"
               >
                 Clear Filters
               </button>
@@ -627,7 +627,7 @@ const Blog: React.FC = () => {
           {/* Featured Post */}
           {featuredPost && (
             <div className="featured-post mb-12 sm:mb-16 md:mb-20">
-              <div className="bg-gradient-to-r from-white to-orange-50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border border-orange-100">
+              <div className="bg-gradient-to-r from-white to-teal-50 rounded-2xl sm:rounded-3xl overflow-hidden shadow-xl sm:shadow-2xl border border-teal-100">
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-0">
                   {/* Image */}
                   <div className="relative h-64 sm:h-80 lg:h-full overflow-hidden">
@@ -640,7 +640,7 @@ const Blog: React.FC = () => {
                       priority
                     />
                     <div className="absolute top-4 sm:top-6 left-4 sm:left-6">
-                      <span className="bg-gradient-to-r from-orange-500 to-red-500 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg flex items-center">
+                      <span className="bg-gradient-to-r from-teal-500 to-red-500 text-white px-3 py-1.5 sm:px-4 sm:py-2 rounded-full text-xs sm:text-sm font-bold shadow-lg flex items-center">
                         <BsStarFill className="mr-1" /> FEATURED
                       </span>
                     </div>
@@ -654,7 +654,7 @@ const Blog: React.FC = () => {
                   {/* Content */}
                   <div className="p-6 sm:p-8 lg:p-12 featured-post-content flex flex-col justify-center">
                     <div className="mb-3 sm:mb-4">
-                      <span className="text-orange-500 font-bold text-xs sm:text-sm uppercase tracking-wider">Featured Story</span>
+                      <span className="text-teal-500 font-bold text-xs sm:text-sm uppercase tracking-wider">Featured Story</span>
                     </div>
                     
                     <h2 className="text-2xl sm:text-3xl lg:text-4xl font-black text-gray-800 mb-4 sm:mb-6 leading-tight">
@@ -668,7 +668,7 @@ const Blog: React.FC = () => {
                     {/* Meta Info */}
                     <div className="flex flex-wrap items-center justify-between gap-4 mb-6 sm:mb-8">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center">
+                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-gradient-to-r from-teal-500 to-red-500 rounded-full flex items-center justify-center">
                           <span className="text-white font-bold text-xs sm:text-sm">
                             {featuredPost.author.split(' ').map(n => n[0]).join('')}
                           </span>
@@ -678,7 +678,7 @@ const Blog: React.FC = () => {
                           <p className="text-gray-500 text-xs sm:text-sm">{featuredPost.date}</p>
                         </div>
                       </div>
-                      <span className="flex items-center text-orange-500 font-semibold text-sm">
+                      <span className="flex items-center text-teal-500 font-semibold text-sm">
                         <FiClock className="mr-1" /> {featuredPost.readTime}
                       </span>
                     </div>
@@ -686,14 +686,14 @@ const Blog: React.FC = () => {
                     {/* Tags */}
                     <div className="flex flex-wrap gap-2 mb-6 sm:mb-8">
                       {featuredPost.tags.map((tag, index) => (
-                        <span key={index} className="tag-item bg-orange-100 text-orange-600 px-2.5 py-1 rounded-lg text-xs sm:text-sm font-semibold">
+                        <span key={index} className="tag-item bg-teal-100 text-teal-600 px-2.5 py-1 rounded-lg text-xs sm:text-sm font-semibold">
                           #{tag}
                         </span>
                       ))}
                     </div>
                     
                     <Link href={`/blog/${featuredPost.id}`}>
-                      <button className="flex items-center justify-center bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl text-base sm:text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
+                      <button className="flex items-center justify-center bg-gradient-to-r from-teal-500 to-red-500 hover:from-teal-600 hover:to-red-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-xl sm:rounded-2xl text-base sm:text-lg transition-all duration-300 hover:scale-105 shadow-lg hover:shadow-xl">
                         <span>Read Full Story</span>
                         <FiChevronRight className="ml-2" />
                       </button>
@@ -738,7 +738,7 @@ const Blog: React.FC = () => {
                   <div className="p-4 sm:p-6 blog-card-content">
                     {/* Author Info */}
                     <div className="flex items-center space-x-3 mb-3 sm:mb-4">
-                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-orange-500 to-red-500 rounded-full flex items-center justify-center">
+                      <div className="w-8 h-8 sm:w-10 sm:h-10 bg-gradient-to-r from-teal-500 to-red-500 rounded-full flex items-center justify-center">
                         <span className="text-white font-bold text-xs">
                           {post.author.split(' ').map(n => n[0]).join('')}
                         </span>
@@ -750,7 +750,7 @@ const Blog: React.FC = () => {
                     </div>
                     
                     {/* Title */}
-                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 sm:mb-3 leading-tight group-hover:text-orange-600 transition-colors duration-300">
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-800 mb-2 sm:mb-3 leading-tight group-hover:text-teal-600 transition-colors duration-300">
                       {post.title}
                     </h3>
                     
@@ -770,7 +770,7 @@ const Blog: React.FC = () => {
                     
                     {/* Read More Button */}
                     <Link href={`/blog/${post.id}`}>
-                      <button className="w-full flex items-center justify-center bg-gradient-to-r from-orange-500 to-red-500 hover:from-orange-600 hover:to-red-600 text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg text-sm">
+                      <button className="w-full flex items-center justify-center bg-gradient-to-r from-teal-500 to-red-500 hover:from-teal-600 hover:to-red-600 text-white font-bold py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg sm:rounded-xl transition-all duration-300 hover:scale-105 shadow-md hover:shadow-lg text-sm">
                         <span>Read More</span>
                         <FiChevronRight className="ml-1" />
                       </button>
@@ -784,7 +784,7 @@ const Blog: React.FC = () => {
           {/* Show "Load More" button if there are a lot of posts */}
           {regularPosts.length > 6 && (
             <div className="text-center">
-              <button className="px-8 py-4 border-2 border-orange-400 text-orange-500 font-bold rounded-xl hover:bg-orange-50 transition-all duration-300">
+              <button className="px-8 py-4 border-2 border-teal-400 text-teal-500 font-bold rounded-xl hover:bg-teal-50 transition-all duration-300">
                 Load More
               </button>
             </div>

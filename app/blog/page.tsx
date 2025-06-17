@@ -297,12 +297,12 @@ export default function BlogPage() {
           <div className="container mx-auto px-4 sm:px-6 relative z-10">
             <div className="text-center max-w-4xl mx-auto">
               <div className="animate-fade-in-down">
-                <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-orange-100 px-5 py-2 rounded-full mb-6">
+                <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-teal-100 px-5 py-2 rounded-full mb-6">
                   <GiNewspaper className="text-amber-600 animate-float" />
                   <span className="text-amber-800 font-medium">Food Stories & More</span>
                 </div>
                 <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold mb-6 text-gray-900 leading-tight">
-                  World Cup <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-orange-500">Blog</span>
+                  World Cup <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-500 to-teal-500">Blog</span>
                 </h1>
               </div>
               
@@ -318,7 +318,7 @@ export default function BlogPage() {
                       onClick={() => setSelectedCategory(category)}
                       className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
                         selectedCategory === category
-                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white shadow-md shadow-orange-200'
+                          ? 'bg-gradient-to-r from-amber-500 to-teal-500 text-white shadow-md shadow-teal-200'
                           : 'bg-white text-gray-700 hover:bg-amber-50 border border-amber-200'
                       }`}
                     >
@@ -378,7 +378,7 @@ export default function BlogPage() {
                       }}
                       className={`px-4 py-3 rounded-lg text-sm font-medium transition-all duration-300 ${
                         selectedCategory === category
-                          ? 'bg-gradient-to-r from-amber-500 to-orange-500 text-white'
+                          ? 'bg-gradient-to-r from-amber-500 to-teal-500 text-white'
                           : 'bg-gray-50 text-gray-700 hover:bg-amber-50'
                       }`}
                     >
@@ -689,7 +689,7 @@ export default function BlogPage() {
                   </div>
 
                   {/* Newsletter Signup */}
-                  <div className="bg-gradient-to-br from-amber-500 to-orange-500 p-6 rounded-xl shadow-lg animate-fade-in-right delay-300">
+                  <div className="bg-gradient-to-br from-amber-500 to-teal-500 p-6 rounded-xl shadow-lg animate-fade-in-right delay-300">
                     <div className="text-center">
                       <GiSpoon className="text-4xl text-white mx-auto mb-4 animate-float" />
                       <h3 className="text-xl font-bold mb-2 text-white">Food Inspiration</h3>

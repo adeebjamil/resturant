@@ -384,7 +384,7 @@ const Gallery: React.FC = () => {
 
         {/* Floating Decorative Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="floating-element absolute top-20 right-20 w-16 h-16 bg-orange-300/30 rounded-full blur-xl"></div>
+          <div className="floating-element absolute top-20 right-20 w-16 h-16 bg-teal-300/30 rounded-full blur-xl"></div>
           <div className="floating-element absolute bottom-32 left-20 w-12 h-12 bg-pink-300/30 rounded-full blur-lg"></div>
           <div className="floating-element absolute top-1/2 left-1/2 w-8 h-8 bg-yellow-300/30 rounded-full blur-sm"></div>
         </div>
@@ -427,7 +427,7 @@ const Gallery: React.FC = () => {
                 </div>
 
                 {/* Decorative Corner Elements */}
-                <div className="absolute top-4 right-4 w-3 h-3 bg-orange-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
+                <div className="absolute top-4 right-4 w-3 h-3 bg-teal-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 animate-pulse"></div>
                 <div className="absolute top-4 left-4 w-2 h-2 bg-pink-400 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 animate-pulse"></div>
               </div>
             ))}

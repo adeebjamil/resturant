@@ -839,7 +839,7 @@ const comments = [
         style={{ opacity: readingProgress > 0 ? 1 : 0 }}
       >
         <div 
-          className="h-full bg-gradient-to-r from-amber-500 to-orange-500"
+          className="h-full bg-gradient-to-r from-amber-500 to-teal-500"
           style={{ width: `${readingProgress}%` }}
         ></div>
       </div>
@@ -1356,7 +1356,7 @@ const comments = [
                     )}
 
                     {/* Author Box */}
-                    <div className="mt-10 bg-gradient-to-r from-amber-50 to-orange-50 p-6 sm:p-8 rounded-xl border border-amber-100/50 shadow-sm">
+                    <div className="mt-10 bg-gradient-to-r from-amber-50 to-teal-50 p-6 sm:p-8 rounded-xl border border-amber-100/50 shadow-sm">
                       <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4 sm:gap-6">
                         <div className="w-20 h-20 rounded-full border-4 border-amber-100 flex items-center justify-center bg-amber-50 flex-shrink-0">
                           {currentPost.authorImage}

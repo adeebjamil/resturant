@@ -320,7 +320,7 @@ const Footer: React.FC = () => {
 
         {/* Floating Decorative Elements */}
         <div className="absolute inset-0 pointer-events-none">
-          <div className="floating-element absolute top-20 right-20 w-16 h-16 bg-orange-500/20 rounded-full blur-xl"></div>
+          <div className="floating-element absolute top-20 right-20 w-16 h-16 bg-teal-500/20 rounded-full blur-xl"></div>
           <div className="floating-element absolute bottom-32 left-20 w-12 h-12 bg-red-500/20 rounded-full blur-lg"></div>
           <div className="floating-element absolute top-1/2 left-1/2 w-8 h-8 bg-yellow-500/20 rounded-full blur-md"></div>
         </div>
@@ -357,22 +357,22 @@ const Footer: React.FC = () => {
               
               <div className="flex space-x-4">
                 {/* Facebook */}
-                <button className="social-icon w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-500">
+                <button className="social-icon w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-teal-500">
                   <FaFacebook className="w-6 h-6 text-white" />
                 </button>
 
                 {/* Twitter */}
-                <button className="social-icon w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-500">
+                <button className="social-icon w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-teal-500">
                   <FaTwitter className="w-6 h-6 text-white" />
                 </button>
 
                 {/* Instagram */}
-                <button className="social-icon w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-500">
+                <button className="social-icon w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-teal-500">
                   <FaInstagram className="w-6 h-6 text-white" />
                 </button>
 
                 {/* YouTube */}
-                <button className="social-icon w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-orange-500">
+                <button className="social-icon w-12 h-12 bg-gray-800 rounded-full flex items-center justify-center hover:bg-teal-500">
                   <FaYoutube className="w-6 h-6 text-white" />
                 </button>
               </div>
@@ -380,13 +380,13 @@ const Footer: React.FC = () => {
 
             {/* Quick Links */}
             <div className="footer-section footer-links space-y-6">
-              <h4 className="text-xl font-bold text-orange-500 mb-6">Quick Links</h4>
+              <h4 className="text-xl font-bold text-teal-500 mb-6">Quick Links</h4>
               <ul className="space-y-3">
                 {['Home', 'About Us', 'Menu', 'Reservations', 'Contact', 'Blog'].map((link, index) => (
                   <li key={link}>
                     <Link href={`/${link.toLowerCase().replace(' ', '-')}`}>
                       <span 
-                        className="footer-link text-gray-300 hover:text-orange-500 cursor-pointer"
+                        className="footer-link text-gray-300 hover:text-teal-500 cursor-pointer"
                         style={{ animationDelay: `${index * 0.1}s` }}
                       >
                         {link}
@@ -399,7 +399,7 @@ const Footer: React.FC = () => {
 
             {/* Restaurant Hours */}
             <div className="footer-section restaurant-hours space-y-6">
-              <h4 className="text-xl font-bold text-orange-500 mb-6">Opening Hours</h4>
+              <h4 className="text-xl font-bold text-teal-500 mb-6">Opening Hours</h4>
               <ul className="space-y-3">
                 {[{
                   day: 'Monday - Friday',
@@ -416,33 +416,33 @@ const Footer: React.FC = () => {
                 ].map((schedule, index) => (
                   <li key={schedule.day} className="hours-item flex justify-between text-gray-300">
                     <span>{schedule.day}</span>
-                    <span className="text-orange-400">{schedule.time}</span>
+                    <span className="text-teal-400">{schedule.time}</span>
                   </li>
                 ))}
               </ul>
               
-              <div className="bg-gradient-to-r from-orange-500/20 to-red-500/20 p-4 rounded-lg border border-orange-500/30">
-                <p className="text-orange-400 font-semibold">🎉 Happy Hour: 5-7 PM</p>
+              <div className="bg-gradient-to-r from-teal-500/20 to-red-500/20 p-4 rounded-lg border border-teal-500/30">
+                <p className="text-teal-400 font-semibold">🎉 Happy Hour: 5-7 PM</p>
                 <p className="text-gray-300 text-sm">Get 20% off on all appetizers!</p>
               </div>
             </div>
 
             {/* Contact & Newsletter */}
             <div className="footer-section footer-contact space-y-6">
-              <h4 className="text-xl font-bold text-orange-500 mb-6">Get In Touch</h4>
+              <h4 className="text-xl font-bold text-teal-500 mb-6">Get In Touch</h4>
               
               {/* Contact Info */}
               <div className="space-y-4">
                 <div className="contact-item flex items-center space-x-3">
-                  <span className="text-orange-500 text-xl">📍</span>
+                  <span className="text-teal-500 text-xl">📍</span>
                   <span className="text-gray-300">123 Food Street, Culinary City, FC 12345</span>
                 </div>
                 <div className="contact-item flex items-center space-x-3">
-                  <span className="text-orange-500 text-xl">📞</span>
+                  <span className="text-teal-500 text-xl">📞</span>
                   <span className="text-gray-300">+1 (555) 123-4567</span>
                 </div>
                 <div className="contact-item flex items-center space-x-3">
-                  <span className="text-orange-500 text-xl">✉️</span>
+                  <span className="text-teal-500 text-xl">✉️</span>
                   <span className="text-gray-300">hello@wellfood.com</span>
                 </div>
               </div>
@@ -454,7 +454,7 @@ const Footer: React.FC = () => {
                   <input
                     type="email"
                     placeholder="Enter your email"
-                    className="newsletter-input px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-orange-500"
+                    className="newsletter-input px-4 py-3 bg-gray-800 border border-gray-600 rounded-lg text-white placeholder-gray-400 focus:outline-none focus:border-teal-500"
                   />
                   <button className="newsletter-btn px-6 py-3 text-white font-bold rounded-lg shadow-lg">
                     Subscribe Now
@@ -480,10 +480,10 @@ const Footer: React.FC = () => {
             
             <div className="flex items-center space-x-6">
               <Link href="/privacy">
-                <span className="footer-link text-gray-400 hover:text-orange-500">Privacy Policy</span>
+                <span className="footer-link text-gray-400 hover:text-teal-500">Privacy Policy</span>
               </Link>
               <Link href="/terms">
-                <span className="footer-link text-gray-400 hover:text-orange-500">Terms of Service</span>
+                <span className="footer-link text-gray-400 hover:text-teal-500">Terms of Service</span>
               </Link>
             </div>
           </div>

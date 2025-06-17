@@ -327,9 +327,9 @@ export default function Hero() {
               
               {/* Price Badge with Animation */}
               <div className="hero-subtitle flex justify-center lg:justify-start">
-                <div className="inline-flex items-center space-x-2 sm:space-x-3 bg-gradient-to-r from-orange-500/20 to-red-500/20 backdrop-blur-sm border border-orange-500/30 rounded-full px-4 sm:px-6 py-2 sm:py-3 price-badge">
-                  <span className="text-orange-400 text-xl sm:text-2xl bounce-element">🍔</span>
-                  <span className="text-orange-400 font-semibold text-sm sm:text-base">Start price Only $25</span>
+                <div className="inline-flex items-center space-x-2 sm:space-x-3 bg-gradient-to-r from-teal-500/20 to-red-500/20 backdrop-blur-sm border border-teal-500/30 rounded-full px-4 sm:px-6 py-2 sm:py-3 price-badge">
+                  <span className="text-teal-400 text-xl sm:text-2xl bounce-element">🍔</span>
+                  <span className="text-teal-400 font-semibold text-sm sm:text-base">Start price Only $25</span>
                 </div>
               </div>
 
@@ -355,7 +355,7 @@ export default function Hero() {
 
               {/* Action Buttons */}
               <div className="hero-buttons flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center lg:justify-start">
-                <button className="group relative bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 scale-hover glow-effect overflow-hidden">
+                <button className="group relative bg-teal-500 hover:bg-teal-600 text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 scale-hover glow-effect overflow-hidden">
                   <span className="relative z-10 flex items-center justify-center space-x-2">
                     <span className="text-sm sm:text-base">VIEW ALL MENU</span>
                     <svg className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:translate-x-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -367,7 +367,7 @@ export default function Hero() {
                 </button>
 
                 <Link href="/contact">
-                  <button className="group border-2 border-orange-500 text-orange-500 hover:bg-orange-500 hover:text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 scale-hover w-full sm:w-auto">
+                  <button className="group border-2 border-teal-500 text-teal-500 hover:bg-teal-500 hover:text-white font-bold py-3 sm:py-4 px-6 sm:px-8 rounded-lg transition-all duration-300 scale-hover w-full sm:w-auto">
                     <span className="flex items-center justify-center space-x-2">
                       <span className="text-sm sm:text-base">BOOK NOW</span>
                       <svg className="w-4 h-4 sm:w-5 sm:h-5 transition-transform duration-300 group-hover:rotate-12" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -400,7 +400,7 @@ export default function Hero() {
               <div className="relative">
                 {/* Main Food Image */}
                 <div className="relative z-10 transform rotate-hover">
-                  <div className="relative bg-gradient-to-br from-orange-500/10 to-red-500/10 backdrop-blur-sm rounded-full p-4 sm:p-8 glow-effect">
+                  <div className="relative bg-gradient-to-br from-teal-500/10 to-red-500/10 backdrop-blur-sm rounded-full p-4 sm:p-8 glow-effect">
                     <Image
                       src="/hero/hero-right.png"
                       alt="Delicious Food"
@@ -424,7 +424,7 @@ export default function Hero() {
                 </div>
 
                 {/* Decorative Elements */}
-                <div className="absolute -top-4 -left-4 sm:-top-8 sm:-left-8 w-8 h-8 sm:w-16 sm:h-16 bg-orange-500/20 rounded-full blur-xl floating-element"></div>
+                <div className="absolute -top-4 -left-4 sm:-top-8 sm:-left-8 w-8 h-8 sm:w-16 sm:h-16 bg-teal-500/20 rounded-full blur-xl floating-element"></div>
                 <div className="absolute -bottom-4 -right-4 sm:-bottom-8 sm:-right-8 w-10 h-10 sm:w-20 sm:h-20 bg-red-500/20 rounded-full blur-xl floating-element"></div>
                 <div className="absolute top-1/2 -left-6 sm:-left-12 w-6 h-6 sm:w-12 sm:h-12 bg-yellow-500/20 rounded-full blur-lg floating-element"></div>
               </div>
@@ -444,7 +444,7 @@ export default function Hero() {
 
               <div className="hidden sm:block absolute -right-8 lg:-right-16 bottom-20 bg-white/10 backdrop-blur-sm rounded-lg p-3 sm:p-4 floating-element scale-hover">
                 <div className="flex items-center space-x-2 sm:space-x-3">
-                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-orange-500 rounded-full flex items-center justify-center">
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 bg-teal-500 rounded-full flex items-center justify-center">
                     <span className="text-white text-xs sm:text-sm">🚀</span>
                   </div>
                   <div>

@@ -15,7 +15,6 @@ import {
   FaGlassWater,
   FaCakeCandles,
   FaStar,
-  FaClock,
   FaFire,
   FaPepperHot
 } from 'react-icons/fa6'
@@ -27,7 +26,7 @@ import {
   GiTacos,
   GiChocolateBar,
   GiMilkCarton,
-  GiOrangeSlice,
+  GiTeapot,
   GiCarrot
 } from 'react-icons/gi'
 import { IoGridOutline, IoListOutline, IoFilterOutline, IoChevronDown } from 'react-icons/io5'
@@ -67,7 +66,7 @@ export default function MenuPage() {
     { id: 'loaded-fries', name: 'Loaded Fries', icon: GiFrenchFries },
     { id: 'plate-items', name: 'Plate Items', icon: FaUtensils },
     { id: 'fresh-juices', name: 'Fresh Juices', icon: FaGlassWater },
-    { id: 'special-juices', name: 'Special Juices', icon: GiOrangeSlice },
+    { id: 'special-juices', name: 'Special Juices', icon: GiTeapot },
     { id: 'chrush-milk-shakes', name: 'Chrush Milk Shakes', icon: GiMilkCarton },
     { id: 'passion-mix', name: 'Passion Mix', icon: FaGlassWater },
     { id: 'mojito-juice', name: 'Mojito Juice', icon: FaGlassWater },
@@ -81,181 +80,145 @@ export default function MenuPage() {
       id: 1,
       name: "Grilled Salmon",
       category: "seafood",
-      price: 28,
-      originalPrice: 35,
       description: "Fresh Atlantic salmon grilled to perfection with lemon butter sauce and seasonal vegetables",
       image: "/menu/salmon.jpg",
       rating: 4.8,
       reviews: 156,
       tags: ["Popular", "Healthy"],
       spicyLevel: 0,
-      calories: 320,
-      cookTime: "15 mins"
+      calories: 320
     },
     {
       id: 2,
       name: "Margherita Pizza",
       category: "pizza", 
-      price: 18,
-      originalPrice: null,
       description: "Classic Italian pizza with fresh mozzarella, tomatoes, and basil on our handmade dough",
       image: "/menu/pizza.webp",
       rating: 4.6,
       reviews: 203,
       tags: ["Vegetarian", "Classic"],
       spicyLevel: 0,
-      calories: 280,
-      cookTime: "12 mins"
+      calories: 280
     },
     {
       id: 3,
       name: "Wagyu Beef Burger",
       category: "burgers",
-      price: 32,
-      originalPrice: 38,
       description: "Premium wagyu beef patty with truffle aioli, aged cheddar, and caramelized onions",
       image: "/menu/burger.jpg",
       rating: 4.9,
       reviews: 89,
       tags: ["Premium", "Chef's Special"],
       spicyLevel: 1,
-      calories: 650,
-      cookTime: "18 mins"
+      calories: 650
     },
     {
       id: 4,
       name: "Lobster Ravioli",
       category: "pasta",
-      price: 26,
-      originalPrice: null,
       description: "Handmade ravioli filled with fresh lobster in a creamy saffron sauce",
       image: "/menu/ravioli.jpg",
       rating: 4.7,
       reviews: 124,
       tags: ["Signature", "Seafood"],
       spicyLevel: 0,
-      calories: 420,
-      cookTime: "20 mins"
+      calories: 420
     },
     {
       id: 5,
       name: "Caesar Salad",
       category: "appetizers",
-      price: 14,
-      originalPrice: null,
       description: "Crisp romaine lettuce with our house Caesar dressing, parmesan, and croutons",
       image: "/menu/caesar.jpg",
       rating: 4.4,
       reviews: 67,
       tags: ["Classic", "Healthy"],
       spicyLevel: 0,
-      calories: 180,
-      cookTime: "5 mins"
+      calories: 180
     },
     {
       id: 6,
       name: "Chocolate Lava Cake",
       category: "desserts",
-      price: 12,
-      originalPrice: null,
       description: "Warm chocolate cake with molten center, served with vanilla ice cream",
       image: "/menu/lava-cake.jpg",
       rating: 4.8,
       reviews: 234,
       tags: ["Popular", "Indulgent"],
       spicyLevel: 0,
-      calories: 450,
-      cookTime: "8 mins"
+      calories: 450
     },
     {
       id: 7,
       name: "Craft Beer Selection",
       category: "beverages",
-      price: 8,
-      originalPrice: null,
       description: "Rotating selection of local craft beers on tap",
       image: "/menu/beer.jpg",
       rating: 4.5,
       reviews: 98,
       tags: ["Local", "Craft"],
       spicyLevel: 0,
-      calories: 150,
-      cookTime: "Instant"
+      calories: 150
     },
     {
       id: 8,
       name: "Ribeye Steak",
       category: "mains",
-      price: 45,
-      originalPrice: 52,
       description: "12oz prime ribeye steak grilled to your preference with garlic mashed potatoes",
       image: "/menu/steak.jpeg",
       rating: 4.9,
       reviews: 176,
       tags: ["Premium", "Bestseller"],
       spicyLevel: 0,
-      calories: 720,
-      cookTime: "25 mins"
+      calories: 720
     },
     {
       id: 9,
       name: "Butter Chicken Porotta",
       category: "porotta-sandwich",
-      price: 8.50,
-      originalPrice: null,
       description: "Crispy porotta served with rich and creamy butter chicken curry",
       image: "/menu/butter-chicken-poratta.webp",
       rating: 4.6,
       reviews: 124,
       tags: ["Popular", "Spicy"],
       spicyLevel: 2,
-      calories: 580,
-      cookTime: "15 mins"
+      calories: 580
     },
     {
       id: 10,
       name: "Chicken Porotta",
       category: "porotta-sandwich",
-      price: 7.50,
-      originalPrice: null,
       description: "Flaky porotta served with spiced chicken curry",
       image: "/menu/chicken-poratta.jpg",
       rating: 4.5,
       reviews: 156,
       tags: ["Popular", "Classic"],
       spicyLevel: 2,
-      calories: 540,
-      cookTime: "15 mins"
+      calories: 540
     },
     {
       id: 11,
       name: "Masala Tea",
       category: "tea-special",
-      price: 3.50,
-      originalPrice: null,
       description: "Traditional spiced tea with aromatic Indian spices",
       image: "/menu/masala-tea.jpeg",
       rating: 4.5,
       reviews: 312,
       tags: ["Traditional", "Hot"],
       spicyLevel: 1,
-      calories: 45,
-      cookTime: "5 mins"
+      calories: 45
     },
     {
       id: 12,
       name: "Cream of Mushroom Soup",
       category: "soup-point",
-      price: 6.50,
-      originalPrice: null,
       description: "Rich and creamy mushroom soup with herbs",
       image: "/menu/mushroom-soup.jpg",
       rating: 4.5,
       reviews: 123,
       tags: ["Creamy", "Vegetarian"],
       spicyLevel: 0,
-      calories: 180,
-      cookTime: "10 mins"
+      calories: 180
     }
   ], [])
 
@@ -275,10 +238,6 @@ export default function MenuPage() {
   const sortedItems = useMemo(() => {
     return [...filteredItems].sort((a, b) => {
       switch (sortBy) {
-        case 'price-low':
-          return a.price - b.price
-        case 'price-high':
-          return b.price - a.price
         case 'rating':
           return b.rating - a.rating
         case 'popular':
@@ -416,14 +375,36 @@ export default function MenuPage() {
         .delay-300 { animation-delay: 0.3s; }
       `}</style>
 
-      <div className="min-h-screen bg-gray-50">
+      <div className="min-h-screen bg-gray-50 pb-20">
+        {/* Optional Video Section with proper height */}
+        <div className="relative bg-gray-900 text-white py-20 md:py-24 lg:py-28 mb-8">
+          <div className="absolute inset-0 overflow-hidden opacity-60">
+            <video 
+              autoPlay
+              muted
+              loop
+              playsInline
+              className="w-full h-full object-cover"
+            >
+              <source src="/restaurant-showcase.mp4" type="video/mp4" />
+              <source src="/restaurant-showcase.webm" type="video/webm" />
+            </video>
+          </div>
+          <div className="relative container mx-auto px-4 text-center">
+            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 md:mb-6">Discover Our Kitchen</h2>
+            <p className="max-w-2xl mx-auto text-gray-200 text-lg md:text-xl">
+              Watch our chefs prepare each dish with passion and authentic flavors
+            </p>
+          </div>
+        </div>
+
         {/* Modern Header - Desktop & Mobile */}
-        <header className="sticky top-0 z-40 bg-white shadow-sm">
+        <header className="sticky top-0 z-40 bg-white shadow-sm mb-6">
           {/* Desktop Header */}
           <div className="hidden md:block py-4 px-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-6">
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-teal-500 to-teal-800 bg-clip-text text-transparent">
                   Restaurant Menu
                 </h1>
                 <div className="flex items-center space-x-4">
@@ -431,14 +412,14 @@ export default function MenuPage() {
                   <div className="flex items-center space-x-1">
                     <button
                       onClick={() => setViewMode('grid')}
-                      className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-orange-100 text-orange-600' : 'text-gray-400 hover:bg-gray-100'}`}
+                      className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-teal-100 text-teal-600' : 'text-gray-400 hover:bg-gray-100'}`}
                       aria-label="Grid view"
                     >
                       <IoGridOutline className="w-5 h-5" />
                     </button>
                     <button
                       onClick={() => setViewMode('list')}
-                      className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-orange-100 text-orange-600' : 'text-gray-400 hover:bg-gray-100'}`}
+                      className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-teal-100 text-teal-600' : 'text-gray-400 hover:bg-gray-100'}`}
                       aria-label="List view"
                     >
                       <IoListOutline className="w-5 h-5" />
@@ -454,7 +435,7 @@ export default function MenuPage() {
                     placeholder="Search menu..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-64 bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white transition-all"
+                    className="w-64 bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-teal-500 focus:bg-white transition-all"
                   />
                   <FaSearch className="absolute right-3 top-2.5 w-4 h-4 text-gray-400" />
                 </div>
@@ -462,12 +443,10 @@ export default function MenuPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white"
+                  className="bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-teal-500 focus:bg-white"
                 >
                   <option value="popular">Most Popular</option>
                   <option value="rating">Top Rated</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
                 </select>
               </div>
             </div>
@@ -477,7 +456,7 @@ export default function MenuPage() {
           <div className="md:hidden p-3 border-b border-gray-100">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <h1 className="text-xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-teal-500 to-teal-800 bg-clip-text text-transparent">
                   Menu
                 </h1>
                 <span className="ml-2 text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded-md">
@@ -497,14 +476,14 @@ export default function MenuPage() {
                 )}
                 <button 
                   onClick={() => setShowMobileFilters(!showMobileFilters)}
-                  className={`p-2.5 rounded-full ${showMobileFilters ? 'bg-orange-100 text-orange-600' : 'text-gray-600 hover:bg-gray-100'}`}
+                  className={`p-2.5 rounded-full ${showMobileFilters ? 'bg-teal-100 text-teal-600' : 'text-gray-600 hover:bg-gray-100'}`}
                   aria-label="Filter"
                 >
                   <IoFilterOutline className="w-4 h-4" />
                 </button>
                 <button 
                   onClick={() => setShowMobileCategories(!showMobileCategories)}
-                  className={`p-2.5 rounded-full flex items-center ${showMobileCategories ? 'bg-orange-100 text-orange-600' : 'text-gray-600 hover:bg-gray-100'}`}
+                  className={`p-2.5 rounded-full flex items-center ${showMobileCategories ? 'bg-teal-100 text-teal-600' : 'text-gray-600 hover:bg-gray-100'}`}
                   aria-label="Categories"
                 >
                   <FaUtensils className="w-4 h-4" />
@@ -513,14 +492,14 @@ export default function MenuPage() {
                 <div className="flex items-center border-l border-gray-200 ml-1 pl-1">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`p-2.5 rounded-full ${viewMode === 'grid' ? 'text-orange-500' : 'text-gray-400'}`}
+                    className={`p-2.5 rounded-full ${viewMode === 'grid' ? 'text-teal-500' : 'text-gray-400'}`}
                     aria-label="Grid view"
                   >
                     <IoGridOutline className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
-                    className={`p-2.5 rounded-full ${viewMode === 'list' ? 'text-orange-500' : 'text-gray-400'}`}
+                    className={`p-2.5 rounded-full ${viewMode === 'list' ? 'text-teal-500' : 'text-gray-400'}`}
                     aria-label="List view"
                   >
                     <IoListOutline className="w-4 h-4" />
@@ -538,7 +517,7 @@ export default function MenuPage() {
                     placeholder="Search menu..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full bg-gray-100 border-0 rounded-full px-4 py-2.5 pr-10 text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white"
+                    className="w-full bg-gray-100 border-0 rounded-full px-4 py-2.5 pr-10 text-sm focus:ring-2 focus:ring-teal-500 focus:bg-white"
                     autoFocus
                   />
                   <button 
@@ -565,12 +544,10 @@ export default function MenuPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-orange-500"
+                  className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-teal-500"
                 >
                   <option value="popular">Most Popular</option>
                   <option value="rating">Top Rated</option>
-                  <option value="price-low">Price: Low to High</option>
-                  <option value="price-high">Price: High to Low</option>
                 </select>
               </div>
             )}
@@ -586,7 +563,7 @@ export default function MenuPage() {
                       onClick={() => setSelectedCategory(category.id)}
                       className={`flex-shrink-0 flex items-center px-3 py-1.5 rounded-full text-xs font-medium ${
                         selectedCategory === category.id
-                          ? 'bg-orange-500 text-white'
+                          ? 'bg-teal-500 text-white'
                           : 'bg-gray-100 text-gray-700'
                       }`}
                     >
@@ -622,7 +599,7 @@ export default function MenuPage() {
                           onClick={() => handleCategorySelect(category.id)}
                           className={`flex items-center p-3 rounded-lg animate-fade-in ${
                             selectedCategory === category.id
-                              ? 'bg-orange-500 text-white'
+                              ? 'bg-teal-500 text-white'
                               : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
                           }`}
                           style={{ animationDelay: `${index * 0.03}s` }}
@@ -642,13 +619,13 @@ export default function MenuPage() {
           </div>
         </header>
         
-        {/* Main Content Wrapper */}
-        <div className="md:flex md:container mx-auto">
-          {/* Sidebar Categories - Desktop */}
-          <aside className="hidden md:block w-64 bg-white border-r border-gray-100 h-[calc(100vh-73px)] sticky top-[73px] overflow-y-auto scrollbar-hide flex-shrink-0">
-            <div className="py-4 px-4">
-              <h2 className="text-sm font-bold uppercase tracking-wide text-gray-500 mb-4 ml-2">Categories</h2>
-              <div className="space-y-1">
+        {/* Main Content Wrapper with proper spacing */}
+        <div className="md:flex md:container mx-auto px-4 md:px-6 lg:px-8">
+          {/* Sidebar Categories - Desktop with fixed height */}
+          <aside className="hidden md:block w-64 bg-white border-r border-gray-100 h-[calc(100vh-200px)] sticky top-[120px] overflow-y-auto scrollbar-hide flex-shrink-0 mr-6 rounded-lg shadow-sm">
+            <div className="py-6 px-4">
+              <h2 className="text-sm font-bold uppercase tracking-wide text-gray-500 mb-6 ml-2">Categories</h2>
+              <div className="space-y-2">
                 {categories.map((category) => {
                   const IconComponent = category.icon;
                   const itemCount = menuItems.filter(item => category.id === 'all' || item.category === category.id).length;
@@ -656,17 +633,17 @@ export default function MenuPage() {
                     <button
                       key={category.id}
                       onClick={() => setSelectedCategory(category.id)}
-                      className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-colors ${
+                      className={`w-full flex items-center justify-between px-3 py-3 rounded-lg text-left transition-colors ${
                         selectedCategory === category.id
-                          ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white'
+                          ? 'bg-gradient-to-r from-teal-500 to-teal-800 text-white'
                           : 'hover:bg-gray-50 text-gray-700'
                       }`}
                     >
                       <div className="flex items-center space-x-3">
                         <IconComponent className="text-base" />
-                        <span className="text-sm">{category.name}</span>
+                        <span className="text-sm font-medium">{category.name}</span>
                       </div>
-                      <span className={`text-xs px-1.5 py-0.5 rounded-full ${selectedCategory === category.id ? 'bg-white/20' : 'bg-gray-100'}`}>
+                      <span className={`text-xs px-2 py-1 rounded-full ${selectedCategory === category.id ? 'bg-white/20' : 'bg-gray-100'}`}>
                         {itemCount}
                       </span>
                     </button>
@@ -676,49 +653,37 @@ export default function MenuPage() {
             </div>
           </aside>
 
-          {/* Main Content */}
-          <main className="flex-1 p-4">
-            {/* Menu Items Grid/List */}
+          {/* Main Content with proper spacing */}
+          <main className="flex-1 mb-16">
+            {/* Menu Items Grid/List with improved spacing */}
             {viewMode === 'grid' ? (
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3 sm:gap-4 md:gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5 md:gap-6">
                 {sortedItems.map((item, index) => (
                   <div 
                     key={item.id} 
-                    className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-up"
+                    className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 animate-slide-up mb-4"
                     style={{ animationDelay: `${index * 0.05}s` }}
                   >
-                    <div className="relative h-36 sm:h-40 overflow-hidden">
+                    <div className="relative h-48 sm:h-52 overflow-hidden">
                       <Image
                         src={item.image}
                         alt={item.name}
                         fill
-                        className="object-cover"
+                        className="object-cover hover:scale-105 transition-transform duration-300"
                       />
                       
                       {/* Mobile-friendly tags */}
-                      <div className="absolute top-2 left-2 flex flex-wrap gap-1">
+                      <div className="absolute top-3 left-3 flex flex-wrap gap-1">
                         {item.tags.slice(0, 1).map((tag) => (
-                          <span key={tag} className="bg-white/90 text-gray-800 px-2 py-0.5 rounded-full text-xs font-medium">
+                          <span key={tag} className="bg-white/90 text-gray-800 px-2 py-1 rounded-full text-xs font-medium shadow-sm">
                             {tag}
                           </span>
                         ))}
                       </div>
-
-                      {/* Price badge */}
-                      <div className="absolute top-2 right-2">
-                        <div className="bg-white/90 rounded-full px-2 py-1 shadow-sm">
-                          <div className="flex items-center">
-                            {item.originalPrice && (
-                              <span className="text-gray-500 line-through text-xs mr-1">${item.originalPrice}</span>
-                            )}
-                            <span className="font-bold text-orange-600">${item.price.toFixed(2)}</span>
-                          </div>
-                        </div>
-                      </div>
                       
                       {/* Spicy indicator on image */}
                       {item.spicyLevel > 0 && (
-                        <div className="absolute bottom-2 left-2 flex space-x-0.5 bg-white/80 rounded-full py-0.5 px-1.5">
+                        <div className="absolute bottom-3 left-3 flex space-x-0.5 bg-white/80 rounded-full py-1 px-2">
                           {Array(item.spicyLevel).fill(0).map((_, i) => (
                             <FaPepperHot key={i} className="text-red-500 text-xs" />
                           ))}
@@ -726,28 +691,25 @@ export default function MenuPage() {
                       )}
                     </div>
 
-                    <div className="p-3 sm:p-4">
-                      <div className="flex items-start justify-between mb-1">
+                    <div className="p-4 sm:p-5">
+                      <div className="flex items-start justify-between mb-2">
                         <h3 className="font-bold text-gray-900 text-sm sm:text-base line-clamp-1">
                           {item.name}
                         </h3>
-                        <div className="flex items-center ml-1 flex-shrink-0">
+                        <div className="flex items-center ml-2 flex-shrink-0">
                           <FaStar className="text-yellow-400 w-3 h-3 sm:w-4 sm:h-4" />
                           <span className="text-xs text-gray-600 ml-1">{item.rating}</span>
                         </div>
                       </div>
 
-                      <p className="text-gray-600 text-xs mb-2 line-clamp-2">{item.description}</p>
+                      <p className="text-gray-600 text-xs mb-3 line-clamp-2">{item.description}</p>
 
                       <div className="flex items-center justify-between text-xs text-gray-500">
-                        <span className="flex items-center">
-                          <FaClock className="w-3 h-3 mr-1 opacity-75" />
-                          {item.cookTime}
-                        </span>
                         <span className="flex items-center">
                           <FaFire className="w-3 h-3 mr-1 opacity-75" />
                           {item.calories} cal
                         </span>
+                        <span className="text-xs">{item.reviews} reviews</span>
                       </div>
                     </div>
                   </div>
@@ -755,13 +717,13 @@ export default function MenuPage() {
 
                 {/* Empty State - Grid */}
                 {sortedItems.length === 0 && (
-                  <div className="col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4 text-center py-12 bg-white rounded-xl shadow-sm mt-4">
-                    <FaSearch className="text-4xl mb-4 mx-auto text-gray-300" />
-                    <h3 className="text-lg font-bold text-gray-800 mb-2">No menu items found</h3>
-                    <p className="text-gray-600 text-sm mb-4">Try adjusting your search or filter criteria</p>
+                  <div className="col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4 text-center py-16 bg-white rounded-xl shadow-sm mt-8">
+                    <FaSearch className="text-5xl mb-6 mx-auto text-gray-300" />
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">No menu items found</h3>
+                    <p className="text-gray-600 text-sm mb-6">Try adjusting your search or filter criteria</p>
                     <button 
                       onClick={resetFilters}
-                      className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors"
+                      className="px-6 py-3 bg-teal-500 text-white rounded-lg text-sm font-medium hover:bg-teal-600 transition-colors"
                     >
                       Reset filters
                     </button>
@@ -769,15 +731,15 @@ export default function MenuPage() {
                 )}
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-4">
                 {sortedItems.map((item, index) => (
                   <div 
                     key={item.id} 
-                    className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 animate-slide-in-right"
+                    className="bg-white rounded-xl overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 animate-slide-in-right mb-4"
                     style={{ animationDelay: `${index * 0.05}s` }}
                   >
                     <div className="flex">
-                      <div className="relative w-24 h-24 sm:w-32 sm:h-32 flex-shrink-0">
+                      <div className="relative w-28 h-28 sm:w-36 sm:h-36 flex-shrink-0">
                         <Image
                           src={item.image}
                           alt={item.name}
@@ -787,7 +749,7 @@ export default function MenuPage() {
                         
                         {/* Spicy indicator */}
                         {item.spicyLevel > 0 && (
-                          <div className="absolute bottom-1 left-1 flex space-x-0.5 bg-white/80 rounded-full py-0.5 px-1.5">
+                          <div className="absolute bottom-2 left-2 flex space-x-0.5 bg-white/80 rounded-full py-0.5 px-1.5">
                             {Array(item.spicyLevel).fill(0).map((_, i) => (
                               <FaPepperHot key={i} className="text-red-500 text-xs" />
                             ))}
@@ -795,47 +757,38 @@ export default function MenuPage() {
                         )}
                       </div>
                       
-                      <div className="flex-1 p-3 min-w-0">
+                      <div className="flex-1 p-4 min-w-0">
                         <div className="flex justify-between items-start">
                           <div>
-                            <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-0.5 line-clamp-1">
+                            <h3 className="font-bold text-gray-900 text-sm sm:text-base mb-1 line-clamp-1">
                               {item.name}
                             </h3>
                             
                             {/* Tags in list view */}
-                            <div className="flex flex-wrap gap-1 mb-1">
+                            <div className="flex flex-wrap gap-1 mb-2">
                               {item.tags.slice(0, 2).map((tag) => (
-                                <span key={tag} className="bg-gray-100 text-gray-600 px-1.5 py-0.5 rounded text-xs">
+                                <span key={tag} className="bg-gray-100 text-gray-600 px-2 py-0.5 rounded text-xs">
                                   {tag}
                                 </span>
                               ))}
                             </div>
                           </div>
                           
-                          {/* Price */}
-                          <div className="flex items-center ml-2 flex-shrink-0">
-                            {item.originalPrice && (
-                              <span className="text-gray-500 line-through text-xs mr-1">${item.originalPrice}</span>
-                            )}
-                            <span className="font-bold text-orange-600 text-sm sm:text-base">${item.price.toFixed(2)}</span>
+                          {/* Rating in top right */}
+                          <div className="flex items-center ml-3 flex-shrink-0">
+                            <FaStar className="text-yellow-400 w-3 h-3 mr-1" />
+                            <span className="text-sm">{item.rating}</span>
                           </div>
                         </div>
                         
-                        <p className="text-gray-600 text-xs mb-2 line-clamp-2">{item.description}</p>
+                        <p className="text-gray-600 text-xs mb-3 line-clamp-2">{item.description}</p>
                         
                         <div className="flex items-center justify-between text-xs text-gray-500">
-                          <div className="flex items-center">
-                            <FaStar className="text-yellow-400 w-3 h-3 mr-1" />
-                            <span>{item.rating}</span>
-                          </div>
-                          <span className="flex items-center">
-                            <FaClock className="w-3 h-3 mr-1 opacity-75" />
-                            {item.cookTime}
-                          </span>
                           <span className="flex items-center">
                             <FaFire className="w-3 h-3 mr-1 opacity-75" />
                             {item.calories} cal
                           </span>
+                          <span>{item.reviews} reviews</span>
                         </div>
                       </div>
                     </div>
@@ -844,13 +797,13 @@ export default function MenuPage() {
 
                 {/* Empty State - List */}
                 {sortedItems.length === 0 && (
-                  <div className="text-center py-12 bg-white rounded-xl shadow-sm mt-4">
-                    <FaSearch className="text-4xl mb-4 mx-auto text-gray-300" />
-                    <h3 className="text-lg font-bold text-gray-800 mb-2">No menu items found</h3>
-                    <p className="text-gray-600 text-sm mb-4">Try adjusting your search or filter criteria</p>
+                  <div className="text-center py-16 bg-white rounded-xl shadow-sm mt-8">
+                    <FaSearch className="text-5xl mb-6 mx-auto text-gray-300" />
+                    <h3 className="text-xl font-bold text-gray-800 mb-3">No menu items found</h3>
+                    <p className="text-gray-600 text-sm mb-6">Try adjusting your search or filter criteria</p>
                     <button 
                       onClick={resetFilters}
-                      className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors"
+                      className="px-6 py-3 bg-teal-500 text-white rounded-lg text-sm font-medium hover:bg-teal-600 transition-colors"
                     >
                       Reset filters
                     </button>

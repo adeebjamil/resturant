@@ -82,7 +82,7 @@ export default function AboutPage() {
       icon: GiCookingPot, 
       title: 'Quality First', 
       desc: 'We source the finest ingredients from local and international suppliers to ensure every dish meets our exacting standards.',
-      color: 'from-amber-400 to-orange-500'
+      color: 'from-amber-400 to-teal-500'
     },
     { 
       icon: FaHeart, 
@@ -250,20 +250,20 @@ export default function AboutPage() {
           {/* Decorative Elements */}
           <div className="absolute inset-0 opacity-20">
             <div className="absolute top-20 left-10 w-40 h-40 rounded-full bg-amber-400 blur-3xl"></div>
-            <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-orange-400 blur-3xl"></div>
+            <div className="absolute bottom-10 right-10 w-60 h-60 rounded-full bg-teal-400 blur-3xl"></div>
             <div className="absolute top-1/3 left-1/2 w-40 h-40 rounded-full bg-red-400 blur-3xl"></div>
           </div>
           
           {/* Small Floating Food Icons */}
           <div className="absolute inset-0 overflow-hidden">
             <div className="absolute top-[15%] left-[10%] animate-float" style={{animationDelay: '0.5s'}}>
-              <GiMeal className="text-3xl text-orange-300 opacity-60" />
+              <GiMeal className="text-3xl text-teal-300 opacity-60" />
             </div>
             <div className="absolute top-[30%] right-[15%] animate-float" style={{animationDelay: '1.2s'}}>
               <FaUtensils className="text-2xl text-amber-400 opacity-60" />
             </div>
             <div className="absolute bottom-[25%] left-[20%] animate-float" style={{animationDelay: '0.8s'}}>
-              <GiHotMeal className="text-4xl text-orange-400 opacity-40" />
+              <GiHotMeal className="text-4xl text-teal-400 opacity-40" />
             </div>
             <div className="absolute bottom-[10%] right-[25%] animate-float" style={{animationDelay: '1.5s'}}>
               <GiSparkles className="text-2xl text-amber-500 opacity-50" />
@@ -275,7 +275,7 @@ export default function AboutPage() {
             <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
               <div className="md:w-1/2 text-center md:text-left">
                 <div className="animate-fade-in-down">
-                  <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-orange-100 px-5 py-2 rounded-full mb-6">
+                  <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-teal-100 px-5 py-2 rounded-full mb-6">
                     <GiCookingPot className="text-amber-600 animate-float" />
                     <span className="text-amber-800 font-medium">Our Story</span>
                   </div>
@@ -293,7 +293,7 @@ export default function AboutPage() {
                   <div className="flex flex-wrap gap-4 justify-center md:justify-start">
                     <Link 
                       href="/menu"
-                      className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-orange-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
+                      className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-500 to-teal-600 text-white px-6 py-3 rounded-full text-lg font-semibold hover:shadow-lg transition-all duration-300 transform hover:-translate-y-1"
                     >
                       <FaUtensils className="animate-pulse" />
                       <span>Explore Menu</span>
@@ -335,7 +335,7 @@ export default function AboutPage() {
                   </div>
                   
                   {/* Stats Badge */}
-                  <div className="absolute -top-4 -right-4 bg-gradient-to-r from-amber-500 to-orange-500 p-4 rounded-xl shadow-xl text-white animate-float" style={{animationDelay: '1s'}}>
+                  <div className="absolute -top-4 -right-4 bg-gradient-to-r from-amber-500 to-teal-500 p-4 rounded-xl shadow-xl text-white animate-float" style={{animationDelay: '1s'}}>
                     <div className="text-center">
                       <p className="text-2xl font-bold">8+</p>
                       <p className="text-xs uppercase tracking-wide">Years of Excellence</p>
@@ -351,7 +351,7 @@ export default function AboutPage() {
         <section id="story" className="py-16 md:py-24 bg-white relative">
           <div className="container mx-auto px-4 relative z-10">
             <div className="text-center mb-16 animate-fade-in-down">
-              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-orange-100 px-5 py-2 rounded-full mb-6">
+              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-teal-100 px-5 py-2 rounded-full mb-6">
                 <FaRocket className="text-amber-600 animate-pulse" />
                 <span className="text-amber-800 font-medium">Our Journey</span>
               </div>
@@ -369,7 +369,7 @@ export default function AboutPage() {
             <div className="hidden md:block max-w-6xl mx-auto">
               <div className="relative">
                 {/* Timeline Connector Line */}
-                <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-amber-200 via-orange-300 to-red-400 rounded-full"></div>
+                <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-amber-200 via-teal-300 to-red-400 rounded-full"></div>
                 
                 {journey.map((milestone, index) => (
                   <div 
@@ -385,7 +385,7 @@ export default function AboutPage() {
                         
                         {/* Year Badge */}
                         <div className={`inline-block mb-4 ${index % 2 === 0 ? 'float-right ml-4' : 'float-left mr-4'}`}>
-                          <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-4 py-2 rounded-full text-sm font-bold">
+                          <span className="bg-gradient-to-r from-amber-500 to-teal-500 text-white px-4 py-2 rounded-full text-sm font-bold">
                             {milestone.year}
                           </span>
                         </div>
@@ -403,7 +403,7 @@ export default function AboutPage() {
                     
                     {/* Central Icon */}
                     <div className="absolute left-1/2 transform -translate-x-1/2 z-20">
-                      <div className="w-16 h-16 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
+                      <div className="w-16 h-16 bg-gradient-to-r from-amber-500 to-teal-500 rounded-full flex items-center justify-center border-4 border-white shadow-lg">
                         <milestone.icon className="text-2xl text-white" />
                       </div>
                     </div>
@@ -436,14 +436,14 @@ export default function AboutPage() {
                 >
                   {/* Icon */}
                   <div className="absolute left-0 transform -translate-x-[50%] z-20">
-                    <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-500 rounded-full flex items-center justify-center border-4 border-white shadow-md">
+                    <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-teal-500 rounded-full flex items-center justify-center border-4 border-white shadow-md">
                       <milestone.icon className="text-lg text-white" />
                     </div>
                   </div>
                   
                   {/* Year Badge */}
                   <div className="absolute -left-8 top-14 z-20">
-                    <span className="bg-gradient-to-r from-amber-500 to-orange-500 text-white px-3 py-1 rounded-full text-xs font-bold">
+                    <span className="bg-gradient-to-r from-amber-500 to-teal-500 text-white px-3 py-1 rounded-full text-xs font-bold">
                       {milestone.year}
                     </span>
                   </div>
@@ -483,7 +483,7 @@ export default function AboutPage() {
         <section className="py-16 md:py-24 bg-white">
           <div className="container mx-auto px-4">
             <div className="text-center mb-16 animate-fade-in-down">
-              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-orange-100 px-5 py-2 rounded-full mb-6">
+              <div className="inline-flex items-center space-x-2 bg-gradient-to-r from-amber-100 to-teal-100 px-5 py-2 rounded-full mb-6">
                 <FaHeart className="text-amber-600 animate-pulse" />
                 <span className="text-amber-800 font-medium">Our Values</span>
               </div>

@@ -67,7 +67,7 @@ import {
   GiTacos,
   GiChocolateBar,
   GiMilkCarton,
-  GiOrangeSlice,
+  GitealSlice,
   GiCarrot
 } from 'react-icons/gi'
 import { IoGridOutline, IoListOutline, IoFilterOutline, IoChevronDown } from 'react-icons/io5'
@@ -107,7 +107,7 @@ export default function MenuPage() {
     { id: 'loaded-fries', name: 'Loaded Fries', icon: GiFrenchFries },
     { id: 'plate-items', name: 'Plate Items', icon: FaUtensils },
     { id: 'fresh-juices', name: 'Fresh Juices', icon: FaGlassWater },
-    { id: 'special-juices', name: 'Special Juices', icon: GiOrangeSlice },
+    { id: 'special-juices', name: 'Special Juices', icon: GitealSlice },
     { id: 'chrush-milk-shakes', name: 'Chrush Milk Shakes', icon: GiMilkCarton },
     { id: 'passion-mix', name: 'Passion Mix', icon: FaGlassWater },
     { id: 'mojito-juice', name: 'Mojito Juice', icon: FaGlassWater },
@@ -409,7 +409,7 @@ export default function MenuPage() {
           <div className="hidden md:block py-4 px-6">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-6">
-                <h1 className="text-2xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-teal-500 to-red-500 bg-clip-text text-transparent">
                   Restaurant Menu
                 </h1>
                 <div className="flex items-center space-x-4">
@@ -417,14 +417,14 @@ export default function MenuPage() {
                   <div className="flex items-center space-x-1">
                     <button
                       onClick={() => setViewMode('grid')}
-                      className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-orange-100 text-orange-600' : 'text-gray-400 hover:bg-gray-100'}`}
+                      className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-teal-100 text-teal-600' : 'text-gray-400 hover:bg-gray-100'}`}
                       aria-label="Grid view"
                     >
                       <IoGridOutline className="w-5 h-5" />
                     </button>
                     <button
                       onClick={() => setViewMode('list')}
-                      className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-orange-100 text-orange-600' : 'text-gray-400 hover:bg-gray-100'}`}
+                      className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-teal-100 text-teal-600' : 'text-gray-400 hover:bg-gray-100'}`}
                       aria-label="List view"
                     >
                       <IoListOutline className="w-5 h-5" />
@@ -440,7 +440,7 @@ export default function MenuPage() {
                     placeholder="Search menu..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-64 bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white transition-all"
+                    className="w-64 bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-teal-500 focus:bg-white transition-all"
                   />
                   <FaSearch className="absolute right-3 top-2.5 w-4 h-4 text-gray-400" />
                 </div>
@@ -448,7 +448,7 @@ export default function MenuPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white"
+                  className="bg-gray-100 border-0 rounded-full px-4 py-2 text-sm focus:ring-2 focus:ring-teal-500 focus:bg-white"
                 >
                   <option value="popular">Most Popular</option>
                   <option value="rating">Top Rated</option>
@@ -463,7 +463,7 @@ export default function MenuPage() {
           <div className="md:hidden p-3 border-b border-gray-100">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <h1 className="text-xl font-bold bg-gradient-to-r from-orange-500 to-red-500 bg-clip-text text-transparent">
+                <h1 className="text-xl font-bold bg-gradient-to-r from-teal-500 to-red-500 bg-clip-text text-transparent">
                   Menu
                 </h1>
                 <span className="ml-2 text-xs px-1.5 py-0.5 bg-gray-100 text-gray-600 rounded-md">
@@ -483,14 +483,14 @@ export default function MenuPage() {
                 )}
                 <button 
                   onClick={() => setShowMobileFilters(!showMobileFilters)}
-                  className={`p-2.5 rounded-full ${showMobileFilters ? 'bg-orange-100 text-orange-600' : 'text-gray-600 hover:bg-gray-100'}`}
+                  className={`p-2.5 rounded-full ${showMobileFilters ? 'bg-teal-100 text-teal-600' : 'text-gray-600 hover:bg-gray-100'}`}
                   aria-label="Filter"
                 >
                   <IoFilterOutline className="w-4 h-4" />
                 </button>
                 <button 
                   onClick={() => setShowMobileCategories(!showMobileCategories)}
-                  className={`p-2.5 rounded-full flex items-center ${showMobileCategories ? 'bg-orange-100 text-orange-600' : 'text-gray-600 hover:bg-gray-100'}`}
+                  className={`p-2.5 rounded-full flex items-center ${showMobileCategories ? 'bg-teal-100 text-teal-600' : 'text-gray-600 hover:bg-gray-100'}`}
                   aria-label="Categories"
                 >
                   <FaUtensils className="w-4 h-4" />
@@ -499,14 +499,14 @@ export default function MenuPage() {
                 <div className="flex items-center border-l border-gray-200 ml-1 pl-1">
                   <button
                     onClick={() => setViewMode('grid')}
-                    className={`p-2.5 rounded-full ${viewMode === 'grid' ? 'text-orange-500' : 'text-gray-400'}`}
+                    className={`p-2.5 rounded-full ${viewMode === 'grid' ? 'text-teal-500' : 'text-gray-400'}`}
                     aria-label="Grid view"
                   >
                     <IoGridOutline className="w-4 h-4" />
                   </button>
                   <button
                     onClick={() => setViewMode('list')}
-                    className={`p-2.5 rounded-full ${viewMode === 'list' ? 'text-orange-500' : 'text-gray-400'}`}
+                    className={`p-2.5 rounded-full ${viewMode === 'list' ? 'text-teal-500' : 'text-gray-400'}`}
                     aria-label="List view"
                   >
                     <IoListOutline className="w-4 h-4" />
@@ -524,7 +524,7 @@ export default function MenuPage() {
                     placeholder="Search menu..."
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    className="w-full bg-gray-100 border-0 rounded-full px-4 py-2.5 pr-10 text-sm focus:ring-2 focus:ring-orange-500 focus:bg-white"
+                    className="w-full bg-gray-100 border-0 rounded-full px-4 py-2.5 pr-10 text-sm focus:ring-2 focus:ring-teal-500 focus:bg-white"
                     autoFocus
                   />
                   <button 
@@ -551,7 +551,7 @@ export default function MenuPage() {
                 <select
                   value={sortBy}
                   onChange={(e) => setSortBy(e.target.value)}
-                  className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-orange-500"
+                  className="w-full bg-white border border-gray-200 rounded-lg px-3 py-2 text-sm focus:ring-2 focus:ring-teal-500"
                 >
                   <option value="popular">Most Popular</option>
                   <option value="rating">Top Rated</option>
@@ -572,7 +572,7 @@ export default function MenuPage() {
                       onClick={() => setSelectedCategory(category.id)}
                       className={`flex-shrink-0 flex items-center px-3 py-1.5 rounded-full text-xs font-medium ${
                         selectedCategory === category.id
-                          ? 'bg-orange-500 text-white'
+                          ? 'bg-teal-500 text-white'
                           : 'bg-gray-100 text-gray-700'
                       }`}
                     >
@@ -608,7 +608,7 @@ export default function MenuPage() {
                           onClick={() => handleCategorySelect(category.id)}
                           className={`flex items-center p-3 rounded-lg animate-fade-in ${
                             selectedCategory === category.id
-                              ? 'bg-orange-500 text-white'
+                              ? 'bg-teal-500 text-white'
                               : 'bg-white border border-gray-200 text-gray-700 hover:bg-gray-50'
                           }`}
                           style={{ animationDelay: `${index * 0.03}s` }}
@@ -644,7 +644,7 @@ export default function MenuPage() {
                       onClick={() => setSelectedCategory(category.id)}
                       className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-left transition-colors ${
                         selectedCategory === category.id
-                          ? 'bg-gradient-to-r from-orange-500 to-red-500 text-white'
+                          ? 'bg-gradient-to-r from-teal-500 to-red-500 text-white'
                           : 'hover:bg-gray-50 text-gray-700'
                       }`}
                     >
@@ -697,7 +697,7 @@ export default function MenuPage() {
                             {item.originalPrice && (
                               <span className="text-gray-500 line-through text-xs mr-1">${item.originalPrice}</span>
                             )}
-                            <span className="font-bold text-orange-600">${item.price.toFixed(2)}</span>
+                            <span className="font-bold text-teal-600">${item.price.toFixed(2)}</span>
                           </div>
                         </div>
                       </div>
@@ -788,7 +788,7 @@ export default function MenuPage() {
                             {item.originalPrice && (
                               <span className="text-gray-500 line-through text-xs mr-1">${item.originalPrice}</span>
                             )}
-                            <span className="font-bold text-orange-600 text-sm sm:text-base">${item.price.toFixed(2)}</span>
+                            <span className="font-bold text-teal-600 text-sm sm:text-base">${item.price.toFixed(2)}</span>
                           </div>
                         </div>
                         
@@ -826,7 +826,7 @@ export default function MenuPage() {
                     setSelectedCategory('all')
                     setSearchQuery('')
                   }}
-                  className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors"
+                  className="px-4 py-2 bg-teal-500 text-white rounded-lg text-sm font-medium hover:bg-teal-600 transition-colors"
                 >
                   Reset filters
                 </button>
