@@ -247,8 +247,8 @@ export default function Navbar() {
     <Image
       src="/Untitled_design__5_-removebg-preview.png"
       alt="WellFood Logo"
-      width={105}
-      height={105}
+      width={80}
+      height={80}
       className="object-contain rounded-2xl"
       priority
     />
