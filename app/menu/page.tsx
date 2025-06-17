@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useMemo, useCallback } from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
 import { 
@@ -46,10 +46,10 @@ export default function MenuPage() {
     setIsVisible(true)
   }, [])
   
-  // Group categories for mobile tabs
-  const popularCategories = ['all', 'porotta-sandwich', 'tea-special', 'soup-point', 'burger-specials']
+  // Memoized static data
+  const popularCategories = useMemo(() => ['all', 'porotta-sandwich', 'tea-special', 'soup-point', 'burger-specials'], [])
 
-  const categories = [
+  const categories = useMemo(() => [
     { id: 'all', name: 'All Items', icon: FaUtensils },
     { id: 'porotta-sandwich', name: 'Porotta Sandwich', icon: FaBreadSlice },
     { id: 'tea-special', name: 'Tea Special', icon: FaCoffee },
@@ -74,10 +74,9 @@ export default function MenuPage() {
     { id: 'health-juice', name: 'Health Juice', icon: GiCarrot },
     { id: 'fruits-bricks', name: 'Fruits Bricks', icon: FaAppleWhole },
     { id: 'dessert-items', name: 'Dessert Items', icon: FaCakeCandles }
-  ]
+  ], [])
 
-  // Menu Items data
-  const menuItems = [
+  const menuItems = useMemo(() => [
     {
       id: 1,
       name: "Grilled Salmon",
@@ -258,36 +257,91 @@ export default function MenuPage() {
       calories: 180,
       cookTime: "10 mins"
     }
-  ]
+  ], [])
 
-  // Filter logic
-  const filteredItems = menuItems.filter(item => {
-    const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory
-    const matchesSearch = item.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         item.description.toLowerCase().includes(searchQuery.toLowerCase())
-    return matchesCategory && matchesSearch
-  })
+  // Memoized filtered items
+  const filteredItems = useMemo(() => {
+    return menuItems.filter(item => {
+      const matchesCategory = selectedCategory === 'all' || item.category === selectedCategory
+      const lowerQuery = searchQuery.toLowerCase()
+      const matchesSearch = !searchQuery || 
+        item.name.toLowerCase().includes(lowerQuery) ||
+        item.description.toLowerCase().includes(lowerQuery)
+      return matchesCategory && matchesSearch
+    })
+  }, [menuItems, selectedCategory, searchQuery])
 
-  // Sort logic
-  const sortedItems = [...filteredItems].sort((a, b) => {
-    switch (sortBy) {
-      case 'price-low':
-        return a.price - b.price
-      case 'price-high':
-        return b.price - a.price
-      case 'rating':
-        return b.rating - a.rating
-      case 'popular':
-      default:
-        return b.reviews - a.reviews
-    }
-  })
+  // Memoized sorted items
+  const sortedItems = useMemo(() => {
+    return [...filteredItems].sort((a, b) => {
+      switch (sortBy) {
+        case 'price-low':
+          return a.price - b.price
+        case 'price-high':
+          return b.price - a.price
+        case 'rating':
+          return b.rating - a.rating
+        case 'popular':
+        default:
+          return b.reviews - a.reviews
+      }
+    })
+  }, [filteredItems, sortBy])
 
-  // Close mobile menus when a category is selected
-  const handleCategorySelect = (categoryId: string) => {
+  // Memoized category item counts
+  const categoryItemCounts = useMemo(() => {
+    const counts: { [key: string]: number } = {}
+    categories.forEach(category => {
+      counts[category.id] = menuItems.filter(item => 
+        category.id === 'all' || item.category === category.id
+      ).length
+    })
+    return counts
+  }, [categories, menuItems])
+
+  // Optimized event handlers
+  const handleCategorySelect = useCallback((categoryId: string) => {
     setSelectedCategory(categoryId)
     setShowMobileCategories(false)
-  }
+  }, [])
+
+  const handleSearchChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchQuery(e.target.value)
+  }, [])
+
+  const handleSortChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    setSortBy(e.target.value)
+  }, [])
+
+  const resetFilters = useCallback(() => {
+    setSelectedCategory('all')
+    setSearchQuery('')
+  }, [])
+
+  const closeSearchBar = useCallback(() => {
+    setShowSearchBar(false)
+    setSearchQuery('')
+  }, [])
+
+  const toggleMobileFilters = useCallback(() => {
+    setShowMobileFilters(prev => !prev)
+  }, [])
+
+  const toggleMobileCategories = useCallback(() => {
+    setShowMobileCategories(prev => !prev)
+  }, [])
+
+  const toggleViewMode = useCallback((mode: string) => {
+    setViewMode(mode)
+  }, [])
+
+  // Memoized spicy level indicators
+  const renderSpicyIndicators = useCallback((spicyLevel: number) => {
+    if (spicyLevel <= 0) return null
+    return Array(spicyLevel).fill(0).map((_, i) => (
+      <FaPepperHot key={i} className="text-red-500 text-xs" />
+    ))
+  }, [])
 
   return (
     <>
@@ -698,6 +752,21 @@ export default function MenuPage() {
                     </div>
                   </div>
                 ))}
+
+                {/* Empty State - Grid */}
+                {sortedItems.length === 0 && (
+                  <div className="col-span-1 sm:col-span-2 lg:col-span-3 xl:col-span-4 text-center py-12 bg-white rounded-xl shadow-sm mt-4">
+                    <FaSearch className="text-4xl mb-4 mx-auto text-gray-300" />
+                    <h3 className="text-lg font-bold text-gray-800 mb-2">No menu items found</h3>
+                    <p className="text-gray-600 text-sm mb-4">Try adjusting your search or filter criteria</p>
+                    <button 
+                      onClick={resetFilters}
+                      className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors"
+                    >
+                      Reset filters
+                    </button>
+                  </div>
+                )}
               </div>
             ) : (
               <div className="space-y-3">
@@ -772,24 +841,21 @@ export default function MenuPage() {
                     </div>
                   </div>
                 ))}
-              </div>
-            )}
 
-            {/* Empty State */}
-            {sortedItems.length === 0 && (
-              <div className="text-center py-12 bg-white rounded-xl shadow-sm mt-4">
-                <FaSearch className="text-4xl mb-4 mx-auto text-gray-300" />
-                <h3 className="text-lg font-bold text-gray-800 mb-2">No menu items found</h3>
-                <p className="text-gray-600 text-sm mb-4">Try adjusting your search or filter criteria</p>
-                <button 
-                  onClick={() => {
-                    setSelectedCategory('all')
-                    setSearchQuery('')
-                  }}
-                  className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors"
-                >
-                  Reset filters
-                </button>
+                {/* Empty State - List */}
+                {sortedItems.length === 0 && (
+                  <div className="text-center py-12 bg-white rounded-xl shadow-sm mt-4">
+                    <FaSearch className="text-4xl mb-4 mx-auto text-gray-300" />
+                    <h3 className="text-lg font-bold text-gray-800 mb-2">No menu items found</h3>
+                    <p className="text-gray-600 text-sm mb-4">Try adjusting your search or filter criteria</p>
+                    <button 
+                      onClick={resetFilters}
+                      className="px-4 py-2 bg-orange-500 text-white rounded-lg text-sm font-medium hover:bg-orange-600 transition-colors"
+                    >
+                      Reset filters
+                    </button>
+                  </div>
+                )}
               </div>
             )}
           </main>

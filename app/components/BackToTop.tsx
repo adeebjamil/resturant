@@ -213,14 +213,14 @@ const BackToTop: React.FC = () => {
       {isVisible && (
         <button
           onClick={smoothScrollToTop}
-          className={`back-to-top-btn fixed bottom-8 right-8 w-16 h-16 bg-orange-500/80 rounded-full flex items-center justify-center text-white font-bold shadow-2xl z-50 ${
+          className={`back-to-top-btn fixed bottom-8 right-8 w-16 h-16 bg-teal-500/80 rounded-full flex items-center justify-center text-white font-bold shadow-2xl z-50 ${
             isVisible ? 'visible' : 'hidden'
           } ${isScrolling ? 'scrolling' : ''}`}
           aria-label="Back to top"
           disabled={isScrolling}
         >
           {/* Outer Floating Ring */}
-          <div className={`floating-ring absolute inset-0 rounded-full border-2 border-orange-300/30 ${isScrolling ? 'scrolling' : ''}`}></div>
+          <div className={`floating-ring absolute inset-0 rounded-full border-2 border-teal-300/30 ${isScrolling ? 'scrolling' : ''}`}></div>
 
           {/* Progress Ring */}
           <svg className="absolute inset-0 w-full h-full -rotate-90" viewBox="0 0 64 64">
@@ -264,11 +264,11 @@ const BackToTop: React.FC = () => {
           <div className="ripple-effect absolute inset-0 rounded-full bg-white/10 scale-0"></div>
 
           {/* Inner Glow */}
-          <div className="absolute inset-2 rounded-full bg-gradient-to-t from-orange-600/20 to-transparent"></div>
+          <div className="absolute inset-2 rounded-full bg-gradient-to-t from-teal-600/20 to-transparent"></div>
 
           {/* Scrolling Indicator */}
           {isScrolling && (
-            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-orange-500 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
+            <div className="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-teal-500 text-white text-xs px-2 py-1 rounded whitespace-nowrap">
             
             </div>
           )}

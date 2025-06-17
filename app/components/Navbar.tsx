@@ -241,56 +241,53 @@ export default function Navbar() {
           <div className="max-w-7xl mx-auto flex items-center justify-between">
             
             {/* Logo Section */}
-            <Link href="/" className="logo-container flex items-center">
-              {/* Replace with your actual logo image */}
-              <div className="relative w-14 h-14 logo-glow rounded-full overflow-hidden">
-                <Image
-                  src="/images/logo.png"
-                  alt="World Cup Restaurant"
-                  fill
-                  sizes="(max-width: 768px) 40px, 56px"
-                  className="object-cover"
-                  priority
-                />
-              </div>
-              <div className="ml-3">
-                <span className="sr-only">World Cup Restaurant</span>
-              </div>
-            </Link>
+<Link href="/" className="logo-container flex items-center">
+  {/* Replace with your actual logo image */}
+  <div className="flex items-center space-x-3">
+    <Image
+      src="/Untitled_design__5_-removebg-preview.png"
+      alt="WellFood Logo"
+      width={105}
+      height={105}
+      className="object-contain rounded-2xl"
+      priority
+    />
+  </div>
+</Link>
 
             {/* Desktop Navigation */}
             <div className="hidden lg:flex items-center space-x-8">
               <Link href="/">
                 <span className="nav-item text-sm font-medium tracking-wide cursor-pointer flex items-center">
-                  <FaHome className="mr-2 text-orange-500" />
+                  <FaHome className="mr-2 text-teal-600" />
                   HOME
                 </span>
               </Link>
               
               <Link href="/menu">
                 <span className="nav-item text-sm font-medium tracking-wide cursor-pointer flex items-center">
-                  <FaUtensils className="mr-2 text-orange-500" />
+                  <FaUtensils className="mr-2 text-teal-600" />
                   MENU
                 </span>
               </Link>
               
               <Link href="/about">
                 <span className="nav-item text-sm font-medium tracking-wide cursor-pointer flex items-center">
-                  <FaInfoCircle className="mr-2 text-orange-500" />
+                  <FaInfoCircle className="mr-2 text-teal-600" />
                   ABOUT
                 </span>
               </Link>
               
               <Link href="/blog">
                 <span className="nav-item text-sm font-medium tracking-wide cursor-pointer flex items-center">
-                  <FaNewspaper className="mr-2 text-orange-500" />
+                  <FaNewspaper className="mr-2 text-teal-600" />
                   BLOG
                 </span>
               </Link>
               
               <Link href="/contact">
                 <span className="nav-item text-sm font-medium tracking-wide cursor-pointer flex items-center">
-                  <FaEnvelope className="mr-2 text-orange-500" />
+                  <FaEnvelope className="mr-2 text-teal-600" />
                   CONTACT
                 </span>
               </Link>
@@ -301,7 +298,7 @@ export default function Navbar() {
               
               {/* Phone Number */}
               <div className="phone-container flex items-center space-x-3 px-4 py-2 rounded-xl bg-black border border-gray-800 hover:bg-black/80 transition-all duration-300">
-                <div className="w-8 h-8 bg-orange-600 rounded-full flex items-center justify-center">
+                <div className="w-8 h-8 bg-teal-600 rounded-full flex items-center justify-center">
                   <FaPhone className="w-3 h-3 text-white" />
                 </div>
                 <div className="flex flex-col">
@@ -312,7 +309,7 @@ export default function Navbar() {
 
               {/* Book Now Button */}
               <Link href="/contact">
-                <button className="book-button px-6 py-3 bg-orange-600 hover:bg-orange-700 rounded-xl font-semibold text-sm tracking-wide text-white transition-all duration-300 hover:shadow-lg hover:shadow-orange-600/20 flex items-center">
+                <button className="book-button px-6 py-3 bg-teal-600 hover:bg-teal-700 rounded-xl font-semibold text-sm tracking-wide text-white transition-all duration-300 hover:shadow-lg hover:shadow-teal-600/20 flex items-center">
                   <FaCalendarAlt className="mr-2" />
                   BOOK TABLE
                 </button>
@@ -324,7 +321,7 @@ export default function Navbar() {
                 className="p-2 rounded-lg hover:bg-black transition-all duration-300"
                 aria-label="Open sidebar menu"
               >
-                <FaBars className="w-5 h-5 hover:text-orange-500 transition-colors" />
+                <FaBars className="w-5 h-5 hover:text-teal-500 transition-colors" />
               </button>
             </div>
 
@@ -351,7 +348,7 @@ export default function Navbar() {
                   onClick={() => handleNavigation('/')} 
                   className="text-left px-4 py-2 rounded-lg hover:bg-black border border-gray-900 transition-colors flex items-center w-full"
                 >
-                  <FaHome className="mr-3 text-orange-500" />
+                  <FaHome className="mr-3 text-teal-500" />
                   HOME
                 </button>
                 
@@ -359,7 +356,7 @@ export default function Navbar() {
                   onClick={() => handleNavigation('/menu')} 
                   className="text-left px-4 py-2 rounded-lg hover:bg-black border border-gray-900 transition-colors flex items-center w-full"
                 >
-                  <FaUtensils className="mr-3 text-orange-500" />
+                  <FaUtensils className="mr-3 text-teal-500" />
                   MENU
                 </button>
                 
@@ -367,7 +364,7 @@ export default function Navbar() {
                   onClick={() => handleNavigation('/about')} 
                   className="text-left px-4 py-2 rounded-lg hover:bg-black border border-gray-900 transition-colors flex items-center w-full"
                 >
-                  <FaInfoCircle className="mr-3 text-orange-500" />
+                  <FaInfoCircle className="mr-3 text-teal-500" />
                   ABOUT
                 </button>
                 
@@ -375,7 +372,7 @@ export default function Navbar() {
                   onClick={() => handleNavigation('/blog')} 
                   className="text-left px-4 py-2 rounded-lg hover:bg-black border border-gray-900 transition-colors flex items-center w-full"
                 >
-                  <FaNewspaper className="mr-3 text-orange-500" />
+                  <FaNewspaper className="mr-3 text-teal-500" />
                   BLOG
                 </button>
                 
@@ -383,20 +380,20 @@ export default function Navbar() {
                   onClick={() => handleNavigation('/contact')} 
                   className="text-left px-4 py-2 rounded-lg hover:bg-black border border-gray-900 transition-colors flex items-center w-full"
                 >
-                  <FaEnvelope className="mr-3 text-orange-500" />
+                  <FaEnvelope className="mr-3 text-teal-500" />
                   CONTACT
                 </button>
                 
                 {/* Mobile Contact & Book section */}
                 <div className="pt-4 space-y-4 px-4">
                   <div className="flex items-center space-x-3 px-4 py-3 bg-black border border-gray-800 rounded-lg">
-                    <FaPhone className="text-orange-500 w-4 h-4" />
+                    <FaPhone className="text-teal-500 w-4 h-4" />
                     <span className="text-sm">+880 123 456 88</span>
                   </div>
                   
                   <button
                     onClick={() => handleNavigation('/contact')}
-                    className="w-full px-6 py-3 bg-orange-600 hover:bg-orange-700 rounded-lg font-semibold text-sm tracking-wide text-white transition-colors flex items-center justify-center"
+                    className="w-full px-6 py-3 bg-teal-600 hover:bg-teal-700 rounded-lg font-semibold text-sm tracking-wide text-white transition-colors flex items-center justify-center"
                   >
                     <FaCalendarAlt className="mr-2" />
                     BOOK TABLE
@@ -420,7 +417,7 @@ export default function Navbar() {
           <div className="fixed right-0 top-0 h-full w-80 bg-white text-gray-800 p-8 shadow-2xl sidebar-slide-in z-[51]">
             <button 
               onClick={closeSidebar}
-              className="absolute top-4 right-4 text-gray-600 hover:text-orange-500 transition-all duration-300 hover:rotate-90"
+              className="absolute top-4 right-4 text-gray-600 hover:text-teal-500 transition-all duration-300 hover:rotate-90"
               aria-label="Close sidebar"
             >
               <FaTimes className="w-6 h-6" />
@@ -434,40 +431,40 @@ export default function Navbar() {
               <input
                 type="text"
                 placeholder="NAME"
-                className="w-full bg-gray-50 border border-gray-300 px-4 py-3 text-gray-800 placeholder-gray-500 focus:border-orange-500 focus:outline-none rounded-lg transition-all duration-300"
+                className="w-full bg-gray-50 border border-gray-300 px-4 py-3 text-gray-800 placeholder-gray-500 focus:border-teal-500 focus:outline-none rounded-lg transition-all duration-300"
               />
               
               <input
                 type="email"
                 placeholder="EMAIL ADDRESS"
-                className="w-full bg-gray-50 border border-gray-300 px-4 py-3 text-gray-800 placeholder-gray-500 focus:border-orange-500 focus:outline-none rounded-lg transition-all duration-300"
+                className="w-full bg-gray-50 border border-gray-300 px-4 py-3 text-gray-800 placeholder-gray-500 focus:border-teal-500 focus:outline-none rounded-lg transition-all duration-300"
               />
               
               <textarea
                 placeholder="MESSAGE"
                 rows={4}
-                className="w-full bg-gray-50 border border-gray-300 px-4 py-3 text-gray-800 placeholder-gray-500 focus:border-orange-500 focus:outline-none resize-none rounded-lg transition-all duration-300"
+                className="w-full bg-gray-50 border border-gray-300 px-4 py-3 text-gray-800 placeholder-gray-500 focus:border-teal-500 focus:outline-none resize-none rounded-lg transition-all duration-300"
               />
 
               <button
                 type="submit"
-                className="w-full bg-orange-600 hover:bg-orange-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 tracking-wider"
+                className="w-full bg-teal-600 hover:bg-teal-700 text-white font-bold py-3 px-6 rounded-lg transition-all duration-300 tracking-wider"
               >
                 SUBMIT NOW
               </button>
             </form>
 
             <div className="flex justify-center space-x-4 mt-8">
-              <a href="#" className="social-icon p-2 border border-gray-300 rounded-full hover:border-orange-500 hover:text-orange-500 transition-all duration-300 text-gray-600">
+              <a href="#" className="social-icon p-2 border border-gray-300 rounded-full hover:border-teal-500 hover:text-teal-500 transition-all duration-300 text-gray-600">
                 <FaFacebook className="w-5 h-5" />
               </a>
-              <a href="#" className="social-icon p-2 border border-gray-300 rounded-full hover:border-orange-500 hover:text-orange-500 transition-all duration-300 text-gray-600">
+              <a href="#" className="social-icon p-2 border border-gray-300 rounded-full hover:border-teal-500 hover:text-teal-500 transition-all duration-300 text-gray-600">
                 <FaTwitter className="w-5 h-5" />
               </a>
-              <a href="#" className="social-icon p-2 border border-gray-300 rounded-full hover:border-orange-500 hover:text-orange-500 transition-all duration-300 text-gray-600">
+              <a href="#" className="social-icon p-2 border border-gray-300 rounded-full hover:border-teal-500 hover:text-teal-500 transition-all duration-300 text-gray-600">
                 <FaInstagram className="w-5 h-5" />
               </a>
-              <a href="#" className="social-icon p-2 border border-gray-300 rounded-full hover:border-orange-500 hover:text-orange-500 transition-all duration-300 text-gray-600">
+              <a href="#" className="social-icon p-2 border border-gray-300 rounded-full hover:border-teal-500 hover:text-teal-500 transition-all duration-300 text-gray-600">
                 <FaYoutube className="w-5 h-5" />
               </a>
             </div>

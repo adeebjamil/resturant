@@ -56,41 +56,41 @@ export default function MenuShowcase() {
   const getIconForCategory = (category: string) => {
     switch (category) {
       case 'SHAWARMA':
-        return <FaDrumstickBite className="text-2xl text-orange-500" />;
+        return <FaDrumstickBite className="text-2xl text-teal-600" />;
       case 'CAMEL BURGER':
-        return <GiCamel className="text-2xl text-orange-500" />;
+        return <GiCamel className="text-2xl text-teal-600" />;
       case 'MACHBOOS':
-        return <FaUtensils className="text-2xl text-orange-500" />;
+        return <FaUtensils className="text-2xl text-teal-600" />;
       case 'SAMAK MACHBOOS':
-        return <GiFishCooked className="text-2xl text-orange-500" />;
+        return <GiFishCooked className="text-2xl text-teal-600" />;
       case 'FALAFEL':
-        return <FaLeaf className="text-2xl text-orange-500" />;
+        return <FaLeaf className="text-2xl text-teal-600" />;
       case 'LUQAIMAT':
-        return <GiHoneycomb className="text-2xl text-orange-500" />;
+        return <GiHoneycomb className="text-2xl text-teal-600" />;
       case 'KNAFEH':
-        return <FaGem className="text-2xl text-orange-500" />;
+        return <FaGem className="text-2xl text-teal-600" />;
       case 'ARABIC BREAD':
-        return <FaBreadSlice className="text-2xl text-orange-500" />;
+        return <FaBreadSlice className="text-2xl text-teal-600" />;
       case 'DATES':
-        return <GiPalmTree className="text-2xl text-orange-500" />;
+        return <GiPalmTree className="text-2xl text-teal-600" />;
       case 'JUMBO PRAWNS':
-        return <GiShrimp className="text-2xl text-orange-500" />;
+        return <GiShrimp className="text-2xl text-teal-600" />;
       case 'GRILLED HAMMOUR':
-        return <BiSushi className="text-2xl text-orange-500" />;
+        return <BiSushi className="text-2xl text-teal-600" />;
       case 'SEAFOOD PLATTER':
-        return <GiFishCooked className="text-2xl text-orange-500" />;
+        return <GiFishCooked className="text-2xl text-teal-600" />;
       case 'MIXED GRILL':
-        return <MdLocalDining className="text-2xl text-orange-500" />;
+        return <MdLocalDining className="text-2xl text-teal-600" />;
       case 'LAMB KOFTA':
-        return <FaDrumstickBite className="text-2xl text-orange-500" />;
+        return <FaDrumstickBite className="text-2xl text-teal-600" />;
       case 'UMALI':
-        return <MdOutlineBakeryDining className="text-2xl text-orange-500" />;
+        return <MdOutlineBakeryDining className="text-2xl text-teal-600" />;
       case 'BAKLAVA':
-        return <FaCoffee className="text-2xl text-orange-500" />;
+        return <FaCoffee className="text-2xl text-teal-600" />;
       case 'SAFFRON ICE CREAM':
-        return <MdOutlineIcecream className="text-2xl text-orange-500" />;
+        return <MdOutlineIcecream className="text-2xl text-teal-600" />;
       default:
-        return <FaUtensils className="text-2xl text-orange-500" />;
+        return <FaUtensils className="text-2xl text-teal-600" />;
     }
   };
 
@@ -223,7 +223,6 @@ export default function MenuShowcase() {
   // Fixed version of getColumnItems to prevent hydration errors
   const getColumnItems = (colIndex: number) => {
     // Don't use window conditionals during server rendering or initial client render
-    // Instead, always use a consistent approach for the initial render
     if (!isMounted) {
       // For consistent initial render - split into 3 columns
       const itemsPerColumn = Math.ceil(filteredMenuItems.length / 3);
@@ -246,6 +245,8 @@ export default function MenuShowcase() {
   return (
     <>
       <style jsx>{`
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Kufi+Arabic:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
         @keyframes fadeIn {
           from {
             opacity: 0;
@@ -260,7 +261,7 @@ export default function MenuShowcase() {
         @keyframes slideInUp {
           from {
             opacity: 0;
-            transform: translateY(50px);
+            transform: translateY(30px);
           }
           to {
             opacity: 1;
@@ -271,7 +272,7 @@ export default function MenuShowcase() {
         @keyframes slideInLeft {
           from {
             opacity: 0;
-            transform: translateX(-50px);
+            transform: translateX(-20px);
           }
           to {
             opacity: 1;
@@ -282,7 +283,7 @@ export default function MenuShowcase() {
         @keyframes slideInRight {
           from {
             opacity: 0;
-            transform: translateX(50px);
+            transform: translateX(20px);
           }
           to {
             opacity: 1;
@@ -293,23 +294,11 @@ export default function MenuShowcase() {
         @keyframes scaleIn {
           from {
             opacity: 0;
-            transform: scale(0.9);
+            transform: scale(0.95);
           }
           to {
             opacity: 1;
             transform: scale(1);
-          }
-        }
-
-        @keyframes bounce {
-          0%, 20%, 50%, 80%, 100% {
-            transform: translateY(0);
-          }
-          40% {
-            transform: translateY(-10px);
-          }
-          60% {
-            transform: translateY(-5px);
           }
         }
 
@@ -322,221 +311,197 @@ export default function MenuShowcase() {
           }
         }
 
-        @keyframes float {
+        @keyframes softFloat {
           0%, 100% {
             transform: translateY(0px);
           }
           50% {
-            transform: translateY(-10px);
+            transform: translateY(-5px);
           }
         }
 
-        @keyframes rotate {
-          from {
-            transform: rotate(0deg);
-          }
-          to {
-            transform: rotate(360deg);
-          }
-        }
-
-        @keyframes shine {
+        @keyframes shimmer {
           0% {
-            transform: translateX(-100%);
+            background-position: -100% 0;
           }
           100% {
-            transform: translateX(100%);
+            background-position: 200% 0;
           }
-        }
-
-        @keyframes wiggle {
-          0%, 100% { transform: rotate(0deg); }
-          25% { transform: rotate(-3deg); }
-          75% { transform: rotate(3deg); }
-        }
-
-        @keyframes zoomIn {
-          from {
-            opacity: 0;
-            transform: scale(0.5);
-          }
-          to {
-            opacity: 1;
-            transform: scale(1);
-          }
-        }
-
-        @keyframes moveLeft {
-          0% {
-            transform: translateX(100%);
-          }
-          100% {
-            transform: translateX(-100%);
-          }
-        }
-
-        @keyframes moveRight {
-          0% {
-            transform: translateX(-100%);
-          }
-          100% {
-            transform: translateX(100%);
-          }
-        }
-
-        /* New background patterns */
-        .pattern-dots {
-          background-image: radial-gradient(rgba(0, 0, 0, 0.05) 1px, transparent 1px);
-          background-size: 20px 20px;
         }
 
         .menu-section {
-          background: #ffffff;
+          background-color: #ffffff;
           position: relative;
           overflow: hidden;
-          animation: fadeIn 1s ease-out;
+          padding: 100px 0;
+        }
+
+        .menu-pattern {
+          position: absolute;
+          inset: 0;
+          opacity: 0.03;
+          background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%231e6f5c' fill-opacity='0.2'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
         }
 
         .heading-text {
           animation: slideInUp 0.8s ease-out 0.2s both;
         }
 
-        /* Menu card styling */
         .menu-card {
           background: #ffffff;
-          border: 1px solid rgba(0, 0, 0, 0.1);
+          backdrop-filter: blur(10px);
+          border-radius: 20px;
+          border: 1px solid rgba(0, 0, 0, 0.04);
           animation: scaleIn 0.6s ease-out both;
-          transition: all 0.4s ease;
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+          box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.05);
         }
 
-        .menu-card:nth-child(1) { 
-          animation: slideInLeft 0.8s ease-out 0.3s both;
-        }
-        .menu-card:nth-child(2) { 
-          animation: slideInUp 0.8s ease-out 0.4s both;
-        }
-        .menu-card:nth-child(3) { 
-          animation: slideInRight 0.8s ease-out 0.5s both;
-        }
+        .menu-card:nth-child(1) { animation-delay: 0.2s; }
+        .menu-card:nth-child(2) { animation-delay: 0.3s; }
+        .menu-card:nth-child(3) { animation-delay: 0.4s; }
 
         .menu-card:hover {
-          transform: translateY(-8px) scale(1.02);
-          box-shadow: 0 15px 40px rgba(255, 165, 0, 0.15);
-          border-color: rgba(255, 165, 0, 0.3);
+          transform: translateY(-5px);
+          box-shadow: 0 15px 35px -10px rgba(30, 111, 92, 0.15);
+          border-color: rgba(30, 111, 92, 0.2);
         }
 
         .menu-item {
           transition: all 0.3s ease;
           cursor: pointer;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+          border-bottom: 1px solid rgba(0, 0, 0, 0.04);
         }
 
         .menu-item:hover {
-          transform: translateX(5px);
-          background: linear-gradient(90deg, transparent, rgba(255, 165, 0, 0.05), transparent);
+          background: linear-gradient(90deg, rgba(30, 111, 92, 0.02), rgba(30, 111, 92, 0.07), rgba(30, 111, 92, 0.02));
         }
 
         .menu-item:hover .menu-image {
-          animation: pulse 0.6s ease-in-out;
-          border: 2px solid rgba(255, 165, 0, 0.8);
+          transform: scale(1.1);
+          border-color: rgba(30, 111, 92, 0.6);
         }
 
         .menu-item:hover .icon-highlight {
-          animation: bounce 0.8s ease-in-out;
+          animation: softFloat 1s ease-in-out;
+          color: #1e6f5c;
         }
 
         .menu-image {
-          transition: all 0.3s ease;
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
           border: 2px solid transparent;
-        }
-
-        .menu-image:hover {
-          transform: scale(1.1) rotate(5deg);
         }
 
         .icon-highlight {
           transition: all 0.3s ease;
-          flex-shrink: 0;
         }
 
-        .floating-element {
-          animation: float 4s ease-in-out infinite;
+        .category-title-wrapper {
+          position: relative;
+          display: inline-block;
+          overflow: hidden;
         }
 
-        .floating-element-1 {
-          position: absolute;
-          width: 150px;
-          height: 150px;
+        .menu-item:hover .category-title {
+          color: #1e6f5c;
+          transform: translateY(-2px);
+        }
+
+        .category-title {
+          transition: all 0.3s ease;
+          color: #2c3e50;
+          transform: translateY(0);
+        }
+
+        .brand-highlight {
+          font-family: 'Noto Kufi Arabic', sans-serif;
+          font-weight: 600;
+          color: #1e6f5c;
+          font-size: 1.1rem;
+        }
+        
+        .description-text {
+          transition: all 0.3s ease;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          display: -webkit-box;
+          -webkit-line-clamp: 2;
+          -webkit-box-orient: vertical;
+        }
+
+        .menu-item:hover .description-text {
+          color: #495057;
+        }
+
+        .image-container {
+          position: relative;
+          overflow: hidden;
+          box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
           border-radius: 50%;
-          background: radial-gradient(circle, rgba(255, 165, 0, 0.1) 0%, transparent 70%);
-          animation: float 8s ease-in-out infinite;
+          transition: all 0.4s ease;
+          transform: rotate(0deg);
         }
 
-        .floating-element-2 {
+        .menu-item:hover .image-container {
+          box-shadow: 0 6px 16px rgba(30, 111, 92, 0.15);
+          transform: rotate(5deg);
+        }
+
+        .shimmer-effect {
           position: absolute;
-          width: 100px;
-          height: 100px;
-          border-radius: 50%;
-          background: radial-gradient(circle, rgba(255, 105, 0, 0.08) 0%, transparent 70%);
-          animation: float 7s ease-in-out infinite 1s;
-        }
-
-        .moving-text-left {
-          animation: moveLeft 50s linear infinite;
-          opacity: 0.03;
-          font-family: 'Times New Roman', serif;
-          color: #000000;
-        }
-
-        .moving-text-right {
-          animation: moveRight 40s linear infinite;
-          opacity: 0.03;
-          font-family: 'Times New Roman', serif;
-          color: #000000;
+          top: 0;
+          left: -100%;
+          width: 50%;
+          height: 100%;
+          background: linear-gradient(90deg, 
+            rgba(255,255,255,0) 0%, 
+            rgba(255,255,255,0.4) 50%, 
+            rgba(255,255,255,0) 100%);
+          animation: shimmer 2s infinite;
+          pointer-events: none;
         }
 
         .tab-button {
-          transition: all 0.3s ease;
           position: relative;
           overflow: hidden;
-          padding: 0.5rem 1rem;
-          font-weight: 600;
+          transition: all 0.3s ease;
+          background: transparent;
+          border: none;
+          color: #495057;
+          font-weight: 500;
+          padding: 0.75rem 1.25rem;
+          border-radius: 10px;
         }
 
         .tab-button:hover {
-          color: #ff6a00;
-        }
-
-        .tab-button::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 50%;
-          width: 0;
-          height: 2px;
-          background: #ff6a00;
-          transition: all 0.3s ease;
-          transform: translateX(-50%);
-        }
-
-        .tab-button:hover::after {
-          width: 80%;
-        }
-
-        .active-tab::after {
-          width: 80%;
+          color: #1e6f5c;
+          background-color: rgba(30, 111, 92, 0.05);
         }
 
         .active-tab {
-          color: #ff6a00;
+          color: #1e6f5c;
+          background-color: rgba(30, 111, 92, 0.08);
+          font-weight: 600;
+        }
+
+        .active-tab::before {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 2px;
+          background: linear-gradient(90deg, #1e6f5c, #2d5a4f);
         }
 
         .explore-button {
-          background: linear-gradient(135deg, #ff6a00 0%, #ff9a00 100%);
-          transition: all 0.4s ease;
+          background: linear-gradient(135deg, #1e6f5c 0%, #2d5a4f 100%);
+          color: white;
+          transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
           position: relative;
           overflow: hidden;
-          animation: zoomIn 0.8s ease-out 0.6s both;
+          border-radius: 12px;
+          box-shadow: 0 5px 15px rgba(30, 111, 92, 0.3);
         }
 
         .explore-button::before {
@@ -546,8 +511,8 @@ export default function MenuShowcase() {
           left: -100%;
           width: 100%;
           height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
-          transition: left 0.6s;
+          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+          transition: left 0.7s;
         }
 
         .explore-button:hover::before {
@@ -555,94 +520,10 @@ export default function MenuShowcase() {
         }
 
         .explore-button:hover {
-          transform: translateY(-3px) scale(1.05);
-          box-shadow: 0 12px 30px rgba(255, 165, 0, 0.4);
+          transform: translateY(-3px);
+          box-shadow: 0 10px 25px rgba(30, 111, 92, 0.4);
         }
 
-        .category-title {
-          transition: all 0.3s ease;
-          color: #222;
-          width: 100%;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          white-space: nowrap;
-        }
-
-        .menu-item:hover .category-title {
-          color: #ff6a00;
-        }
-
-        .description-text {
-          animation: fadeIn 0.8s ease-out 0.2s both;
-          overflow: hidden;
-          text-overflow: ellipsis;
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-        }
-
-        .image-container {
-          position: relative;
-          overflow: hidden;
-          box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-          flex-shrink: 0;
-        }
-
-        .image-container::after {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
-          animation: shine 3s ease-in-out infinite;
-        }
-
-        /* Empty menu state */
-        .empty-menu {
-          height: 300px;
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          text-align: center;
-          border-radius: 1rem;
-          border: 1px dashed rgba(0, 0, 0, 0.2);
-          animation: fadeIn 0.5s ease-out;
-        }
-
-        /* Mobile optimizations */
-        .mobile-menu-card {
-          background: #ffffff;
-          border: 1px solid rgba(0, 0, 0, 0.1);
-          border-radius: 1rem;
-          padding: 1rem;
-          margin-bottom: 1rem;
-          animation: slideInUp 0.5s ease-out;
-        }
-
-        .mobile-menu-item {
-          padding: 0.75rem;
-          border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-        }
-
-        .mobile-menu-item:last-child {
-          border-bottom: none;
-        }
-
-        .mobile-category-title {
-          font-weight: bold;
-          font-size: 1rem;
-          margin-bottom: 0.25rem;
-          color: #222;
-        }
-
-        .mobile-description {
-          font-size: 0.875rem;
-          color: #666;
-        }
-
-        /* Back to top button */
         .back-to-top {
           position: fixed;
           bottom: 20px;
@@ -650,7 +531,7 @@ export default function MenuShowcase() {
           width: 50px;
           height: 50px;
           border-radius: 50%;
-          background: #ff6a00;
+          background: linear-gradient(135deg, #1e6f5c 0%, #2d5a4f 100%);
           color: white;
           display: flex;
           align-items: center;
@@ -673,185 +554,133 @@ export default function MenuShowcase() {
           box-shadow: 0 6px 15px rgba(0,0,0,0.3);
         }
 
-        /* Responsive */
+        .subtle-accent {
+          position: absolute;
+          background: linear-gradient(135deg, #1e6f5c 0%, #2d5a4f 100%);
+          opacity: 0.03;
+          pointer-events: none;
+        }
+
+        .accent-1 {
+          top: 5%;
+          left: 5%;
+          width: 300px;
+          height: 300px;
+          border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+          animation: softFloat 20s infinite alternate;
+        }
+
+        .accent-2 {
+          bottom: 10%;
+          right: 5%;
+          width: 250px;
+          height: 250px;
+          border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+          animation: softFloat 15s infinite alternate-reverse;
+        }
+
+        .menu-tabs {
+          position: relative;
+        }
+
+        .menu-tabs::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 100%;
+          height: 1px;
+          background: linear-gradient(90deg, 
+            transparent 0%, 
+            rgba(45, 90, 79, 0.1) 50%, 
+            transparent 100%);
+        }
+
+        .section-title {
+          position: relative;
+          display: inline-block;
+        }
+
+        .section-title::after {
+          content: '';
+          position: absolute;
+          bottom: -8px;
+          left: 0;
+          width: 40%;
+          height: 3px;
+          background: linear-gradient(90deg, #1e6f5c, transparent);
+          border-radius: 2px;
+        }
+
+        .arabic-title {
+          font-family: 'Noto Kufi Arabic', sans-serif;
+          color: #1e6f5c;
+          display: block;
+          font-weight: 700;
+          margin-top: 0.5rem;
+          letter-spacing: -0.02em;
+        }
+
         @media (max-width: 1024px) {
-          .menu-grid {
-            grid-template-columns: repeat(2, 1fr);
+          .menu-card {
+            border-radius: 16px;
+            padding: 1.5rem;
           }
         }
 
         @media (max-width: 768px) {
           .menu-section {
-            padding: 2rem 0;
-          }
-
-          .menu-grid {
-            grid-template-columns: 1fr;
-            gap: 1rem;
-          }
-          
-          .moving-text-left,
-          .moving-text-right {
-            font-size: 2rem;
+            padding: 80px 0;
           }
           
           .menu-card {
-            margin-bottom: 1rem;
-            padding: 1rem;
-          }
-
-          .menu-tabs {
-            padding: 0.5rem 0;
-            margin-bottom: 1.5rem;
-            justify-content: flex-start;
-          }
-
-          .tab-button {
-            padding: 0.5rem 0.75rem;
-            font-size: 0.9rem;
-            margin: 0 0.25rem;
-          }
-
-          .heading-title {
-            font-size: 2rem;
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
+            border-radius: 12px;
+            padding: 1.25rem;
           }
           
-          .heading-subtitle {
-            font-size: 1.25rem;
+          .tab-button {
+            padding: 0.5rem 1rem;
+            font-size: 0.95rem;
           }
-
+          
           .explore-button {
             padding: 0.75rem 1.5rem;
-          }
-        }
-
-        @media (max-width: 480px) {
-          .menu-section {
-            padding: 1.5rem 0;
-          }
-
-          .container {
-            padding: 0 1rem;
-          }
-
-          .heading-text {
-            padding: 0 0.5rem;
-          }
-
-          .menu-item {
-            flex-direction: row;
-            text-align: left;
-            padding: 1rem 0;
-            align-items: center;
-          }
-
-          .menu-item-content {
-            display: flex;
-            align-items: center;
-            width: 100%;
-          }
-          
-          .image-container {
-            width: 3rem;
-            height: 3rem;
-            margin-right: 0.75rem;
-            margin-bottom: 0;
-          }
-
-          .menu-text {
-            flex: 1;
-            min-width: 0; /* Ensures text wrapping works with flexbox */
-          }
-
-          .category-title {
-            font-size: 0.9rem;
-            margin-bottom: 0.25rem;
-            white-space: normal;
-            line-height: 1.2;
-          }
-
-          .description-text {
-            font-size: 0.8rem;
-            line-height: 1.3;
-          }
-
-          .icon-highlight {
-            margin-left: 0.5rem;
-          }
-
-          .explore-button {
-            width: auto;
-            margin: 0 1rem;
-          }
-          
-          .heading-title {
-            font-size: 1.6rem;
-          }
-          
-          .heading-subtitle {
             font-size: 1rem;
-          }
-
-          .tab-button {
-            padding: 0.4rem 0.6rem;
-            font-size: 0.8rem;
           }
         }
       `}</style>
 
-      <section ref={sectionRef} className="menu-section pattern-dots relative min-h-screen py-16 sm:py-20 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute inset-0 z-0">
-          <div className="floating-element-1 top-[10%] left-[5%]"></div>
-          <div className="floating-element-2 bottom-[20%] right-[10%]"></div>
-          <div className="floating-element-1 bottom-[30%] left-[20%]"></div>
-          <div className="floating-element-2 top-[30%] right-[15%]"></div>
-        </div>
+      <section ref={sectionRef} className="menu-section relative">
+        <div className="menu-pattern"></div>
+        
+        {/* Subtle background accents */}
+        <div className="subtle-accent accent-1"></div>
+        <div className="subtle-accent accent-2"></div>
 
-        {/* Moving Background Text */}
-        <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div className="absolute top-20 left-0 w-full">
-            <div className="moving-text-left text-5xl sm:text-7xl md:text-9xl font-black whitespace-nowrap">
-              DUBAI FLAVORS • EMIRATI CUISINE • ARABIAN NIGHTS •
-            </div>
-          </div>
-          
-          <div className="absolute bottom-20 left-0 w-full">
-            <div className="moving-text-right text-5xl sm:text-7xl md:text-9xl font-black whitespace-nowrap">
-              SHAWARMA • MACHBOOS • LUQAIMAT • CAMEL •
-            </div>
-          </div>
-        </div>
-
-        <div className="relative z-10 container mx-auto px-4 sm:px-6 lg:px-8">
-          {/* Header Section */}
-          <div className="text-center mb-8 sm:mb-16">
+        <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+          {/* Header Section with Arabic */}
+          <div className="text-center mb-16">
             <div className="heading-text">
-              <span className="inline-block px-3 py-1 rounded-full bg-gradient-to-r from-orange-500 to-amber-500 text-black text-xs sm:text-sm font-bold tracking-wide mb-4 sm:mb-6">
-                AUTHENTIC EMIRATI CUISINE
-              </span>
-              <h2 className="heading-title text-3xl sm:text-4xl lg:text-6xl font-black text-gray-900 leading-tight mb-3 sm:mb-6">
-                <span className="relative">
-                  EXPERIENCE THE FLAVORS OF DUBAI
-                  <span className="absolute -bottom-1 left-0 w-full h-1 bg-gradient-to-r from-orange-500 to-amber-500"></span>
-                </span>
-                <br/>
-                <span className="text-orange-500">TRADITIONAL & MODERN</span>
+              <h2 className="section-title text-4xl sm:text-5xl font-bold text-gray-800 mb-3">
+                World Cup Menu
+                <span className="arabic-title text-2xl sm:text-3xl text-teal-600">قائمة كأس العالم</span>
               </h2>
-              <h3 className="heading-subtitle text-xl sm:text-2xl lg:text-4xl font-bold text-gray-700 opacity-90">
-                DISCOVER OUR ARABIAN DELICACIES
-              </h3>
+              <p className="text-gray-600 mt-4 max-w-2xl mx-auto">
+                Experience the finest selection of authentic Middle Eastern cuisine, expertly crafted with traditional recipes and premium ingredients.
+                <span className="block mt-2 brand-highlight">From our kitchen to your table</span>
+              </p>
             </div>
           </div>
 
-          {/* Menu Tabs - Fixed scrollable for mobile */}
-          <div ref={tabsRef} className="menu-tabs flex space-x-1 sm:space-x-4 md:space-x-8 mb-8 overflow-x-auto pb-2 px-1 -mx-1 scrollbar-hide">
+          {/* Menu Tabs */}
+          <div 
+            ref={tabsRef} 
+            className="menu-tabs flex space-x-2 sm:space-x-4 mb-12 overflow-x-auto pb-4 px-1 -mx-1 scrollbar-hide"
+          >
             {tabs.map((tab, index) => (
               <button 
                 key={index}
-                className={`tab-button text-gray-800 text-sm sm:text-base font-medium ${activeTab === index ? 'active-tab' : ''}`}
+                className={`tab-button font-medium ${activeTab === index ? 'active-tab' : ''}`}
                 onClick={() => setActiveTab(index)}
               >
                 {tab}
@@ -859,14 +688,14 @@ export default function MenuShowcase() {
             ))}
           </div>
 
-          {/* Mobile & Tablet View (Single Column) */}
-          <div className="menu-grid block sm:hidden mb-12">
+          {/* Mobile & Tablet View */}
+          <div className="block sm:hidden mb-12">
             {filteredMenuItems.length > 0 ? (
-              <>
+              <div className="space-y-4">
                 {filteredMenuItems.map((item, index) => (
-                  <div key={`mobile-${index}`} className="mobile-menu-card">
-                    <div className="mobile-menu-item flex items-center">
-                      <div className="image-container w-16 h-16 rounded-full overflow-hidden mr-3">
+                  <div key={`mobile-${index}`} className="menu-card p-4">
+                    <div className="menu-item flex items-center p-2">
+                      <div className="image-container w-16 h-16 mr-4 flex-shrink-0">
                         <Image
                           src={item.image}
                           alt={item.category}
@@ -874,63 +703,68 @@ export default function MenuShowcase() {
                           height={64}
                           className="menu-image w-full h-full object-cover"
                         />
+                        <div className="shimmer-effect"></div>
                       </div>
-                      <div className="menu-text flex-1 min-w-0">
-                        <h4 className="mobile-category-title">
-                          {item.category}
-                        </h4>
-                        <p className="mobile-description">
+                      
+                      <div className="flex-1 min-w-0">
+                        <div className="category-title-wrapper">
+                          <h4 className="category-title text-base font-bold mb-1">
+                            {item.category}
+                          </h4>
+                        </div>
+                        <p className="description-text text-gray-500 text-sm">
                           {item.description}
                         </p>
                       </div>
+                      
                       <div className="icon-highlight ml-2">
                         {getIconForCategory(item.category)}
                       </div>
                     </div>
                   </div>
                 ))}
-              </>
+              </div>
             ) : (
-              // Empty state for mobile
-              <div className="empty-menu">
-                <div className="text-center py-12">
-                  <FaUtensils className="mx-auto text-3xl text-gray-300 mb-3" />
-                  <h3 className="text-lg font-medium text-gray-500">No menu items found</h3>
-                  <p className="text-gray-400 mt-2">Try another category</p>
-                </div>
+              <div className="menu-card p-8 text-center">
+                <FaUtensils className="mx-auto text-3xl text-gray-300 mb-3" />
+                <h3 className="text-lg font-medium text-gray-500">No menu items found</h3>
+                <p className="text-gray-400 mt-2">Try another category</p>
               </div>
             )}
           </div>
 
-          {/* Desktop View (Three Columns) */}
-          <div className="menu-grid hidden sm:grid lg:grid-cols-3 md:grid-cols-2 gap-6 mb-16">
+          {/* Desktop View */}
+          <div className="hidden sm:grid lg:grid-cols-3 md:grid-cols-2 gap-8 mb-16">
             {filteredMenuItems.length > 0 ? (
               <>
                 {/* Column 1 */}
-                <div className="menu-card rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
-                  <div className="space-y-4 sm:space-y-6">
+                <div className="menu-card p-6 sm:p-8">
+                  <div className="space-y-6">
                     {getColumnItems(0).map((item, index) => (
-                      <div key={`col1-${index}`} className="menu-item flex items-center justify-between p-3 sm:p-4 rounded-lg last:border-b-0">
-                        <div className="flex items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
-                          <div className="image-container w-12 sm:w-16 h-12 sm:h-16 rounded-full overflow-hidden">
-                            <Image
-                              src={item.image}
-                              alt={item.category}
-                              width={64}
-                              height={64}
-                              className="menu-image w-full h-full object-cover"
-                            />
-                          </div>
-                          <div className="flex-1 min-w-0">
-                            <h4 className="category-title font-bold text-gray-900 text-base sm:text-lg mb-0.5 sm:mb-1">
+                      <div key={`col1-${index}`} className="menu-item flex items-center p-3 rounded-lg last:border-b-0">
+                        <div className="image-container w-14 h-14 mr-4 flex-shrink-0">
+                          <Image
+                            src={item.image}
+                            alt={item.category}
+                            width={56}
+                            height={56}
+                            className="menu-image w-full h-full object-cover"
+                          />
+                          <div className="shimmer-effect"></div>
+                        </div>
+                        
+                        <div className="flex-1 min-w-0">
+                          <div className="category-title-wrapper">
+                            <h4 className="category-title text-base font-bold mb-1">
                               {item.category}
                             </h4>
-                            <p className="description-text text-gray-600 text-xs sm:text-sm leading-relaxed">
-                              {item.description}
-                            </p>
                           </div>
+                          <p className="description-text text-gray-500 text-sm">
+                            {item.description}
+                          </p>
                         </div>
-                        <div className="icon-highlight ml-2 sm:ml-4">
+                        
+                        <div className="icon-highlight ml-3">
                           {getIconForCategory(item.category)}
                         </div>
                       </div>
@@ -940,91 +774,94 @@ export default function MenuShowcase() {
 
                 {/* Column 2 */}
                 {getColumnItems(1).length > 0 && (
-                  <div className="menu-card rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
-                    <div className="space-y-4 sm:space-y-6">
+                  <div className="menu-card p-6 sm:p-8">
+                    <div className="space-y-6">
                       {getColumnItems(1).map((item, index) => (
-                        <div key={`col2-${index}`} className="menu-item flex items-center justify-between p-3 sm:p-4 rounded-lg last:border-b-0">
-                          <div className="flex items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
-                            <div className="image-container w-12 sm:w-16 h-12 sm:h-16 rounded-full overflow-hidden">
-                              <Image
-                                src={item.image}
-                                alt={item.category}
-                                width={64}
-                                height={64}
-                                className="menu-image w-full h-full object-cover"
+                        <div key={`col2-${index}`} className="menu-item flex items-center p-3 rounded-lg last:border-b-0">
+                          <div className="image-container w-14 h-14 mr-4 flex-shrink-0">
+                            <Image
+                              src={item.image}
+                              alt={item.category}
+                              width={56}
+                              height={56}
+                              className="menu-image w-full h-full object-cover"
                             />
+                            <div className="shimmer-effect"></div>
                           </div>
+                          
                           <div className="flex-1 min-w-0">
-                            <h4 className="category-title font-bold text-gray-900 text-base sm:text-lg mb-0.5 sm:mb-1">
-                              {item.category}
-                            </h4>
-                            <p className="description-text text-gray-600 text-xs sm:text-sm leading-relaxed">
+                            <div className="category-title-wrapper">
+                              <h4 className="category-title text-base font-bold mb-1">
+                                {item.category}
+                              </h4>
+                            </div>
+                            <p className="description-text text-gray-500 text-sm">
                               {item.description}
                             </p>
                           </div>
+                          
+                          <div className="icon-highlight ml-3">
+                            {getIconForCategory(item.category)}
+                          </div>
                         </div>
-                        <div className="icon-highlight ml-2 sm:ml-4">
-                          {getIconForCategory(item.category)}
-                        </div>
-                      </div>
-                    ))}
+                      ))}
                     </div>
                   </div>
                 )}
 
                 {/* Column 3 */}
                 {getColumnItems(2).length > 0 && (
-                  <div className="menu-card rounded-2xl p-4 sm:p-6 md:p-8 shadow-lg">
-                    <div className="space-y-4 sm:space-y-6">
+                  <div className="menu-card p-6 sm:p-8">
+                    <div className="space-y-6">
                       {getColumnItems(2).map((item, index) => (
-                        <div key={`col3-${index}`} className="menu-item flex items-center justify-between p-3 sm:p-4 rounded-lg last:border-b-0">
-                          <div className="flex items-center space-x-3 sm:space-x-4 flex-1 min-w-0">
-                            <div className="image-container w-12 sm:w-16 h-12 sm:h-16 rounded-full overflow-hidden">
-                              <Image
-                                src={item.image}
-                                alt={item.category}
-                                width={64}
-                                height={64}
-                                className="menu-image w-full h-full object-cover"
+                        <div key={`col3-${index}`} className="menu-item flex items-center p-3 rounded-lg last:border-b-0">
+                          <div className="image-container w-14 h-14 mr-4 flex-shrink-0">
+                            <Image
+                              src={item.image}
+                              alt={item.category}
+                              width={56}
+                              height={56}
+                              className="menu-image w-full h-full object-cover"
                             />
+                            <div className="shimmer-effect"></div>
                           </div>
+                          
                           <div className="flex-1 min-w-0">
-                            <h4 className="category-title font-bold text-gray-900 text-base sm:text-lg mb-0.5 sm:mb-1">
-                              {item.category}
-                            </h4>
-                            <p className="description-text text-gray-600 text-xs sm:text-sm leading-relaxed">
+                            <div className="category-title-wrapper">
+                              <h4 className="category-title text-base font-bold mb-1">
+                                {item.category}
+                              </h4>
+                            </div>
+                            <p className="description-text text-gray-500 text-sm">
                               {item.description}
                             </p>
                           </div>
+                          
+                          <div className="icon-highlight ml-3">
+                            {getIconForCategory(item.category)}
+                          </div>
                         </div>
-                        <div className="icon-highlight ml-2 sm:ml-4">
-                          {getIconForCategory(item.category)}
-                        </div>
-                      </div>
-                    ))}
+                      ))}
                     </div>
                   </div>
                 )}
               </>
             ) : (
-              // Desktop empty state
-              <div className="col-span-3 empty-menu">
-                <div className="text-center py-16">
-                  <FaUtensils className="mx-auto text-4xl text-gray-300 mb-4" />
-                  <h3 className="text-xl font-medium text-gray-500">No menu items found in this category</h3>
-                  <p className="text-gray-400 mt-2">Please try selecting another category</p>
-                </div>
+              <div className="col-span-3 menu-card p-16 text-center">
+                <FaUtensils className="mx-auto text-4xl text-gray-300 mb-4" />
+                <h3 className="text-xl font-medium text-gray-500">No menu items found</h3>
+                <p className="text-gray-400 mt-2">Please try selecting another category</p>
               </div>
             )}
           </div>
 
-          {/* Call to Action - With Link to /menu */}
+          {/* Call to Action */}
           <div className="text-center">
             <Link href="/menu">
-              <button className="explore-button text-black font-bold py-4 px-12 rounded-xl text-lg shadow-lg group">
+              <button className="explore-button font-medium py-4 px-8 sm:px-12 text-base sm:text-lg group">
                 <span className="flex items-center justify-center space-x-3">
-                  <span>EXPLORE FULL MENU</span>
-                  <FaArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-2" />
+                  <span>View Complete Menu</span>
+                  <FaArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </button>
             </Link>

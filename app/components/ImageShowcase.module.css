@@ -1,0 +1,181 @@
+.showcaseContainer {
+  margin: 80px auto;
+  max-width: 1000px;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 1s ease;
+}
+
+.showcaseContainer.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.showcaseTitle {
+  text-align: center;
+  font-size: 2.2rem;
+  margin-bottom: 40px;
+  color: #2c3e50;
+  font-weight: 600;
+  position: relative;
+}
+
+.showcaseTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80px;
+  height: 3px;
+  background: linear-gradient(to right, #1bb1b1, #179898);
+  border-radius: 3px;
+}
+
+.showcaseContent {
+  position: relative;
+}
+
+.showcaseVisual {
+  position: relative;
+  height: 450px;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.showcaseCard {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transform: scale(0.95) translateY(20px);
+  transition: all 0.65s cubic-bezier(0.23, 1, 0.32, 1);
+  visibility: hidden;
+  z-index: 1;
+}
+
+.showcaseCard.active {
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  visibility: visible;
+  z-index: 2;
+}
+
+.imageContainer {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.showcaseImage {
+  object-fit: cover;
+}
+
+.cardContent {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 30px;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+  color: white;
+  transform: translateY(20px);
+  opacity: 0;
+  transition: all 0.5s ease 0.2s;
+}
+
+.showcaseCard.active .cardContent {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.cardContent h4 {
+  font-size: 1.8rem;
+  margin-bottom: 12px;
+  position: relative;
+  padding-left: 15px;
+}
+
+.cardContent h4::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 25px;
+  background-color: var(--card-color, #179898);
+  border-radius: 3px;
+}
+
+.cardContent p {
+  font-size: 1.1rem;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+.showcaseNav {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+  gap: 12px;
+}
+
+.navDot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ccc;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.navDot:hover {
+  background-color: #999;
+  transform: scale(1.2);
+}
+
+.activeDot {
+  width: 14px;
+  height: 14px;
+  background-color: #1bb1b1;
+}
+
+/* Add this animation for a more engaging slide effect */
+@keyframes fadeSlideIn {
+  0% {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.showcaseCard.active {
+  animation: fadeSlideIn 0.7s ease-out;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .showcaseVisual {
+    height: 350px;
+  }
+  
+  .showcaseTitle {
+    font-size: 1.8rem;
+  }
+  
+  .cardContent h4 {
+    font-size: 1.5rem;
+  }
+  
+  .cardContent p {
+    font-size: 1rem;
+  }
+}

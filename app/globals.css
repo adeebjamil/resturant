@@ -7,3 +7,102 @@
 .nav-item:hover svg {
   transform: translateY(-2px);
 }
+
+/* section css */
+
+.nav-item svg {
+  transition: all 0.3s ease;
+}
+
+.nav-item:hover svg {
+  transform: translateY(-2px);
+}
+/* ...existing code... */
+
+/* --- Hero Section Custom Styles & Animations --- */
+
+/* Import a modern English and an Arabic font (e.g., from Google Fonts) 
+   Add this to the top of your globals.css or in your main layout component
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&family=Noto+Naskh+Arabic:wght@400;600;700&display=swap');
+*/
+
+/* Apply the Arabic font */
+.font-arabic {
+  font-family: 'Noto Naskh Arabic', serif; /* Replace with your chosen Arabic font */
+}
+
+/* Text shadow utilities (Tailwind might have plugins for this, or define custom) */
+.text-shadow-md {
+  text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.text-shadow-sm {
+  text-shadow: 0px 1px 3px rgba(0, 0, 0, 0.4);
+}
+
+
+/* Keyframe Animations */
+@keyframes bgZoom {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.15); /* Subtle zoom for background */
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInFromRight {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Animation Classes */
+.animate-bgZoom {
+  animation: bgZoom 20s ease-in-out infinite alternate;
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0; /* Start hidden */
+}
+
+.animate-slideInFromLeft {
+  animation: slideInFromLeft 0.8s ease-out forwards;
+  opacity: 0; /* Start hidden */
+}
+
+.animate-slideInFromRight {
+  animation: slideInFromRight 0.8s ease-out forwards;
+  opacity: 0; /* Start hidden */
+}
+
+
+
+
